@@ -1,0 +1,45 @@
+//百分之百宽
+.full-width {
+  width: 100%;
+}
+
+//百分之百高
+.full-height {
+  height: 100%;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+}
+
+.gird {
+  > div {
+
+  }
+}
+
+//循环等分生成12种等分规则
+.generate-all(12);
+.generate-all(@n,@i:1) when (@i<=@n) {
+  .generate-w(@i);
+  .generate-h(@i);
+  .generate-all(@n, (@i+1));
+}
+
+//循环生成宽度
+.generate-w(@n, @i: 1) when (@i =< @n) {
+  .w-@{i}-@{n} {
+    width: (@i * 100% / @n);
+    float: left;
+  }
+  .generate-w(@n, (@i + 1));
+}
+
+//循环生成高度
+.generate-h(@n, @i: 1) when (@i =< @n) {
+  .h-@{i}-@{n} {
+    height: (@i * 100% / @n);
+  }
+  .generate-h(@n, (@i + 1));
+}
