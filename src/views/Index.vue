@@ -11,7 +11,7 @@
             </container>
             <container title="标题" class=" full-width h-1-5">
                 <TabSimplePoint slot="title" v-model="tabSelect3" :max="3"/>
-                内容
+                内容测试
             </container>
             <container title="标题" class=" full-width h-1-5">
                 <TabSimplePoint slot="title" v-model="tabSelect4" :max="3"/>
