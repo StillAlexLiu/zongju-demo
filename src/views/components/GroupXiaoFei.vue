@@ -1,9 +1,10 @@
 <template>
-    <div class="GroupZhunRu full" v-if="data.length>0">
-        <container-with-left-border class="full-height" v-for="(item,index) in data" :border="index!==0"
-                                    :key="index">
-            <div class="dt full">
+    <div class="GroupXiaoFei">
+        <container-with-left-border v-for="(item,index) in data" :key="index" :border="index!==0">
+            <div class="h-1-2 dt title full-width">
                 <span class="dc">{{item.title}}</span>
+            </div>
+            <div class="h-1-2 dt info full-width">
                 <span class="dc" v-if="item.name">{{item.name}}</span>
                 <span class="dc value" v-if="item.value">{{item.value}}</span>
                 <span class="dc" v-if="item.unit">{{item.unit}}</span>
@@ -16,7 +17,7 @@
 
 <script>
 export default {
-  name: 'GroupJingZheng',
+  name: 'GroupXiaoFei',
   props: {
     data: {
       type: Array,
@@ -24,24 +25,12 @@ export default {
         return []
       }
     }
-  },
-  methods: {
-    makeRow (text) {
-      let rtn = []
-      for (let i = 0; i < text.length; i++) {
-        rtn += text[i]
-        if (i % 2 === 1) {
-          rtn += '\n'
-        }
-      }
-      return rtn
-    }
   }
 }
 </script>
 
 <style scoped lang="less">
-.GroupZhunRu {
+.GroupXiaoFei {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -69,18 +58,12 @@ export default {
 
     .title {
         font-size: 12px;
-        text-align: center;
     }
 
     .value {
         font-size: 16px;
         color: #3FD3D6;
         font-family: 'LESLIE';
-    }
-
-    .info {
-        > span {
-        }
     }
 }
 </style>

@@ -62,10 +62,10 @@ export default {
     justify-content: center;
 
     > div {
-        height: 29px;
+        height: 24px;
         text-align: center;
-        line-height: 29px;
-        margin: 0 13px;
+        line-height: 24px;
+        margin: 0 10px;
         background-size: 100% 100%;
         cursor: pointer;
 
