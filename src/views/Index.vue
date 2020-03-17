@@ -59,9 +59,9 @@
                     </div>
                 </div>
             </container>
-            <container :title="page.titles.left[3]" class=" full-width h-1-4">
+            <container :title="page.left.block4.title" class=" full-width h-1-4">
                 <div class="full-height w-3-10">
-                    <BlockChanQuan/>
+                    <BlockChanQuan :data="page.left.block4.text1"/>
                 </div>
                 <div class="full-height w-7-10">
                     <ChartLineSimple class="w-3-4" :xdata="page.chart1.xdata" :ydata="page.chart1.ydata"/>
@@ -426,6 +426,18 @@ export default {
                 status: 'up'
               }]]
             }
+          },
+          block4: {
+            title: '知识产权',
+            text1: [{
+              name: '发展指数',
+              value: '62.6'
+            }, {
+              name: '国际排行',
+              text: '上升至',
+              form: '13',
+              to: '8'
+            }]
           }
         },
         chart1: {
