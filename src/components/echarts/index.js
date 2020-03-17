@@ -3,6 +3,7 @@ import 'echarts'
 import charts from './charts'
 import screen from './screen'
 import china from './china'
+import 'echarts-gl'
 ECharts.registerTheme('screen', screen)
 ECharts.registerMap('china', china)
 export default {

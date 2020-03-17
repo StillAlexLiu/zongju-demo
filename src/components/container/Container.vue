@@ -37,7 +37,7 @@ export default {
         height: 100%;
         width: 100%;
         background: linear-gradient(180deg, rgba(49, 58, 88, 1) 0%, rgba(46, 54, 85, 1) 100%);
-        padding: 10px;
+        padding: 10px 10px 5px 10px;
 
         .title {
             height: @TitleHeight;
@@ -50,6 +50,7 @@ export default {
 
             .text {
                 text-indent: 14px;
+                font-size: 18px;
                 line-height: @TitleHeight;
             }
 

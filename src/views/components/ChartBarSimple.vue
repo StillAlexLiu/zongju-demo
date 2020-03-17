@@ -1,6 +1,6 @@
 <template>
     <chart :options='options'/>
-<!--    <div>{{options}}</div>-->
+    <!--    <div>{{options}}</div>-->
 </template>
 
 <script>
@@ -39,101 +39,27 @@ export default {
         },
         xAxis: {
           type: 'category',
-          boundaryGap: true,
-          axisLine: {
-            lineStyle: {
-              color: '#334B73',
-              width: 2
-            }
-          },
-          axisLabel: {
-            interval: 0,
-            rotate: 0,
-            textStyle: {
-              color: '#fff',
-              fontSize: 18
-            }
-          },
-          splitLine: {
-            show: false
-          },
-          axisTick: {
-            show: false
-          }
+          boundaryGap: true
         },
-        yAxis: [
-          {
-            name: this.unit,
-            min: 0,
-            splitNumber: 7,
-            nameLocation: 'end',
-            nameTextStyle: {
-              color: 'white',
-              fontSize: 18
-            },
-            show: true,
-            x: 'center',
-            type: 'value',
-            axisLine: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-            axisLabel: {
-              // interval:0,
-              textStyle: {
-                color: '#fff',
-                fontSize: 18
-              }
-            },
-            splitLine: {
-              lineStyle: {
-                color: 'rgba(51,75,115,0.4)'
-              }
-            }
+        yAxis: [{
+          name: this.unit,
+          min: 0,
+          splitNumber: 7,
+          nameLocation: 'end',
+          nameTextStyle: {
+            color: 'white',
+            fontSize: 12
           },
-          {
-            name: '',
-            nameTextStyle: {
-              color: '#fff',
-              fontSize: 22
-            },
-            show: true,
-            x: 'center',
-            type: 'value',
-            axisTick: {
-              show: false
-            },
-            axisLine: {
-              show: false
-            },
-            axisLabel: {
-              // interval:0,
-              formatter: '{value}%',
-              textStyle: {
-                color: '#fff',
-                fontSize: 24
-              }
-            },
-            splitLine: {
-              show: false,
-              lineStyle: {
-                color: 'rgba(51,75,115,0.4)'
-              }
-            }
-          }
-        ],
+          show: true,
+          x: 'center',
+          type: 'value'
+        }],
         series: [
           {
             label: {
               normal: {
                 show: true,
-                position: 'top',
-                textStyle: {
-                  color: '#fff',
-                  fontSize: 20
-                }
+                position: 'top'
               }
             },
             name: '市场主体数量',
