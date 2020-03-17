@@ -4,6 +4,8 @@ import charts from './charts'
 import screen from './screen'
 import china from './china'
 import 'echarts-gl'
+import 'echarts-wordcloud'
+
 ECharts.registerTheme('screen', screen)
 ECharts.registerMap('china', china)
 export default {
