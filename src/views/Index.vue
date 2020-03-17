@@ -64,7 +64,7 @@
                     <BlockChanQuan :data="page.left.block4.text1"/>
                 </div>
                 <div class="full-height w-7-10">
-                    <ChartLineSimple class="w-3-4" :xdata="page.chart1.xdata" :ydata="page.chart1.ydata"/>
+                    <GroupChanQuan :data="page.left.block4.text2"/>
                 </div>
             </container>
         </div>
@@ -83,7 +83,11 @@
         </div>
         <div class="side full-height w-1-3">
             <container title="标题" class=" full-width h-1-4">
-                内容
+                <GroupContainer :data="[1,2,3,4]">
+                    <template v-slot:item="{item}">
+                        {{item}}
+                    </template>
+                </GroupContainer>
             </container>
             <container title="标题" class=" full-width h-1-4">
                 内容
@@ -92,7 +96,7 @@
                 内容
             </container>
             <container title="标题" class=" full-width h-1-4">
-                内容
+                <ChartLineSimple class="w-3-4" :xdata="page.chart1.xdata" :ydata="page.chart1.ydata"/>
             </container>
         </div>
     </div>
@@ -115,10 +119,12 @@ import ChartAreaLine from './components/ChartAreaLine'
 import ChartPieCircle from './components/ChartPieCircle'
 import GroupXiaoFei from './components/GroupXiaoFei'
 import BlockChanQuan from './components/BlockChanQuan'
+import GroupChanQuan from './components/GroupChanQuan'
 
 export default {
   name: 'Index',
   components: {
+    GroupChanQuan,
     BlockChanQuan,
     GroupXiaoFei,
     ChartPieCircle,
@@ -435,8 +441,63 @@ export default {
             }, {
               name: '国际排行',
               text: '上升至',
-              form: '13',
+              from: '13',
               to: '8'
+            }],
+            text2: [{
+              icon: 'T!',
+              name: '商品注册',
+              value: '198',
+              unit: '万件',
+              top: {
+                name: '较去年同期',
+                value: '25%',
+                unit: '',
+                status: 'up'
+              },
+              bottom: {
+                name: '审查时限',
+                value: '9',
+                unit: '个月',
+                trend: '10%',
+                status: 'down'
+              }
+            }, {
+              icon: 'T@',
+              name: '地理标志',
+              value: '2320',
+              unit: '个',
+              top: {
+                name: '地理标志产品',
+                value: '25',
+                unit: '项',
+                status: ''
+              },
+              bottom: {
+                name: '打假维权',
+                value: '20',
+                unit: '件',
+                trend: '16%',
+                status: 'down'
+              }
+            }, {
+              icon: 'T#',
+              name: '专利',
+              value: '283',
+              unit: '万件',
+              top: {
+                name: '同比增长',
+                value: '10',
+                unit: '',
+                status: 'up'
+              },
+              bottom: {
+                name: '审查时限',
+                value: '12',
+                unit: '个月',
+                trend: '8%',
+                status: 'down'
+              }
             }]
           }
         },

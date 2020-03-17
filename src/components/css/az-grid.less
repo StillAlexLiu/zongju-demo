@@ -19,6 +19,23 @@
   }
 }
 
+
+.dt {
+  display: table;
+
+  .dr {
+    display: table-row;
+  }
+
+  .dc {
+
+    display: table-cell;
+    vertical-align: middle;
+
+  }
+}
+
+
 //循环等分生成12种等分规则
 .generate-all(12);
 .generate-all(@n,@i:1) when (@i<=@n) {
