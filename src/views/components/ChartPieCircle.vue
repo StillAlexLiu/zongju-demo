@@ -2,7 +2,7 @@
     <div class="ChartPieCircle full">
         <chart :options='options'/>
         <div class="radioBox">
-            <CheckAndRadioBox :data="radio"/>
+            <CheckAndRadioBox :data="radio" v-model="dataIndex"/>
         </div>
     </div>
 </template>
@@ -15,6 +15,7 @@ export default {
   components: { CheckAndRadioBox },
   data () {
     return {
+      dataIndex: 0,
       radio: [{
         name: '品类',
         value: 0
@@ -47,6 +48,8 @@ export default {
             name: '访问来源',
             type: 'pie',
             radius: ['50%', '62%'],
+            // position: ['60%', '50%'],
+            top: 20,
             avoidLabelOverlap: false,
             label: {
               normal: {
@@ -68,7 +71,7 @@ export default {
                 show: true
               }
             },
-            data: this.data
+            data: this.data[this.dataIndex]
           }
         ]
       }
@@ -83,9 +86,6 @@ export default {
 
     .radioBox {
         position: absolute;
-        height: 40px;
-        width: 100px;
-        background-color: #42b983;
         top: 0;
         right: 0;
     }

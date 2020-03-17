@@ -370,7 +370,7 @@ export default {
             text: [],
             chart1: {
               title: '投诉举报热点分析',
-              data: [{
+              data: [[{
                 name: '烟、酒和饮料',
                 value: Mock.Random.natural(60, 100),
                 trend: Mock.Random.float(0.1, 0.5, 2, 2),
@@ -390,7 +390,27 @@ export default {
                 value: Mock.Random.natural(60, 100),
                 trend: Mock.Random.float(0.1, 0.5, 2, 2),
                 status: 'up'
-              }]
+              }], [{
+                name: '烟、酒和饮料',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: 'up'
+              }, {
+                name: '食品',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: 'down'
+              }, {
+                name: '日用商品',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: '-'
+              }, {
+                name: '医疗及医疗用品',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: 'up'
+              }]]
             }
           }
         },
