@@ -1,9 +1,11 @@
 <template>
     <div class="GroupZhunRu full" v-if="data.length>0">
-        <container-with-left-border class="full-height w-1-4 " v-for="(item,index) in data" :border="false"
+        <container-with-left-border class="full-height w-1-4 " v-for="(item,index) in data" :border="index!==0"
                                     :key="index">
-            <div class="h-1-2 dt title"><span class="dc">{{item.title}}</span></div>
-            <div class="h-1-2 dt info">
+            <div class="h-1-2 dt title full-width">
+                <span class="dc" >{{item.title}}</span>
+            </div>
+            <div class="h-1-2 dt info full-width">
                 <span class="dc" v-if="item.name">{{item.name}}</span>
                 <span class="dc value" v-if="item.value">{{item.value}}</span>
                 <span class="dc" v-if="item.unit">{{item.unit}}</span>
@@ -70,7 +72,6 @@ export default {
 
     .info {
         > span {
-            padding-right: 5px;
         }
     }
 }

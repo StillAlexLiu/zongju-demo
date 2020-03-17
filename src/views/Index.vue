@@ -15,7 +15,9 @@
                                 :colors="page.left.block1.chart1.color"
                                 :type="page.left.block1.chart1.type"
                                 :legend="page.left.block1.chart1.legend"
-                                :units="page.left.block1.chart1.units"/>
+                                :units="page.left.block1.chart1.units"
+                                :borderRadius="false"
+                        />
                     </div>
                 </div>
             </container>
@@ -34,13 +36,30 @@
                                        :unit="page.left.block2.chart1.units"/>
                     </div>
                     <div class="full-height w-1-2">
-                        <ChartBarSimple :data="page.chart2.data" :dimensions="page.chart2.dimensions"/>
+                        <ChartBarLine
+                                :data="page.left.block2.chart2.data"
+                                :title="page.left.block2.chart2.title"
+                                :dimensions="page.left.block2.chart2.dimensions"
+                                :colors="page.left.block2.chart2.color"
+                                :type="page.left.block2.chart2.type"
+                                :legend="page.left.block2.chart2.legend"
+                                :units="page.left.block2.chart2.units"
+                        />
                     </div>
                 </div>
             </container>
-            <container :title="page.titles.left[2]" class=" full-width h-1-4">
-                <ChartBarSimple :data="page.chart2.data" :dimensions="page.chart2.dimensions"/>
-                内容测试
+            <container :title="page.left.block3.title" class=" full-width h-1-4">
+                <div class="h-3-10">
+                    <GroupJingZheng :data="page.left.block3.text"/>
+                </div>
+                <div class="h-7-10">
+                    <div class="full-height w-1-2">
+                        字符云
+                    </div>
+                    <div class="full-height w-1-2">
+                        <ChartPieCircle :title="page.left.block3.chart1.title" :data="page.left.block3.chart1.data"/>
+                    </div>
+                </div>
             </container>
             <container :title="page.titles.left[3]" class=" full-width h-1-4">
                 <ChartLineSimple class="w-3-4" :xdata="page.chart1.xdata" :ydata="page.chart1.ydata"/>
@@ -52,12 +71,11 @@
                 <div class="map-can">
                     <EchartsMap v-if="false"/>
                     <Map3D/>
-                    <!--                    <Map3D/>-->
                 </div>
                 <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
             </div>
             <container title="质量基础" class="center-bottom full-width h-1-4">
-                内容
+                <ChartBarSimple :data="page.chart2.data" :dimensions="page.chart2.dimensions"/>
             </container>
         </div>
         <div class="side full-height w-1-3">
@@ -65,15 +83,12 @@
                 内容
             </container>
             <container title="标题" class=" full-width h-1-4">
-
                 内容
             </container>
             <container title="标题" class=" full-width h-1-4">
-
                 内容
             </container>
             <container title="标题" class=" full-width h-1-4">
-
                 内容
             </container>
         </div>
@@ -94,10 +109,12 @@ import graphic from 'echarts/lib/util/graphic'
 import Map3D from './components/Map3D'
 import GroupJingZheng from './components/GroupJingZheng'
 import ChartAreaLine from './components/ChartAreaLine'
+import ChartPieCircle from './components/ChartPieCircle'
 
 export default {
   name: 'Index',
   components: {
+    ChartPieCircle,
     ChartAreaLine,
     GroupJingZheng,
     Map3D,
@@ -296,6 +313,83 @@ export default {
                 name: '6月',
                 value: Mock.Random.float(98, 103, 3, 3),
                 value1: Mock.Random.float(98, 103, 3, 3)
+              }]
+            },
+            chart2: {
+              title: '重点区域检查',
+              dimensions: ['name', 'value', 'value1'],
+              legend: ['商品零售价格指数', '居民消费价格指数'],
+              units: ['万次', '%'],
+              type: ['bar', 'line'],
+              color: [new graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: 'rgba(79, 255, 148, 0.68)'
+                  },
+                  {
+                    offset: 1,
+                    color: 'rgba(79, 255, 245, 0.4)'
+                  }
+                ],
+                false
+              ), 'rgba(254, 105, 65, 1)'],
+              data: [{
+                name: '1月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(10, 40)
+              }, {
+                name: '2月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(10, 40)
+              }, {
+                name: '3月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(10, 40)
+              }, {
+                name: '4月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(10, 40)
+              }, {
+                name: '5月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(10, 40)
+              }, {
+                name: '6月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(10, 40)
+              }]
+            }
+          },
+          block3: {
+            title: '消费环境',
+            text: [],
+            chart1: {
+              title: '投诉举报热点分析',
+              data: [{
+                name: '烟、酒和饮料',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: 'up'
+              }, {
+                name: '食品',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: 'down'
+              }, {
+                name: '日用商品',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: '-'
+              }, {
+                name: '医疗及医疗用品',
+                value: Mock.Random.natural(60, 100),
+                trend: Mock.Random.float(0.1, 0.5, 2, 2),
+                status: 'up'
               }]
             }
           }

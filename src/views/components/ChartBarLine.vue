@@ -45,6 +45,10 @@ export default {
       default: () => {
         return null
       }
+    },
+    borderRadius: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -55,10 +59,24 @@ export default {
         const item = {
           type: this.type[i],
           name: this.legend[i],
-          yAxisIndex: i
+          yAxisIndex: i,
+          itemStyle: {
+            normal: {}
+          }
         }
         if (this.type[i] === 'bar') {
           item.barWidth = '12'
+
+          if (this.borderRadius) {
+            item.itemStyle.normal.barBorderRadius = [30, 30, 0, 0]
+          }
+        }
+        if (this.type[i] === 'line') {
+          item.symbolSize = 8
+          item.itemStyle = {
+            borderColor: '#fff',
+            borderWidth: 1
+          }
         }
         series.push(item)
         yAxis.push({

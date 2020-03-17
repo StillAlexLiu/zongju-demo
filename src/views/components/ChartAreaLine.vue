@@ -61,7 +61,6 @@ export default {
           }
         })
       }
-      console.log(this.colors)
       return {
         color: this.colors,
         title: {
@@ -69,10 +68,11 @@ export default {
         },
         legend: {
           show: true,
-          left: 'right',
+          right: 'right',
           selectedMode: false,
           itemWidth: 13,
           itemHeight: 7,
+          orient: 'vertical',
           data: this.legend
         },
         dataset: {
