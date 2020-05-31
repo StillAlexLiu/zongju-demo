@@ -2,9 +2,12 @@
     <div class="Container">
         <div class="main">
             <div class="title">
-                <div class="text">{{title}}</div>
-                <div class="slot">
+                <div class="text" v-if="custom">
                     <slot name="title"/>
+                </div>
+                <div class="text" v-else>{{title}}</div>
+                <div class="slot">
+                    <slot name="title-right"/>
                 </div>
             </div>
             <div class="body">
@@ -16,18 +19,22 @@
 
 <script>
 export default {
-  name: 'Container',
+  name: 'ContainerCenterTitle',
   props: {
     title: {
       type: String,
       default: ''
+    },
+    custom: {
+      type: Boolean,
+      default: false
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-@TitleHeight: 31px;
+@TitleHeight: 33px;
 @point: linear-gradient(0, #8D9FBD 0%, #8D9FBD 100%);
 @line: linear-gradient(270deg, rgba(160, 180, 205, 0.24) 0%, rgba(103, 125, 159, 0.63) 100%);
 .Container {
@@ -36,7 +43,8 @@ export default {
     .main {
         height: 100%;
         width: 100%;
-        background: linear-gradient(180deg, rgba(49, 58, 88, 1) 0%, rgba(46, 54, 85, 1) 100%);
+        /*background: linear-gradient(180deg, #20233A 0%, #242942 100%);*/
+        background: linear-gradient(180deg, rgba(32, 35, 58, .5) 0%, rgba(36, 41, 66, .5) 100%);
         padding: 10px 10px 5px 10px;
 
         .title {
@@ -50,8 +58,9 @@ export default {
 
             .text {
                 text-indent: 14px;
-                font-size: 18px;
+                font-size: 22px;
                 line-height: @TitleHeight;
+                font-family: 'siyuan';
             }
 
             .slot {

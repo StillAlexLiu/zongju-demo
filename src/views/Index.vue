@@ -1,11 +1,11 @@
 <template>
     <div class="Index full">
-        <div class="side full-height w-1-3">
+        <div class="side full-height w-2-7">
             <container :title="page.left.block1.title" class=" full-width h-1-4">
                 <group-zhun-ru class="h-3-10" :data="page.left.block1.text.data"/>
                 <div class="h-7-10">
                     <div class="w-1-4 full-height">
-                        <ChartGauge :data="{name:'企业活力',value:45}"/>
+                        <ChartGauge :data="page.left.block1.chart" @click="openDia()"/>
                     </div>
                     <div class="w-3-4 full-height">
                         <ChartBarLine
@@ -16,24 +16,24 @@
                                 :type="page.left.block1.chart1.type"
                                 :legend="page.left.block1.chart1.legend"
                                 :units="page.left.block1.chart1.units"
-                                :borderRadius="false"
                         />
                     </div>
                 </div>
             </container>
             <container :title="page.left.block2.title" class=" full-width h-1-4">
-                <div class="h-1-6">
+                <div class="h-1-4">
                     <GroupJingZheng :data="page.left.block2.text"/>
                 </div>
-                <div class="h-5-6">
+                <div class="h-3-4">
                     <div class="full-height w-1-2">
-                        <ChartAreaLine :data="page.left.block2.chart1.data"
-                                       :title="page.left.block2.chart1.title"
-                                       :dimensions="page.left.block2.chart1.dimensions"
-                                       :colors="page.left.block2.chart1.color"
-                                       :type="page.left.block2.chart1.type"
-                                       :legend="page.left.block2.chart1.legend"
-                                       :unit="page.left.block2.chart1.units"/>
+                        <ChartBarLine :data="page.left.block2.chart1.data"
+                                      :title="page.left.block2.chart1.title"
+                                      :dimensions="page.left.block2.chart1.dimensions"
+                                      :colors="page.left.block2.chart1.color"
+                                      :type="page.left.block2.chart1.type"
+                                      :legend="page.left.block2.chart1.legend"
+                                      :isArea="true"
+                                      :units="page.left.block2.chart1.units"/>
                     </div>
                     <div class="full-height w-1-2">
                         <ChartBarLine
@@ -49,95 +49,186 @@
                 </div>
             </container>
             <container :title="page.left.block3.title" class=" full-width h-1-4">
-                <div class="w-1-2 full-height">
-                    字符云
+                <div class="w-4-9 full-height">
+                    <ChartWord/>
                 </div>
-                <div class="w-1-2 full-height">
+                <div class="w-5-9 full-height">
                     <GroupXiaoFei class="h-3-10" :data="page.left.block3.text"/>
                     <div class="h-7-10">
-                        <ChartPieCircle :title="page.left.block3.chart1.title" :data="page.left.block3.chart1.data"/>
+                        <ChartGroupHuanJing :title="page.left.block3.chart1.title"
+                                            :data="page.left.block3.chart1.data"/>
                     </div>
                 </div>
             </container>
             <container :title="page.left.block4.title" class=" full-width h-1-4">
-                <div class="full-height w-3-10">
-                    <BlockChanQuan :data="page.left.block4.text1"/>
-                </div>
-                <div class="full-height w-7-10">
-                    <GroupChanQuan :data="page.left.block4.text2"/>
-                </div>
+                <template v-if="page.name==='china'">
+                    <div class="full-height w-4-10">
+                        <BlockChanQuan :data="page.left.block4.text1"/>
+                    </div>
+                    <div class="full-height w-6-10">
+                        <GroupChanQuan :data="page.left.block4.text2"/>
+                    </div>
+                </template>
+                <template v-else>
+                    <ChartBarLine
+                            :data="page.left.block4.chart1.data"
+                            :title="page.left.block4.chart1.title"
+                            :dimensions="page.left.block4.chart1.dimensions"
+                            :colors="page.left.block4.chart1.color"
+                            :type="page.left.block4.chart1.type"
+                            :legend="page.left.block4.chart1.legend"
+                            :units="page.left.block4.chart1.units"
+                            :two-axis="false"
+                    />
+                </template>
             </container>
         </div>
-        <div class="center full-height  w-1-3">
-            <div class="title">{{page.title}}</div>
-            <div class="map">
-                <div class="map-can">
-                    <EchartsMap v-if="false"/>
-                    <Map3D/>
+        <div class="center full-height  w-3-7">
+
+            <div class="h-3-4">
+                <div class="title h-1-7">
+                    <!--                        <div class="title h-1-7" style="background-color: #42b983">-->
+                    <div class="main-title text-center">
+                        <img class="logo" src="./components/img/logo.png" alt=""/>
+                        <span class="title-text">智慧监管中心</span>
+                    </div>
+                    <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
                 </div>
-                <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
+                <div class="h-6-7" style="position: relative">
+                    <EchartsMap v-if="map1Show" :config="page.center.map"/>
+                    <NumberRoll :number="1.254" v-if="map1Show&&page.name==='china'" title="市场主体" unit="亿户"
+                                class="number"/>
+                    <EchartsMapRenWu v-if="map2Show" :config="page.center.map"/>
+                    <MapText class="map-text" v-if="map2Show" title="重点任务" text="中共中央政治局常务委员会召开会议..."/>
+                </div>
             </div>
-            <container title="质量基础" class="center-bottom full-width h-1-4">
-                <ChartBarSimple :data="page.chart2.data" :dimensions="page.chart2.dimensions"/>
+            <container
+                    :title="[page.center.block1.title,page.center.block2.title,page.center.block3.title][centerIndex]"
+                    class="center-bottom full-width h-1-4">
+                <trans class="full-height float-left" :data1="page.center.block1" :data2="page.center.block2"
+                       :data3="page.center.block3"
+                       :selectIndex="centerIndex"
+                       style="width: calc(100% - 20px)"
+                />
+                <tab-point style="width: 20px" class="float-left full-height" :max="3" v-model="centerIndex"/>
             </container>
         </div>
-        <div class="side full-height w-1-3">
-            <container title="标题" class=" full-width h-1-4">
-                <GroupContainer :data="[1,2,3,4]">
-                    <template v-slot:item="{item}">
-                        {{item}}
-                    </template>
-                </GroupContainer>
+        <div class="side full-height w-2-7">
+            <container :title="page.right.block1.title" class=" full-width h-1-4">
+                <GroupShiPin class="h-2-5" :data="page.right.block1.text"/>
+                <div class="h-3-5 " style="padding:0">
+                    <BlockShiPin class="full-height w-1-5" :data="page.right.block1.text2"></BlockShiPin>
+                    <ChartCustomPie class="w-4-5 full-height" :data="page.right.block1.chart1.data"
+                                    :title="page.right.block1.chart1.title"/>
+                </div>
             </container>
-            <container title="标题" class=" full-width h-1-4">
-                内容
+            <container :title="page.right.block2.title" class=" full-width h-1-4">
+                <GroupYaoPin class="h-1-4 full-width" :data="page.right.block2.text"/>
+                <ChartGroup class="h-3-4 full-width" :data="page.right.block2.charts" :tab="page.right.block2.tab"/>
             </container>
-            <container title="标题" class=" full-width h-1-4">
-                内容
+            <container :title="page.right.block3.title" class=" full-width h-1-4">
+                <div class="w-3-5 full-height">
+                    <BlockTeZhongSheBei :data="page.right.block3.charts"/>
+                </div>
+                <div class="w-2-5 full-height">
+                    <ChartPieCircleDouble :data="page.right.block3.chart2.data"
+                                          :title="page.right.block3.chart2.title"/>
+                </div>
             </container>
-            <container title="标题" class=" full-width h-1-4">
-                <ChartLineSimple class="w-3-4" :xdata="page.chart1.xdata" :ydata="page.chart1.ydata"/>
+            <container :title="page.right.block4.title" class=" full-width h-1-4">
+                <div class="h-2-7">
+                    <GroupGongYe :data="page.right.block4.text"/>
+                </div>
+                <div class="h-5-7">
+                    <div class="full-height w-1-2">
+                        <ChartAcross :title="page.right.block4.chart1.title" :data="page.right.block4.chart1"/>
+                    </div>
+                    <div class="full-height w-1-2">
+                        <ChartAreaLine :data="page.right.block4.chart2.data"
+                                       :title="page.right.block4.chart2.title"
+                                       :dimensions="page.right.block4.chart2.dimensions"
+                                       :colors="page.right.block4.chart2.color"
+                                       :type="page.right.block4.chart2.type"
+                                       :legend="page.right.block4.chart2.legend"
+                                       :line-with-circle="false"
+                                       :unit="page.right.block4.chart2.units"/>
+
+                    </div>
+                </div>
             </container>
         </div>
+
+        <transition name="bounce" mode="out-in">
+            <MapDia1 class="dia" v-if="dia1" @close="close"/>
+            <MapDia2 class="dia" v-if="dia2" @close="close"/>
+            <HuoLiDia class="dia" v-if="dia3" @close="close"/>
+        </transition>
     </div>
 </template>
 
 <script>
-// import TabSimplePoint from '../components/tab/TabSimplePoint'
 import EchartsMap from './components/EchartsMap'
 import TabSimpleMap from '../components/tab/TabSimpleMap'
-import ChartLineSimple from './components/ChartLineSimple'
-import ChartBarSimple from './components/ChartBarSimple'
 import GroupZhunRu from './components/GroupZhunRu'
 import ChartGauge from './components/ChartGauge'
 import ChartBarLine from './components/ChartBarLine'
-import Mock from 'mockjs'
-import graphic from 'echarts/lib/util/graphic'
-import Map3D from './components/Map3D'
 import GroupJingZheng from './components/GroupJingZheng'
 import ChartAreaLine from './components/ChartAreaLine'
-import ChartPieCircle from './components/ChartPieCircle'
+import ChartGroupHuanJing from './components/ChartGroupHuanJing'
 import GroupXiaoFei from './components/GroupXiaoFei'
 import BlockChanQuan from './components/BlockChanQuan'
 import GroupChanQuan from './components/GroupChanQuan'
+import ChartWord from './components/ChartWordCloub'
+import ChartAcross from './components/ChartAcross'
+import GroupShiPin from './components/GroupShiPin'
+import BlockShiPin from './components/BlockShiPin'
+import ChartCustomPie from './components/ChartCustomPie'
+import GroupYaoPin from './components/GroupYaoPin'
+import ChartGroup from './components/ChartGroup'
+import BlockTeZhongSheBei from './components/BlockTeZhongSheBei'
+import ChartPieCircleDouble from './components/ChartPieCircleDouble'
+import GroupGongYe from './components/GroupGongYe'
+import MapDia1 from './components/DialogImg/MapDia1'
+import MapDia2 from './components/DialogImg/MapDia2'
+import EchartsMapRenWu from './components/EchartsMapRenWu'
+import NumberRoll from './components/Number/numberRoll'
+import MapText from './components/mapText'
+import Trans from './components/trans'
+import TabPoint from '../components/tab/TabPoint'
+import HuoLiDia from './components/DialogImg/HuoLiDia'
 
 export default {
   name: 'Index',
   components: {
+    HuoLiDia,
+    TabPoint,
+    Trans,
+    MapText,
+    NumberRoll,
+    EchartsMapRenWu,
+    MapDia2,
+    MapDia1,
+    GroupGongYe,
+    ChartPieCircleDouble,
+    BlockTeZhongSheBei,
+    ChartGroup,
+    GroupYaoPin,
+    ChartCustomPie,
+    BlockShiPin,
+    GroupShiPin,
     GroupChanQuan,
     BlockChanQuan,
     GroupXiaoFei,
-    ChartPieCircle,
+    ChartGroupHuanJing,
     ChartAreaLine,
     GroupJingZheng,
-    Map3D,
     ChartBarLine,
     ChartGauge,
     GroupZhunRu,
-    ChartBarSimple,
-    ChartLineSimple,
     TabSimpleMap,
-    EchartsMap
+    EchartsMap,
+    ChartWord,
+    ChartAcross
     // TabSimplePoint
   },
   data () {
@@ -145,379 +236,33 @@ export default {
       tabSelect0: 0,
       max: 3,
       mapTabActive: 0,
+      centerIndex: 0,
+      dia1: false,
+      dia2: false,
+      dia3: false,
+      map1Show: true,
+      map2Show: false,
       mapTab: [{
-        name: '首页',
+        name: '主体',
         value: 0
       }, {
-        name: '重点关注',
+        name: '任务',
         value: 1
       }, {
-        name: '会商机制',
+        name: '会商',
         value: 2
       }, {
-        name: '指挥调度',
+        name: '指挥',
         value: 3
       }],
-      options: [],
-      page: {
-        titles: {
-          left: ['准入环境', '竞争环境', '消费环境', '知识产权', '知识产权'],
-          center: ['质量基础'],
-          right: ['食品安全', '药品安全', '特种设备安全', '工业消费品', '重点监管']
-        },
-        left: {
-          block1: {
-            title: '准入环境',
-            text: {
-              data: [{
-                name: '市场主体',
-                value: [{
-                  name: '总量',
-                  value: '1.25',
-                  unit: '亿户'
-                }, {
-                  name: '小微企业',
-                  value: '203',
-                  unit: '万户'
-                }]
-              }, {
-                name: '平均办结',
-                value: [{
-                  value: '12',
-                  unit: '月'
-                }, {
-                  value: '3',
-                  unit: '月'
-                }]
-              }]
-            },
-            chart1: {
-              title: '新设企业增长趋势分析',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['新设企业数量', '新设企业同比'],
-              type: ['bar', 'line'],
-              units: ['户数', '%'],
-              color: [new graphic.LinearGradient(
-                0,
-                1,
-                0,
-                0,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(247, 143, 53, 1)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(247, 216, 98, 1)'
-                  }
-                ],
-                false
-              ), 'rgba(50, 197, 255, 1)'],
-              data: [{
-                name: '2019.06',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '2019.07',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '2019.08',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '2019.09',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '2019.10',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '2019.11',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }]
-            }
-          },
-          block2: {
-            title: '竞争环境',
-            text: [{
-              title: '不正当竞争案件',
-              value: '13',
-              unit: '万件',
-              per: '15%',
-              trend: 'up'
-            }, {
-              title: '反垄断案件',
-              value: '306',
-              unit: '件',
-              per: '8%',
-              trend: '-'
-            }],
-            chart1: {
-              title: '价格监测趋势分析',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['商品零售价格指数', '居民消费价格指数'],
-              color: [new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: '#61E4FF'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(0, 0, 0, 0)'
-                  }
-                ],
-                false
-              ), new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: '#4F7DF8'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(0, 0, 0, 0)'
-                  }
-                ],
-                false
-              )],
-              data: [{
-                name: '1月',
-                value: Mock.Random.float(98, 103, 3, 3),
-                value1: Mock.Random.float(98, 103, 3, 3)
-              }, {
-                name: '2月',
-                value: Mock.Random.float(98, 103, 3, 3),
-                value1: Mock.Random.float(98, 103, 3, 3)
-              }, {
-                name: '3月',
-                value: Mock.Random.float(98, 103, 3, 3),
-                value1: Mock.Random.float(98, 103, 3, 3)
-              }, {
-                name: '4月',
-                value: Mock.Random.float(98, 103, 3, 3),
-                value1: Mock.Random.float(98, 103, 3, 3)
-              }, {
-                name: '5月',
-                value: Mock.Random.float(98, 103, 3, 3),
-                value1: Mock.Random.float(98, 103, 3, 3)
-              }, {
-                name: '6月',
-                value: Mock.Random.float(98, 103, 3, 3),
-                value1: Mock.Random.float(98, 103, 3, 3)
-              }]
-            },
-            chart2: {
-              title: '重点区域检查',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['商品零售价格指数', '居民消费价格指数'],
-              units: ['万次', '%'],
-              type: ['bar', 'line'],
-              color: [new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(79, 255, 148, 0.68)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(79, 255, 245, 0.4)'
-                  }
-                ],
-                false
-              ), 'rgba(254, 105, 65, 1)'],
-              data: [{
-                name: '1月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '2月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '3月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '4月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '5月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '6月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }]
-            }
-          },
-          block3: {
-            title: '消费环境',
-            text: [
-              {
-                title: '投诉举报总量',
-                value: '4501',
-                unit: '万次',
-                trend: '8.7%',
-                status: 'down'
-              },
-              {
-                title: '办结率',
-                value: '100%'
-              },
-              {
-                title: '诉转率',
-                value: '100%'
-              }
-            ],
-            chart1: {
-              title: '投诉举报热点分析',
-              data: [[{
-                name: '烟、酒和饮料',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'up'
-              }, {
-                name: '食品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'down'
-              }, {
-                name: '日用商品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: '-'
-              }, {
-                name: '医疗及医疗用品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'up'
-              }], [{
-                name: '烟、酒和饮料',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'up'
-              }, {
-                name: '食品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'down'
-              }, {
-                name: '日用商品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: '-'
-              }, {
-                name: '医疗及医疗用品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'up'
-              }]]
-            }
-          },
-          block4: {
-            title: '知识产权',
-            text1: [{
-              name: '发展指数',
-              value: '62.6'
-            }, {
-              name: '国际排行',
-              text: '上升至',
-              from: '13',
-              to: '8'
-            }],
-            text2: [{
-              icon: 'T!',
-              name: '商品注册',
-              value: '198',
-              unit: '万件',
-              top: {
-                name: '较去年同期',
-                value: '25%',
-                unit: '',
-                status: 'up'
-              },
-              bottom: {
-                name: '审查时限',
-                value: '9',
-                unit: '个月',
-                trend: '10%',
-                status: 'down'
-              }
-            }, {
-              icon: 'T@',
-              name: '地理标志',
-              value: '2320',
-              unit: '个',
-              top: {
-                name: '地理标志产品',
-                value: '25',
-                unit: '项',
-                status: ''
-              },
-              bottom: {
-                name: '打假维权',
-                value: '20',
-                unit: '件',
-                trend: '16%',
-                status: 'down'
-              }
-            }, {
-              icon: 'T#',
-              name: '专利',
-              value: '283',
-              unit: '万件',
-              top: {
-                name: '同比增长',
-                value: '10',
-                unit: '',
-                status: 'up'
-              },
-              bottom: {
-                name: '审查时限',
-                value: '12',
-                unit: '个月',
-                trend: '8%',
-                status: 'down'
-              }
-            }]
-          }
-        },
-        chart1: {
-          xdata: [],
-          ydata: []
-        },
-        chart2: {
-          data: [{
-            name: '测试1',
-            value: 33
-          }, {
-            name: '测试2',
-            value: 33
-          }, {
-            name: '测试3',
-            value: 33
-          }],
-          dimensions: ['name', 'value']
-        }
+      options: []
+    }
+  },
+  props: {
+    page: {
+      type: Object,
+      default: () => {
+        return {}
       }
     }
   },
@@ -526,29 +271,46 @@ export default {
   },
   methods: {
     MapChange (i) { // 这个会立刻执行
-      // console.log(i)
-      this.showInPage()
+      console.log(i)
+      if (i === 0) {
+        this.map1Show = true
+        this.map2Show = false
+      }
+      if (i === 1) {
+        this.map1Show = false
+        this.map2Show = true
+      }
+      if (i === 2) {
+        this.dia1 = true
+      }
+      if (i === 3) {
+        this.dia2 = true
+      }
     },
-    getConfig () {
-      this.$http.post('/screenNode/getTree', {}).then(value => {
-        this.options = value
-        this.showInPage(value)
-      })
+    // getConfig () {
+    //   this.$http.post('/screenNode/getTree', {}).then(value => {
+    //     this.options = value
+    //     this.showInPage(value)
+    //   })
+    // },
+    centerIndexChange (i) {
+      console.log(i)
+      this.centerIndex = i
     },
-    showInPage (value) {
-      this.page.title = '标题'
-      this.page.chart1.xdata = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      this.page.chart1.ydata = [820, 932, 901, 934, 1290, 1330, 1320]
+    close () {
+      this.dia1 = false
+      this.dia2 = false
+      this.dia3 = false
+    },
+    openDia () {
+      console.log(1)
+      this.dia3 = true
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-@SideWidth: 27%;
-@MapHeight: 68%;
-@TitleHeight: 5%;
-@CenterBottomHeight: 27%;
 .Index {
     padding: 15px 20px;
     color: #ffffff;
@@ -558,25 +320,113 @@ export default {
     }
 
     .center {
-        .title {
-            height: @TitleHeight;
+        .map-tab {
+            height: 28px;
         }
 
-        .map {
-            height: @MapHeight;
-            @MapTabHeight: 40px;
+        .main-title {
+            height: calc(100% - 28px);
 
-            .map-can {
-                height: calc(-@MapTabHeight + ~"100%");
+            .logo {
+                width: 35px;
+                height: 36px;
+                vertical-align: bottom;
             }
 
-            .map-tab {
-                height: @MapTabHeight;
+            .title-text {
+                font-size: 34px;
+                line-height: 40px;
+                letter-spacing: 4px;
+                margin-left: 13px;
             }
         }
+    }
 
-        .center-bottom {
-            height: @CenterBottomHeight;
+    .dia {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        padding: 60px 67px 98px 67px;
+        top: 0;
+        left: 0;
+        /*width: 1786px;*/
+        /*height: 922px;*/
+        /*top: 60px;*/
+        /*left: 67px;*/
+
+    }
+
+    .bounce-enter-active {
+        animation: bounce-in 0.8s;
+    }
+
+    .bounce-leave-active {
+        /*animation: bounce-out 0.5s;*/
+        animation: bounce-in 0.8s reverse;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        /*50% {*/
+        /*    transform: scale();*/
+        /*}*/
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .number {
+        position: absolute;
+        top: 26px;
+        left: 260px;
+    }
+
+    .map-text {
+        position: absolute;
+        top: 26px;
+        left: 80px;
+    }
+
+    .bounce-tab-enter-active {
+        animation: bounce-tab-in .5s;
+        animation-timing-function: linear;
+    }
+
+    .bounce-tab-leave-active {
+        /*animation: bounce-out 0.5s;*/
+        animation: bounce-tab-out .5s;
+        animation-timing-function: linear;
+    }
+
+    @keyframes bounce-tab-in {
+        0% {
+            /*transform: scale(0);*/
+
+            transform: rotateY(270deg) rotateZ(5deg) rotateX(5deg);
+        }
+        /*50% {*/
+        /*    transform: scale();*/
+        /*}*/
+        100% {
+            /*transform: scale(1);*/
+            transform: rotateY(360deg) rotateZ(0deg) rotateX(0);
+        }
+    }
+    @keyframes bounce-tab-out {
+        0% {
+            /*transform: scale(0);*/
+
+            transform: rotateY(0deg) rotateZ(0) rotateX(0);
+        }
+        /*50% {*/
+        /*    transform: scale();*/
+        /*}*/
+        100% {
+            /*transform: scale(1);*/
+            transform: rotateY(90deg) rotateZ(-5deg) rotateX(-5deg);
         }
     }
 }

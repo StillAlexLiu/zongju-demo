@@ -1,20 +1,48 @@
 @font-face {
-  font-family: 'LESLIE'; //重命名字体名
-  src: url("./font/LESLIE.TTF")
+  font-family: 'LESLIE'; //重命名字体， led效果那个
+  //src: url("./font/LESLIE.TTF")
+  src: url("./font/LCDMonoBold.ttf")
 }
 
 @font-face {
-  font-family: 'PingFang'; //重命名字体名
+  font-family: 'PingFang'; //重命名字体，通用字体
   src: url("./font/PingFang Regular.ttf")
+}
+
+@font-face {
+  font-family: 'siyuan';
+  src: url("./font/SOURCEHANSANSCN-BOLD.OTF");
+}
+@font-face {
+  font-family: 'din';
+  //src: url("./font/FF_DIN_Pro_Bold_Italic.otf");
+  src: url("./font/DINPro-Medium.otf");
 }
 
 * {
   font-family: 'PingFang';
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .number-font {
-  font-family: 'LESLIE';
+  font-family: 'din';
+  //font-family: 'Impact';
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 24px;
+  color: #FFBB6F;
+  letter-spacing:2px;
+}
+
+.percent-font {
+  font-family: 'PingFang';
+  font-size: 18px;
+  color: #fff;
+}
+
+.unit-font {
+  font-size: 12px;
+  color:#fff;
 }
 
 .text-center {

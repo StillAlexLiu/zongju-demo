@@ -21,7 +21,7 @@ export default {
 
 <style scoped lang="less">
 .ContainerWithLeftBorder {
-    background: linear-gradient(270deg, rgba(51, 75, 115, 0) 0%, rgba(51, 75, 115, 0.5) 50%, rgba(51, 75, 115, 0) 100%);
+    /*background: linear-gradient(270deg, rgba(51, 75, 115, 0) 0%, rgba(51, 75, 115, 0.5) 50%, rgba(51, 75, 115, 0) 100%);*/
     > * {
         float: left;
         height: 100%;

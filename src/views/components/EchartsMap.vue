@@ -1,78 +1,30 @@
 <template>
-    <v-chart class="cbg" :autoresize='true' :options='options' ref="echarts" @click="this.handler"/>
+    <v-chart class="" :autoresize='true' :options='options' ref="echarts" @click="this.handler"/>
 </template>
 
 <script>
-import json from './china'
+import echarts from 'echarts'
 
-const geoData = json.features
-const mapPint = require('./img/mapPoint.png')
 const mapInfo = require('./img/mapInfo.png')
-
 export default {
   name: 'EchartsMap',
   data () {
     return {
       options: {},
       center: [104.075206, 30.659799],
-      mapSelectName: '四川',
+      mapSelectName: '',
       timer: 0,
       isIn: true,
       indata: [],
       inpoints: [],
-      aspectScale: 0.7, // 地图长宽比
-      themes: [{
-        map: {
-          border: 'rgba(89,148,187,.50)'
-        },
-        lines: {
-          in: '',
-          out: ''
-        }
-      }, {
-        map: {
-          default: 'rgb(0,40,94)',
-          select: {
-            type: 'radial',
-            x: 0.5,
-            y: 0.5,
-            r: 0.5,
-            colorStops: [{
-              offset: 0.5,
-              color: '#0C3996' // 0% 处的颜色
-            }, {
-              offset: 0.83,
-              color: '#015CD5' // 0% 处的颜色
-            }, {
-              offset: 0.85,
-              color: '#005ED8' // 100% 处的颜色
-            }],
-            global: false // 缺省为 false
-          },
-          border: '#61aaff'
-        },
-        lines: {
-          in: '',
-          out: ''
-        }
-      }],
-      themeIndex: 0
+      aspectScale: 0.7 // 地图长宽比
     }
   },
-  watch: {
-    data: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption()
-        this.$nextTick(() => {
-          // 选中四川
-          this.$refs.echarts.dispatchAction({
-            type: 'geoSelect',
-            seriesName: 'geo',
-            name: this.mapSelectName
-          })
-        })
+  props: {
+    config: {
+      type: Object,
+      default: () => {
+        return {}
       }
     }
   },
@@ -80,7 +32,16 @@ export default {
     clearInterval(this.timer)
   },
   mounted () {
+    this.mapSelectName = this.config.mapSelectName
     this.options = this.getOption()
+    this.$nextTick(() => {
+      // 选中四川
+      this.$refs.echarts.dispatchAction({
+        type: 'geoSelect',
+        seriesName: 'geo',
+        name: this.mapSelectName
+      })
+    })
   },
   methods: {
     handler (event) {
@@ -88,7 +49,7 @@ export default {
         this.mapSelectName = event.name
         const find = this.getCPByName(event.name)
         if (find) {
-          this.center = find.properties.cp
+          this.config.center = find.properties.cp
         }
         this.options = this.getOption()
         this.$nextTick(() => {
@@ -101,7 +62,7 @@ export default {
       }
     },
     getCPByName (name) {
-      const find = geoData.find(value => {
+      const find = echarts.getMap(this.config.name).geoJson.features.find(value => {
         return value.properties.name === name
       })
       return find
@@ -109,63 +70,139 @@ export default {
     makeData () {
       this.indata = []
       this.inpoints = []
+      const geoData = echarts.getMap(this.config.name).geoJson.features
       for (let i = 0; i < geoData.length; i++) {
         const cp = geoData[i].properties.cp
         const name = geoData[i].properties.name
         if (name !== this.mapSelectName) {
-          if (i % 2 === 0) {
+          if (i % 4 === 0) {
             this.inpoints.push({
               value: cp,
-              symbol: 'image://' + mapPint,
-              symbolSize: '15',
+              // symbol: 'image://' + mapPint,
+              symbol: 'circle',
+              // FBD420
+              symbolSize: '10',
               name: name,
-              itemStyle: {}
-            })
-            this.indata.push({
-              name: '',
-              coords: [cp, this.center],
-              lineStyle: {
-                color: '#26C5EB',
-                curveness: this.center[0] > cp[0] ? '0.3' : '-0.3'
+              itemStyle: {
+                color: '#FBD420'
               }
             })
-          } else {
+            if (this.config.style === 0) {
+              this.indata.push({
+                name: '',
+                coords: [cp, this.config.center],
+                lineStyle: {
+                  color: '#26C5EB',
+                  curveness: this.config.center[0] > cp[0] ? '0.3' : '-0.3'
+                }
+              })
+            }
+          }
+          if (i % 4 === 1) {
             this.inpoints.push({
               value: cp,
-              symbol: 'image://' + mapPint,
-              symbolSize: '15',
+              // symbol: 'image://' + mapPint,
+              symbol: 'circle',
+              // FBD420
+              symbolSize: '10',
               name: name,
-              itemStyle: {}
-            })
-            this.indata.push({
-              name: '',
-              coords: [this.center, cp],
-              lineStyle: {
-                color: '#F5D298',
-                curveness: this.center[0] < cp[0] ? '0.3' : '-0.3'
+              itemStyle: {
+                color: '#FBD420'
               }
             })
+
+            if (this.config.style === 0) {
+              this.indata.push({
+                name: '',
+                coords: [this.config.center, cp],
+                lineStyle: {
+                  color: '#F5D298',
+                  curveness: this.config.center[0] < cp[0] ? '0.3' : '-0.3'
+                }
+              })
+            }
           }
         }
       }
     },
     getOption () {
+      const style = this.config.style
       this.makeData()
       const mapSelectName = this.mapSelectName
       const geos = []
       const level = 3
+
+      function getMapStyle (i) {
+        if (i === 0) { // 上层
+          if (style === 0) {
+            return '#151729'
+          } else {
+            return new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+              {
+                offset: 0,
+                color: '#32C7E1'
+              },
+              {
+                offset: 1,
+                color: 'rgba(50,198,223,.40)'
+              }
+            ])
+            // return {
+            //   type: 'radial',
+            //   x: 0.5,
+            //   y: 0.5,
+            //   r: 0.5,
+            //   colorStops: [{
+            //     offset: 0,
+            //     color: 'rgba(50,198,223,.40)' // 0% 处的颜色
+            //   }, {
+            //     offset: 0.85,
+            //     color: '#32C7E1' // 100% 处的颜色
+            //   }],
+            //   global: false // 缺省为 false
+            // }
+          }
+        } else { // 下层
+          if (style === 0) {
+            return '#344F6A'
+          } else {
+            return '#314F69'
+          }
+        }
+      }
+
+      function getMapLineStyle (i) {
+        if (i === 0) { // 上层
+          if (style === 0) {
+            return 'rgba(89, 148, 187, .50)'
+          } else {
+            return '#A0D2FF'
+            // return '#5995BA'
+          }
+        } else { // 下层
+          if (style === 0) {
+            return 'rgba(0, 0, 0, 0)'
+          } else {
+            // return 'rgba(89, 148, 187, .50)'
+            // return 'rgba(89, 148, 187, .50)'
+            return '#314F69'
+          }
+        }
+      }
+
       for (let i = 0; i < level; i++) {
         const geoItem = {
-          map: 'china',
-          // left: 0,
+          map: this.config.name,
           top: 20 - 5 * i,
           bottom: 5 + 5 * i,
-          aspectScale: this.aspectScale,
+          aspectScale: this.config.aspectScale,
           silent: i !== level - 1,
           itemStyle: {
-            color: i === level - 1 ? '#151729' : 'rgba(0,0,0,0)',
+            color: i === level - 1 ? getMapStyle(0) : getMapStyle(1),
+            // color: i === level - 1 ? '#151729' : '#314F69',
             borderWidth: 1,
-            borderColor: 'rgba(89,148,187,.50)'
+            borderColor: i === level - 1 ? getMapLineStyle(0) : getMapLineStyle(1)
+            // borderColor: 'rgba(89, 148, 187, .50)'
           },
           emphasis: {
             itemStyle: {
@@ -176,18 +213,30 @@ export default {
                 r: 0.5,
                 colorStops: [{
                   offset: 0,
-                  color: '#1D2435' // 0% 处的颜色
+                  color: '#32C7E1' // 0% 处的颜色
                 }, {
                   offset: 0.85,
-                  color: '#2E5E95' // 100% 处的颜色
+                  color: 'rgba(50,198,223,.40)' // 100% 处的颜色
                 }],
                 global: false // 缺省为 false
               } : 'rgba(0,0,0,0)',
-              borderWidth: 1,
+              // color: i === level - 1 ? new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+              //   {
+              //     offset: 0,
+              //     color: '#32C7E1'
+              //   },
+              //   {
+              //     offset: 1,
+              //     color: 'rgba(50,198,223,.40)'
+              //   }
+              // ]) : 'rgba(0,0,0,0)',
+              borderWidth: 0,
               borderColor: 'rgba(89,148,187,.50)'
             },
             label: {
-              show: i === level - 1
+              show: i === level - 1,
+              color: '#fff',
+              fontSize: 18
             }
           }
         }
@@ -243,6 +292,7 @@ export default {
               show: true,
               position: 'bottom',
               formatter: '{b}',
+              fontSize: 18,
               color: '#fff'
             }
           },
@@ -258,7 +308,7 @@ export default {
           },
           data: [{
             name: '',
-            coords: this.getPoint([[83, 24], this.center], 1),
+            coords: this.getPoint([this.config.pointPosition, this.config.center], 1),
             lineStyle: {
               color: '#A0D2FF',
               curveness: '0'
@@ -274,10 +324,10 @@ export default {
               position: 'inside',
               formatter: function () {
                 return '{title|' + mapSelectName + '}\n' +
-                  '{name|企业总数}{value|430}{name|万户}\n' +
-                  '{name|个体数}{value|430}{name|万户}\n' +
-                  '{name|农专户数}{value|430}{name|万户}\n' +
-                  '{name|小微企业数}{value|430}{name|万户}'
+                  '{name|企业总数}{value|430}{unit|万户}\n' +
+                  '{name|个体数}{value|223}{unit|万户}\n' +
+                  '{name|农专户数}{value|130}{unit|万户}\n' +
+                  '{name|小微企业数}{value|93}{unit|万户}'
               },
               rich: {
                 title: {
@@ -288,14 +338,23 @@ export default {
                 name: {
                   color: '#FFFFFF',
                   fontSize: 12,
+                  width: 80,
+                  lineHeight: 22,
+                  align: 'right',
+                  verticalAlign: 'bottom'
+                },
+                unit: {
+                  color: '#FFFFFF',
+                  fontSize: 12,
+                  width: 30,
                   lineHeight: 22,
                   verticalAlign: 'bottom'
                 },
                 value: {
-                  color: '#3FD3D6',
-                  fontSize: 22,
-                  padding: [0, 3],
-                  lineHeight: 22,
+                  color: '#fff',
+                  fontSize: 24,
+                  width: 40,
+                  lineHeight: 26,
                   verticalAlign: 'bottom',
                   fontFamily: 'LESLIE'
                 }
@@ -306,9 +365,9 @@ export default {
           },
           silent: true,
           data: [{
-            value: [83, 24],
+            value: this.config.pointPosition,
             symbol: 'image://' + mapInfo,
-            symbolSize: ['226', '226'],
+            symbolSize: ['203', '203'],
             name: '信息'
           }]
         }]
@@ -318,8 +377,8 @@ export default {
       const fixed = coords[0]
       const change = coords[1]
       const rad = Math.atan2(change[1] - fixed[1], change[0] - fixed[0])
-      const r = 8.8
-      const rtn2 = [fixed[0] + Math.cos(rad) * r, fixed[1] + Math.sin(rad) * r * this.aspectScale]
+      const r = this.config.r
+      const rtn2 = [fixed[0] + Math.cos(rad) * r, fixed[1] + Math.sin(rad) * r * this.config.aspectScale]
       return [rtn2, change]
     }
   }
@@ -327,6 +386,4 @@ export default {
 </script>
 
 <style scoped lang="less">
-.cbg {
-}
 </style>

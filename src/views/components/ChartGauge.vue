@@ -1,5 +1,10 @@
 <template>
-    <chart class="ChartGauge" :options='options'/>
+    <div class="full ChartGauge" style="position: relative">
+        <chart class="chart" :options='options' @click="click"/>
+        <div class="info" @click="click" >
+            <span>{{data.value}}</span>%
+        </div>
+    </div>
 </template>
 
 <script>
@@ -18,9 +23,30 @@ export default {
       }
     }
   },
+  methods: {
+    click () {
+      console.log(1)
+      this.$emit('click', '')
+    }
+  },
   computed: {
     options () {
-      const color = new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+      const color = new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+        // {
+        //   offset: 0,
+        //   color: 'rgba(0, 219, 141, 0.62)'
+        // }, {
+        //   offset: 0.17,
+        //   color: 'rgba(140, 221, 56, 1)'
+        // },
+        // {
+        //   offset: 0.9,
+        //   color: 'rgba(239, 239, 43, 1)'
+        // },
+        // {
+        //   offset: 1,
+        //   color: 'rgba(255, 145, 0, 1)'
+        // }
         {
           offset: 0,
           color: 'rgba(0, 219, 141, 0.62)'
@@ -30,11 +56,11 @@ export default {
         },
         {
           offset: 0.9,
-          color: 'rgba(239, 239, 43, 1)'
+          color: 'rgba(255, 145, 0, 1)'
         },
         {
           offset: 1,
-          color: 'rgba(255, 145, 0, 1)'
+          color: '#E3475A'
         }
       ])
       const colorSet = [
@@ -45,32 +71,12 @@ export default {
         graphic: {
           elements: [{
             type: 'text',
-            left: '35%',
-            top: '35%',
-            style: {
-              text: this.data.value,
-              textAlign: 'right',
-              font: '20px "LESLIE"',
-              fill: 'rgba(255, 213, 137, 1)'
-            }
-          }, {
-            type: 'text',
-            left: '55%',
-            top: '43%',
-            style: {
-              text: '%',
-              textAlign: 'left',
-              font: '10px "LESLIE"',
-              fill: '#fff'
-            }
-          }, {
-            type: 'text',
             top: '79%',
             left: 'center',
             style: {
               text: this.data.name,
               textAlign: 'center',
-              font: '10px "LESLIE"',
+              font: '18px "LESLIE"',
               fill: '#fff'
             }
           }]
@@ -78,8 +84,8 @@ export default {
         series: [
           {
             type: 'gauge',
-            center: ['50%', '44%'],
-            radius: '66%',
+            center: ['50%', '45%'],
+            radius: '70%',
             startAngle: '225',
             endAngle: '-45',
             pointer: {
@@ -137,9 +143,25 @@ export default {
 
 <style scoped lang="less">
 .ChartGauge {
-    background-image: url("./img/gauge.png");
-    background-size: 91px 94px;
-    background-position: center;
-    background-repeat: no-repeat;
+    .chart {
+        background-image: url("./img/gauge.png");
+        background-size: 114px 117px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .info {
+        position: absolute;
+        width: 100%;
+        top: 34px;
+        text-align: center;
+
+        span {
+            padding-left: 6px;
+            font-size: 36px;
+            color: #3FD3D6;
+            font-family: 'LESLIE';
+        }
+    }
 }
 </style>

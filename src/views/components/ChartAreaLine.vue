@@ -43,13 +43,17 @@ export default {
       default: () => {
         return null
       }
+    },
+    lineWithCircle: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
     options () {
       const series = []
       for (let i = 0; i < this.legend.length; i++) {
-        series.push({
+        const item = {
           type: 'line',
           name: this.legend[i],
           areaStyle: {},
@@ -59,20 +63,36 @@ export default {
             borderColor: '#fff',
             borderWidth: 1
           }
-        })
+        }
+        if (this.lineWithCircle) {
+          item.symbolSize = 8
+          item.itemStyle = {
+            borderColor: '#fff',
+            borderWidth: 1
+          }
+        } else {
+          item.symbolSize = 0
+        }
+        series.push(item)
       }
       return {
         color: this.colors,
         title: {
           text: this.title
         },
+        grid: {
+          // containLabel: true,
+          left: 40,
+          top: 40,
+          right: 10,
+          bottom: 20
+        },
         legend: {
           show: true,
-          right: 'right',
+          left: 'right',
           selectedMode: false,
           itemWidth: 13,
           itemHeight: 7,
-          orient: 'vertical',
           data: this.legend
         },
         dataset: {

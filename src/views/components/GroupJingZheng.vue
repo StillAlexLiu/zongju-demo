@@ -2,21 +2,24 @@
     <div class="GroupZhunRu full" v-if="data.length>0">
         <container-with-left-border class="full-height" v-for="(item,index) in data" :border="index!==0"
                                     :key="index">
-            <div class="dt full">
-                <span class="dc">{{item.title}}</span>
+            <div class="dt full-height info">
+                <span class="dc ">{{item.title}}</span>
                 <span class="dc" v-if="item.name">{{item.name}}</span>
-                <span class="dc value" v-if="item.value">{{item.value}}</span>
+                <span class="dc number-font" v-if="item.value">{{item.value}}</span>
                 <span class="dc" v-if="item.unit">{{item.unit}}</span>
-                <span class="dc" v-if="item.per">{{item.per}}</span>
-                <span class="dc" v-if="item.trend">{{item.trend}}</span>
+                <span class="dc percent-font" v-if="item.per">{{item.per}}</span>
+                <span class="dc" v-if="item.trend"><Arrow :dir="item.trend"/></span>
             </div>
         </container-with-left-border>
     </div>
 </template>
 
 <script>
+import Arrow from './Arrow'
+
 export default {
   name: 'GroupJingZheng',
+  components: { Arrow },
   props: {
     data: {
       type: Array,
@@ -67,19 +70,13 @@ export default {
         }
     }
 
-    .title {
-        font-size: 12px;
-        text-align: center;
-    }
-
-    .value {
-        font-size: 16px;
-        color: #3FD3D6;
-        font-family: 'LESLIE';
-    }
-
     .info {
         > span {
+            padding: 0 4px;
+        }
+
+        .title {
+            text-align: center;
         }
     }
 }

@@ -49,6 +49,26 @@ export default {
     borderRadius: {
       type: Boolean,
       default: true
+    },
+    barWidth: {
+      type: Number,
+      default: 8
+    },
+    twoAxis: {
+      type: Boolean,
+      default: true
+    },
+    lineWithCircle: {
+      type: Boolean,
+      default: true
+    },
+    isArea: {
+      type: Boolean,
+      default: false
+    },
+    rotate: {
+      type: Number,
+      default: 0
     }
   },
   computed: {
@@ -59,41 +79,72 @@ export default {
         const item = {
           type: this.type[i],
           name: this.legend[i],
-          yAxisIndex: i,
+
           itemStyle: {
             normal: {}
           }
         }
+        if (this.twoAxis) {
+          item.yAxisIndex = i
+        }
         if (this.type[i] === 'bar') {
-          item.barWidth = '12'
+          item.barWidth = this.barWidth
 
           if (this.borderRadius) {
             item.itemStyle.normal.barBorderRadius = [30, 30, 0, 0]
           }
         }
         if (this.type[i] === 'line') {
-          item.symbolSize = 8
-          item.itemStyle = {
-            borderColor: '#fff',
-            borderWidth: 1
+          if (this.lineWithCircle) {
+            item.symbolSize = 8
+            item.itemStyle = {
+              borderColor: '#fff',
+              borderWidth: 1
+            }
+          } else {
+            item.symbolSize = 0
+          }
+
+          if (this.isArea) {
+            item.areaStyle = {}
           }
         }
         series.push(item)
-        yAxis.push({
-          name: this.units[i],
-          min: 0,
-          nameLocation: 'end',
-          nameGap: 6,
-          nameTextStyle: {
-            fontSize: 12
-          },
-          splitLine: {
-            show: i === 0
-          },
-          show: true,
-          // x: 'center',
-          type: 'value'
-        })
+        if (this.twoAxis) {
+          yAxis.push({
+            name: this.units[i],
+            min: 0,
+            nameLocation: 'end',
+            nameGap: 6,
+            nameTextStyle: {
+              fontSize: 12
+            },
+            splitLine: {
+              show: i === 0
+            },
+            show: true,
+            // x: 'center',
+            type: 'value'
+          })
+        } else {
+          if (i === 0) {
+            yAxis.push({
+              name: this.units[i],
+              min: 0,
+              nameLocation: 'end',
+              nameGap: 6,
+              nameTextStyle: {
+                fontSize: 12
+              },
+              splitLine: {
+                show: i === 0
+              },
+              show: true,
+              // x: 'center',
+              type: 'value'
+            })
+          }
+        }
       }
       return {
         color: this.colors,
@@ -114,13 +165,18 @@ export default {
         },
         xAxis: {
           type: 'category',
-          boundaryGap: true
+          boundaryGap: true,
+          axisLabel: {
+            interval: 0
+            // rotate: -12
+          }
         },
         yAxis: yAxis,
         series: series
       }
     }
-  }
+  },
+  methods: {}
 }
 </script>
 

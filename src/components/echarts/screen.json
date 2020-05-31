@@ -1,20 +1,21 @@
 {
   "color": [
-    "#32c5ff",
-    "#f7d862",
-    "#7af9ff",
-    "#d48265",
-    "#91c7ae",
-    "#fe6941",
-    "#ca8622",
-    "#bda29a",
-    "#6e7074",
-    "#546570",
-    "#c4ccd3"
+    "#FE6941",
+    "#FFD589",
+    "#87A0F6",
+    "#B8E986",
+    "#E3475A",
+    "#4A90E2",
+    "#91D243",
+    "#FE9E55",
+    "#22AEC5",
+    "#FF98A4",
+    "#5DC3FF"
   ],
   "backgroundColor": "rgba(0,0,0,0)",
   "textStyle": {
-    "fontSize": 12,
+    "fontSize": 10,
+    "fontFamily": "PingFang",
     "color": "#ccc"
   },
   "title": {
@@ -38,7 +39,7 @@
     },
     "symbolSize": "5",
     "symbol": "circle",
-    "smooth": true
+    "smooth": false
   },
   "radar": {
     "itemStyle": {
@@ -53,7 +54,7 @@
     },
     "symbolSize": "5",
     "symbol": "circle",
-    "smooth": true
+    "smooth": false
   },
   "bar": {
     "itemStyle": {
@@ -177,19 +178,19 @@
     },
     "symbolSize": "5",
     "symbol": "circle",
-    "smooth": true,
+    "smooth": false,
     "color": [
-      "#32c5ff",
-      "#f7d862",
-      "#7af9ff",
-      "#d48265",
-      "#91c7ae",
-      "#fe6941",
-      "#ca8622",
-      "#bda29a",
-      "#6e7074",
-      "#546570",
-      "#c4ccd3"
+      "#FE6941",
+      "#FFD589",
+      "#87A0F6",
+      "#B8E986",
+      "#E3475A",
+      "#4A90E2",
+      "#91D243",
+      "#FE9E55",
+      "#22AEC5",
+      "#FF98A4",
+      "#5DC3FF"
     ],
     "label": {
       "normal": {
@@ -418,7 +419,7 @@
   "legend": {
     "textStyle": {
       "color": "#ccc",
-      "fontSize": 8
+      "fontSize": 12
     }
   },
   "tooltip": {

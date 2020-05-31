@@ -1,6 +1,6 @@
 <template>
     <div class="charts">
-        <v-chart :options='computedOptions' :autoresize='true' theme="screen"/>
+        <v-chart :options='computedOptions' :autoresize='true' theme="screen" @click="this.handler"/>
         <!--        {{computedOptions}}-->
     </div>
 </template>
@@ -52,6 +52,9 @@ export default {
   methods: {
     addLinePoint () {
 
+    },
+    handler (...params) {
+      this.$emit('click', params)
     }
   }
 }

@@ -20,7 +20,6 @@ export default {
       deep: true,
       handler: function () {
         this.$emit('input', this.active)
-        this.$emit('change', this.active)
       }
     },
     value: {
@@ -46,6 +45,7 @@ export default {
   methods: {
     click (i) {
       this.active = i
+      this.$emit('change', this.active)
     }
   }
 }
@@ -60,11 +60,11 @@ export default {
     justify-content: center;
 
     > div {
-        width: 100px;
-        height: 29px;
+        width: 80px;
+        height: 28px;
         text-align: center;
-        line-height: 29px;
-        margin: 0 13px;
+        line-height: 28px;
+        margin: 0 24px;
         background-image: url("./img/map-default.png");
         background-size: 100% 100%;
         cursor: pointer;
