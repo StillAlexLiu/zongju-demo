@@ -1,6 +1,6 @@
 <template>
     <div class="metering full">
-        <div class="metering_left w-1-3">
+        <div class="metering_left w-1-3 full-height">
             <container class="full-with h-1-3" :title="page.titles.left[0]">
                 <metMarket :data="page.low.text.data" class="h-1-5"></metMarket>
                 <div class="h-4-5 w-1-2">
@@ -71,10 +71,7 @@
             </container>
         </div>
         <div class="metering_center full-height w-1-3">
-            <div class="main-title text-center">
-                <img class="logo" src="./images/logo.png" alt/>
-                <span class="title-text">智慧监管中心</span>
-            </div>
+            <CenterTitle/>
             <div class="main-contant full-width">
                 <container class="full" :title="page.middle.title">
                     <div class="h-8-11">
@@ -116,7 +113,7 @@
                 </container>
             </div>
         </div>
-        <div class="metering_right w-1-3">
+        <div class="metering_right w-1-3 full-height">
             <container class="full" :title="page.right.title">
                 <div class="h-1-3">
                     <div class="w-1-2 full-height">
@@ -217,9 +214,11 @@ import metPer2 from './components/metPer2.vue'
 import middleText from './components/middleText.vue'
 import metArea from './components/metArea.vue'
 import metLine from './components/metLine.vue'
+import CenterTitle from '../common/CenterTitle'
 
 export default {
   components: {
+    CenterTitle,
     metMarket,
     progressBar,
     pie,
@@ -951,17 +950,14 @@ export default {
 </script>
 <style lang='less' scoped>
 .metering {
-    color: white;
+    color: #fff;
+    padding: 15px 20px;
 }
 
 .metering_left {
-    height: 98%;
-    padding: 1% 0 0 1%;
 }
 
 .metering_right {
-    height: 98%;
-    padding: 1% 1% 0 0;
 }
 
 //   .left-border{
@@ -999,12 +995,11 @@ export default {
 }
 
 .metering_center {
-    height: 98%;
-    padding: 1% 0 0 0;
-}
+    height: 100%;
 
-.main-contant {
-    height: 97%;
+    .main-contant {
+        height: calc(100% - 40px);
+    }
 }
 
 .left-title {

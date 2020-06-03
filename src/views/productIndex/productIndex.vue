@@ -30,10 +30,7 @@
             </div>
             <div class="full-height w-1-3 positionRelative">
                 <div class="title full-width">
-                    <div class="main-title text-center">
-                        <img class="logo" src="src/views/index/components/img/logo.png" alt=""/>
-                        <span class="title-text">智慧监管中心</span>
-                    </div>
+                    <CenterTitle/>
                     <proMapTopNumber :data="mapNumber"></proMapTopNumber>
 
                 </div>
@@ -154,10 +151,12 @@ import productJiankong from './components/productJianKong'
 import productChartFive from './components/productChartFive'
 import productTabSipleMap from './components/productTabSipleMap'
 import proMapTopNumber from './components/proMapTopNumber'
+import CenterTitle from '../common/CenterTitle'
 
 export default {
   name: 'productIndex',
   components: {
+    CenterTitle,
     productFirstView,
     prouctAreaLine,
     productbarLine,

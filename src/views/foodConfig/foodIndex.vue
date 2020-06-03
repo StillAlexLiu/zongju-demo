@@ -1,6 +1,6 @@
 <template>
     <div class="deptIndex full">
-        <div class="side full-height w-3-10">
+        <div class="side full-height w-2-7">
             <container class=" full-width h-7-11" :title="page.left.block1.title">
                 <foodChangeTitle :data="page.left.block1.tab"></foodChangeTitle>
                 <foodMarketZT :data="page.left.block1.text.data" class="h-1-8"/>
@@ -41,14 +41,11 @@
                 </div>
             </container>
         </div>
-        <div class="center full-height  w-4-10">
+        <div class="center full-height  w-3-7">
             <div class="map h-7-11 full-width">
                 <div class="h-1-6 full-width">
                     <div class="h-1-2 full-width">
-                        <div class="main-title text-center">
-                            <img class="logo" src="src/views/index/components/img/logo.png" alt=""/>
-                            <span class="title-text">智慧监管中心</span>
-                        </div>
+                        <CenterTitle/>
                     </div>
                     <div class="h-1-2 full-width">
                         <mapList :data="page.center.mapList" v-on:foodChangetabMap="foodChangetabMap"></mapList>
@@ -60,7 +57,7 @@
                 </div>
             </div>
             <container class=" full-width h-4-11" :title="page.center.block.title">
-                <div class="full-width h-2-3">
+                <div class="full-width h-4-7">
                     <foodChartBarLine
                         :data="page.center.chart2.data"
                         :title="page.center.chart2.title"
@@ -70,12 +67,14 @@
                         :legend="page.center.chart2.legend"
                         :units="page.center.chart2.units"></foodChartBarLine>
                 </div>
-                <foodChangeTitle :data="page.center.tab"></foodChangeTitle>
-                <foodTable class="full-width h-1-4" :data="page.center.block.table"
-                           :data1="page.center.block.table1"></foodTable>
+                <div class="h-3-7">
+                    <foodChangeTitle :data="page.center.tab" class="foot-center-title"></foodChangeTitle>
+                    <foodTable class="full-width food-center-title-sub" :data="page.center.block.table"
+                               :data1="page.center.block.table1"></foodTable>
+                </div>
             </container>
         </div>
-        <div class="side full-height w-3-10">
+        <div class="side full-height w-2-7">
             <container class=" full-width h-7-11" :title="page.right.block1.title">
                 <foodMarketJC :data="page.right.block1.text5.data" class="full-width h-2-6"
                               style="padding:10px"></foodMarketJC>
@@ -85,29 +84,31 @@
                 <foodMarketZBR :data="page.right.block1.text3.data" class="full-width h-1-6" style="padding:10px"/>
             </container>
             <container class=" full-width h-4-11" :title="page.right.block2.title">
-                <div class="titile_box"><p>{{page.right.block2.main.title}}<span class="number-font">{{page.right.block2.main.value}}</span><span
-                    class="unit-font">{{page.right.block2.main.unit}}</span></p></div>
-                <div class="w-1-2 full-height">
-                    <div class="JGbg w-1-1 h-6-8">
-                        <div class="text-center h-6-12" style="padding-top:55px;">
-                            <p>责令停产</p>
-                            <p><span class='number-font'>120</span><span class='unit-font'>件</span></p>
-                        </div>
-                        <div class="text-center h-3-11" style="padding-top:5px;">
-                            <p>罚款</p>
-                            <p><span class='number-font'>200</span><span class='unit-font'>万元</span></p>
-                        </div>
-                        <div class="text-center h-3-12">
-                            <p>警告</p>
-                            <p><span class='number-font'>902</span><span class='unit-font'>件</span></p>
+                <div class="titile_box h-1-6">{{page.right.block2.main.title}}<span class="number-font">{{page.right.block2.main.value}}</span><span
+                    class="unit-font">{{page.right.block2.main.unit}}</span></div>
+                <div class="h-5-6">
+                    <div class="w-1-2 full-height">
+                        <div class="JGbg w-1-1 h-6-8">
+                            <div class="text-center h-6-12" style="padding-top:45px;">
+                                <div>责令停产</div>
+                                <div><span class='number-font'>120</span><span class='unit-font'>件</span></div>
+                            </div>
+                            <div class="text-center h-3-11" style="padding-top:0px;">
+                                <div>罚款</div>
+                                <div><span class='number-font'>200</span><span class='unit-font'>万元</span></div>
+                            </div>
+                            <div class="text-center h-3-12">
+                                <div>警告</div>
+                                <div><span class='number-font'>902</span><span class='unit-font'>件</span></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-1-2 full-height">
-                    <foodChartPieR
-                        :data="page.right.block2.chart1.data"
-                        :title="page.right.block2.chart1.title"
-                    />
+                    <div class="w-1-2 full-height">
+                        <foodChartPieR
+                            :data="page.right.block2.chart1.data"
+                            :title="page.right.block2.chart1.title"
+                        />
+                    </div>
                 </div>
             </container>
         </div>
@@ -132,10 +133,12 @@ import foodMarketTS from './components/foodMarketTS' // 信息提示
 import foodMarketCard from './components/foodMarketCard' // 信息list
 import foodMarketMain from './components/foodMarketMain' // 信息card
 import foodMarketMainRight from './components/foodMarketMainRight' // 信息card
-import foodMarketZBR from './components/foodMarketZBR' // 信息card
+import foodMarketZBR from './components/foodMarketZBR'
+import CenterTitle from '../common/CenterTitle' // 信息card
 export default {
   name: 'foodIndex',
   components: {
+    CenterTitle,
     foodChangeTitle,
     foodChangetab,
     foodMarketZT,
@@ -795,20 +798,20 @@ export default {
 
     .borderbg {
         margin-left: 60px;
-        background: url('./img/分组 66@2x.png');
+        background-image: url('./img/分组 66@2x.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
 
     .foodbg {
-        background: url('./img/分组 56@2x.png');
+        background-image: url('./img/分组 56@2x.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
 
     .foodbottnbg {
         margin-left: 4px;
-        background: url('./img/分组 68@2x.png');
+        background-image: url('./img/分组 68@2x.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
@@ -816,13 +819,13 @@ export default {
     .JGbg {
         margin-top: 20px;
         position: relative;
-        background: url('./img/三角.png');
+        background-image: url('./img/三角.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
 
     .sssBg {
-        background: url('./img/Rectangle@2x.png');
+        background-image: url('./img/Rectangle@2x.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 20%;
@@ -836,7 +839,7 @@ export default {
     }
 
     .titleBg {
-        background: url('./img/矩形@2x (3).png');
+        background-image: url('./img/矩形@2x (3).png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         text-align: center;
@@ -850,16 +853,22 @@ export default {
     }
 
     .titile_box {
-        padding-top: 20px;
 
-        p {
-            background: linear-gradient(270deg, rgba(51, 75, 115, 0) 0%, rgba(51, 75, 115, 0.5) 50%, rgba(51, 75, 115, 0) 100%);
-            padding-left: 10px;
+        background: linear-gradient(270deg, rgba(51, 75, 115, 0) 0%, rgba(51, 75, 115, 0.5) 50%, rgba(51, 75, 115, 0) 100%) no-repeat top;
+        background-size: 100% 30px;
+        text-indent: 10px;
 
-            span {
-                padding-left: 30px;
-            }
+        span {
+            padding-left: 20px;
         }
+    }
+
+    .foot-center-title {
+        height: 35px;
+    }
+
+    .food-center-title-sub {
+        height: calc(100% - 35px);
     }
 }
 </style>

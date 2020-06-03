@@ -2,6 +2,7 @@
     <div class="main ">
         <div class="full-height" style="position: relative">
             <router-view/>
+            <RootTitle class="root—title"/>
             <PageSelect class="selector"/>
         </div>
     </div>
@@ -9,10 +10,14 @@
 
 <script>
 import PageSelect from './index/components/pageSelect'
+import RootTitle from './common/RootTitle'
 
 export default {
   name: 'mainIndex',
-  components: { PageSelect }
+  components: {
+    RootTitle,
+    PageSelect
+  }
 }
 </script>
 
@@ -27,6 +32,11 @@ export default {
         position: absolute;
         top: 22px;
         left: 1150px;
+    }
+
+    .root—title {
+        position: absolute;
+        top: 0;
     }
 }
 </style>

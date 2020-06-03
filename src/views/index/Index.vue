@@ -87,11 +87,7 @@
 
             <div class="h-3-4">
                 <div class="title h-1-7">
-                    <!--                        <div class="title h-1-7" style="background-color: #42b983">-->
-                    <div class="main-title text-center">
-                        <img class="logo" src="./components/img/logo.png" alt=""/>
-                        <span class="title-text">智慧监管中心</span>
-                    </div>
+                    <CenterTitle/>
                     <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
                 </div>
                 <div class="h-6-7" style="position: relative">
@@ -196,10 +192,12 @@ import MapText from './components/mapText'
 import Trans from './components/trans'
 import TabPoint from '../../components/tab/TabPoint'
 import HuoLiDia from './components/DialogImg/HuoLiDia'
+import CenterTitle from '../common/CenterTitle'
 
 export default {
   name: 'Index',
   components: {
+    CenterTitle,
     HuoLiDia,
     TabPoint,
     Trans,
@@ -322,23 +320,11 @@ export default {
     .center {
         .map-tab {
             height: 28px;
+            margin-top: 40px;
         }
 
         .main-title {
             height: calc(100% - 28px);
-
-            .logo {
-                width: 35px;
-                height: 36px;
-                vertical-align: bottom;
-            }
-
-            .title-text {
-                font-size: 34px;
-                line-height: 40px;
-                letter-spacing: 4px;
-                margin-left: 13px;
-            }
         }
     }
 

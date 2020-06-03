@@ -27,8 +27,7 @@
             <div class="full-width h-6-10 maptab1">
                 <div class="title h-1-7 full-width">
                     <div class="main-title text-center">
-                        <img class="logo" src="src/views/index/components/img/logo.png" alt=""/>
-                        <span class="title-text">智慧监管中心</span>
+                        <CenterTitle/>
                         <NumberRoll :number="page.numberRolltop" :title='mapTab[mapTabActive].name+"年报已报"' unit="万户"
                                     class="number"/>
                         <NumberRoll :number="page.numberRollbtn" :title='mapTab[mapTabActive].name+"年报率"' unit="%"
@@ -109,10 +108,12 @@ import ChartVerticalBar from './components/ChartVerticalBar'
 import NumberRoll from '../index/components/Number/NumberRollLeft'
 import TabSimpleMap from './components/TabSimpleMap'
 import ChartChinaMap from './components/ChartChinaMap'
+import CenterTitle from '../common/CenterTitle'
 
 export default {
   name: 'superviseIndex',
   components: {
+    CenterTitle,
     tableMessage,
     ChartTwoBar,
     goUnderMessage,

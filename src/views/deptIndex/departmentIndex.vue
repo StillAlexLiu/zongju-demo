@@ -1,12 +1,15 @@
 <template>
     <div class="deptIndex full">
         <div class="side full-height w-3-10">
+            <container class=" full-width h-3-9" :title="page.left.block2.title">
+                <deptMinitEnt :data="page.left.block2.text"></deptMinitEnt>
+            </container>
             <container class=" full-width h-3-9" :title="page.left.block1.title">
                 <changeTab :data="page.left.block1.tab" v-on:changeTabView="changeTabViewTag"></changeTab>
                 <dept-Market-ZT :data="page.left.block1.text.data" class="h-1-5 full-width"
                                 v-if="changeTabViewTagIsShow===1"/>
                 <deptXinShe class="h-1-5 full-width" :data="page.left.block1.text2"
-                            v-else-if="changeTabViewTagIsShow===3"></deptXinShe>
+                            v-else-if="changeTabViewTagIsShow===2"></deptXinShe>
                 <div class="h-4-6 full-width deptPaddingTop">
                     <deptChartBarLine
                         :data="page.left.block1.chart1.data"
@@ -18,9 +21,6 @@
                         :units="page.left.block1.chart1.units"
                     />
                 </div>
-            </container>
-            <container class=" full-width h-2-9" :title="page.left.block2.title">
-                <deptMinitEnt :data="page.left.block2.text"></deptMinitEnt>
             </container>
             <container class=" full-width h-2-9" :title="page.left.block3.title">
                 <div class="full-height w-1-5">
@@ -56,10 +56,7 @@
             <div class="map h-7-11 full-width">
                 <div class="mapTitleHeight full-width">
                     <div class="full-width">
-                        <div class="main-title text-center">
-                            <img class="logo" src="src/views/index/components/img/logo.png" alt=""/>
-                            <span class="title-text">智慧监管中心</span>
-                        </div>
+                        <CenterTitle/>
                     </div>
                     <div class="mapTitleHeight full-width" style="margin-top:10px" v-if="isShowMap===1">
                         <mapView :data="page.center.mapView"></mapView>
@@ -190,10 +187,12 @@ import initGongDangMap from './components/initGongdangMap'
 import deptXinShe from './components/deptxinshe'
 import deptGongDang from './components/deptGongDang'
 import HuoLiDia from '../index/components/DialogImg/HuoLiDia'
+import CenterTitle from '../common/CenterTitle'
 
 export default {
   name: 'deptIndex',
   components: {
+    CenterTitle,
     HuoLiDia,
     changeTab,
     deptMarketZT,
@@ -232,14 +231,11 @@ export default {
           block1: {
             title: '主体市场情况',
             tab: [{
-              title: '市场主体',
+              title: '新设',
               id: 1
             }, {
-              title: '新设',
-              id: 2
-            }, {
               title: '注吊销',
-              id: 3
+              id: 2
             }],
             text: {
               data: [
@@ -362,51 +358,57 @@ export default {
             }
           },
           block2: {
-            title: '小微企业情况',
+            title: '重点指标',
             text: {
               data1: [
                 {
-                  name: '发展指数',
-                  value: '125.88'
+                  name: '注册登记总量',
+                  value: '1.25',
+                  unit: '亿元',
+                  text: '同比',
+                  per: '24%',
+                  status: 'up'
                 },
                 {
-                  value: '34%',
-                  name: '同比',
-                  ra: 'up'
+                  name: '行政许可（备案）办结',
+                  value: '1.25',
+                  unit: '万户',
+                  text: '同比',
+                  per: '24%',
+                  status: 'up'
+                },
+                {
+                  name: '注撤销数',
+                  value: '1.25',
+                  unit: '万户',
+                  text: '同比',
+                  per: '26%',
+                  status: 'down'
                 }
               ],
               data2: [
-                {
-                  name: '小微企业数量',
-                  value: '1.16',
-                  unit: '亿户',
-                  id: 'aa'
-                },
-                {
+                [{
+                  name: '小微企业党建总量',
+                  value: '92.35%'
+                }, {
                   name: '占比',
-                  value: '92.35%',
-                  id: 'bb'
-                },
-                {
-                  name: '平均寿命',
-                  value: '2.8',
-                  text: '上升到',
-                  unit: '年',
-                  value2: '4.5',
-                  id: 'cc'
-                }
-              ],
-              data3: [
-                {
-                  name: '享受扶持政策数量',
-                  value: '2540',
-                  unit: '万户'
-                },
-                {
-                  name: '拉动就业人口',
-                  value: '2.37',
-                  unit: '亿'
-                }
+                  value: '20%'
+                }, {
+                  name: '同比',
+                  value: '20%',
+                  status: 'up'
+                }],
+                [{
+                  name: '个体工商户党建总量',
+                  value: '92.35%'
+                }, {
+                  name: '占比',
+                  value: '20%'
+                }, {
+                  name: '同比',
+                  value: '20%',
+                  status: 'down'
+                }]
               ]
             }
           },
@@ -1138,89 +1140,6 @@ export default {
       if (item.id === 1) {
         this.changeTabViewTagIsShow = 1
         this.page.left.block1.chart1 = {
-          title: '全国市场主体分布',
-          dimensions: ['name', 'value', 'value1'],
-          legend: ['主体数量', '同比'],
-          units: ['万户', ''],
-          type: ['bar', 'line'],
-          color: [new graphic.LinearGradient(
-            0,
-            0,
-            0,
-            1,
-            [
-              {
-                offset: 0,
-                color: 'rgba(79, 255, 148, 0.68)'
-              },
-              {
-                offset: 1,
-                color: 'rgba(79, 255, 245, 0.4)'
-              }
-            ],
-            false
-          ), 'rgba(247, 216, 98, 1)'],
-          data: [{
-            name: '北京',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '上海',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '河北',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '内蒙古',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '江苏',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '四川',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '河南',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '山东',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '山西',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '湖北',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '贵州',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '广州',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '云南',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }, {
-            name: '辽宁',
-            value: Mock.Random.natural(200, 500),
-            value1: Mock.Random.natural(10, 60)
-          }]
-        }
-      } else if (item.id === 2) {
-        this.changeTabViewTagIsShow = 1
-        this.page.left.block1.chart1 = {
           title: '全国市场主体新设分布',
           dimensions: ['name', 'value', 'value1'],
           legend: ['主体数量', '同比'],
@@ -1293,8 +1212,8 @@ export default {
             value1: -58.4
           }]
         }
-      } else if (item.id === 3) {
-        this.changeTabViewTagIsShow = 3
+      } else if (item.id === 2) {
+        this.changeTabViewTagIsShow = 2
         this.page.left.block1.chart1 = {
           title: '全国市场主体注吊销分布',
           dimensions: ['name', 'value', 'value1'],
