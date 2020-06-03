@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import PageSelect from './components/pageSelect'
+import PageSelect from './index/components/pageSelect'
 
 export default {
   name: 'mainIndex',

@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../views/Index.vue'
+import Index from '../views/index/Index.vue'
 import main from '../views/main'
-import deptIndex from '../views/departmentIndex.vue'
-import metering from '../views/metering'
-import foodIndex from '../views/foodIndex.vue'
-import superviseIndex from '../views/superviseIndex.vue'
-import productIndex from '../views/productIndex.vue'
-import countryIndex from '../views/countryIndex'
-import provinceIndex from '../views/provinceIndex'
+import deptIndex from '../views/deptIndex/departmentIndex.vue'
+import metering from '../views/metering/metering'
+import foodIndex from '../views/foodConfig/foodIndex.vue'
+import superviseIndex from '../views/superIndex/superviseIndex.vue'
+import productIndex from '../views/productIndex/productIndex.vue'
+import countryIndex from '../views/index/countryIndex'
+import provinceIndex from '../views/index/provinceIndex'
 
 Vue.use(VueRouter)
 
