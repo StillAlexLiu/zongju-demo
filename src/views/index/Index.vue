@@ -165,6 +165,7 @@
             <Consultation class="dia" v-if="dia1" @close="close"/>
             <Commander class="dia" v-if="dia2" @close="close"/>
             <HuoLiDia class="dia" v-if="dia3" @close="close"/>
+            <Battle class="dia"  v-if="dia4" @close="close"/>
         </transition>
     </div>
 </template>
@@ -202,10 +203,12 @@ import GroupZhiLiang from './components/GroupZhiLiang'
 import ZongHeZhiFa from './components/ZongHeZhiFa'
 import ZhongDianJianGuan from './components/ZhongDianJianGuan'
 import ImgBlock from '../common/ImgBlock'
+import Battle from './DialogImg/Battle'
 
 export default {
   name: 'Index',
   components: {
+    Battle,
     ImgBlock,
     ZhongDianJianGuan,
     ZongHeZhiFa,
@@ -247,8 +250,9 @@ export default {
       mapTabActive: 0,
       centerIndex: 0,
       dia1: false,
-      dia2: true,
+      dia2: false,
       dia3: false,
+      dia4: true,
       map1Show: true,
       map2Show: false,
       mapTab: [{
@@ -263,6 +267,9 @@ export default {
       }, {
         name: '指挥',
         value: 3
+      }, {
+        name: '挂图',
+        value: 4
       }],
       options: [],
       data: {
@@ -304,6 +311,9 @@ export default {
       if (i === 3) {
         this.dia2 = true
       }
+      if (i === 4) {
+        this.dia4 = true
+      }
     },
     // getConfig () {
     //   this.$http.post('/screenNode/getTree', {}).then(value => {
@@ -319,6 +329,7 @@ export default {
       this.dia1 = false
       this.dia2 = false
       this.dia3 = false
+      this.dia4 = false
     },
     openDia () {
       console.log(1)

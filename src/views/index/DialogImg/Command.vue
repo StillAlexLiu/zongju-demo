@@ -9,7 +9,7 @@
                     </div>
                 </div>
             </div>
-            <div class="title">调度指挥</div>
+            <div class="title" @click="close">调度指挥</div>
             <left-tab/>
             <img-block class="img1" :data="img"/>
             <BottomMenu class="menu" :data="menu" :points="points"/>

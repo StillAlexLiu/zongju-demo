@@ -45,7 +45,6 @@ export default {
       }
       if (this.options.title) {
         Object.assign(this.options.title, this.defaultOption.title)
-        console.log(this.options.title)
       }
       return this.options
     }
