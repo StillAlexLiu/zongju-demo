@@ -1,9 +1,9 @@
 <template>
     <div class="BlockShiPin text-center">
-        <div class="h-1-3 name">
+        <div class="h-1-4 name">
             {{data.name}}
         </div>
-        <div class="h-2-3 value number-font">
+        <div class="h-3-4 value number-font">
             {{data.value}}
         </div>
     </div>
@@ -31,7 +31,7 @@ export default {
     background-repeat: no-repeat;
 
     .name {
-        line-height: 70px;
+        line-height: 60px;
     }
 
     .value {

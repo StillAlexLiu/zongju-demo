@@ -66,7 +66,7 @@ export default {
         background-size: 100% 100%;
         cursor: pointer;
         margin: 0 6px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .active {

@@ -22,34 +22,8 @@
                     />
                 </div>
             </container>
-            <container class=" full-width h-2-9" :title="page.left.block3.title">
-                <div class="full-height w-1-5">
-                    <deptEntyKB :data="page.left.block3.text.data"></deptEntyKB>
-                </div>
-                <div class="full-height w-4-5">
-                    <deptEntyKBEchart :data="page.left.block3.chart1.data"
-                                      :title="page.left.block3.chart1.title"
-                                      :dimensions="page.left.block3.chart1.dimensions"
-                                      :colors="page.left.block3.chart1.color"
-                                      :type="page.left.block3.chart1.type"
-                                      :legend="page.left.block3.chart1.legend"
-                                      :units="page.left.block3.chart1.units "></deptEntyKBEchart>
-                </div>
-            </container>
-            <container class=" full-width h-2-9" :title="page.left.block4.title">
-                <div class="w-1-5 full-height">
-                    <deptChartGauge :data="{name:'企业活力',value:98}" @click="openDia"/>
-                </div>
-                <div class="w-4-5 full-height" style="padding-left:2%">
-                    <deptChartHuoli
-                        :data="page.left.block4.chart1.data"
-                        :title="page.left.block4.chart1.title"
-                        :dimensions="page.left.block4.chart1.dimensions"
-                        :colors="page.left.block4.chart1.color"
-                        :type="page.left.block4.chart1.type"
-                        :legend="page.left.block4.chart1.legend"
-                        :units="page.left.block4.chart1.units"></deptChartHuoli>
-                </div>
+            <container class=" full-width h-3-9" :title="page.left.block3.title">
+                <ImgBlock class="full" :data="page.left.block3.img"/>
             </container>
         </div>
         <div class="center full-height  w-4-10">
@@ -88,71 +62,17 @@
 
         <div class="side full-height w-3-10">
             <container class=" full-width h-3-9" :title="page.right.block1.title">
-                <div class="full-width h-1-10">
-                    <deptJgxk :data="page.right.block1.text.data"></deptJgxk>
-                </div>
-                <div class="full-width h-1-10" style="padding-left:4%">
-                    <changeTab :data="page.right.block1.tab" v-on:changeTabView="changeTabViewRight"></changeTab>
-                </div>
-                <div class="full-width h-8-10">
-                    <deptChartPer :data="page.right.block1.chart1.data"
-                                  :title="page.right.block1.chart1.title"
-                                  :dimensions="page.right.block1.chart1.dimensions"
-                                  :colors="page.right.block1.chart1.color"
-                                  :type="page.right.block1.chart1.type"
-                                  :legend="page.right.block1.chart1.legend"
-                                  :units="page.right.block1.chart1.units"></deptChartPer>
-                </div>
+                <img-block :data="page.right.block1.img" class="full"/>
             </container>
-            <container class=" full-width h-2-9" :title="page.right.block2.title">
-                <div class="full-height w-1-2">
-                    <deptZzfl :data="page.right.block2.text.data1" class="h-1-2"></deptZzfl>
-                    <deptZzfl :data="page.right.block2.text.data2" class="h-1-2"></deptZzfl>
-                </div>
-                <div class="full-height w-1-2">
-                    <!-- {{page.right.block2.chart}} -->
-                    <deptChartZzfl :data="page.right.block2.chart.data"
-                                   :title="page.right.block2.chart.title"
-                                   :colors="page.right.block2.chart.color"></deptChartZzfl>
-                </div>
+            <container class=" full-width h-3-9" :title="page.right.block2.title">
+                <img-block :data="page.right.block2.img" class="full-width" style="height: 40px"/>
+                <TabBottomLine :data="page.right.block2.tabs" v-model="tabSelect2" style="height: 30px"/>
+                <img-block v-for="(item,index) in page.right.block2.imgs" :data="item" :key="index"
+                           style="height: calc(100% - 70px);"
+                           v-show="index===tabSelect2"/>
             </container>
-            <container class=" full-width h-2-9" :title="page.right.block3.title"
-                       :chinaMap="page.right.block3.chinaMap">
-                <div class="w-2-7 full-height">
-                    <deptGongDang :data="page.right.block3.gongdangData"></deptGongDang>
-                </div>
-                <div class="w-5-7 full-height">
-                    <deptFeiGongDangEchart v-on:FeiGongDangchangeMap="changeFeiGongDangMap"
-                                           :data="page.right.block3.chart1.data"
-                                           :title="page.right.block3.chart1.title"
-                                           :dimensions="page.right.block3.chart1.dimensions"
-                                           :colors="page.right.block3.chart1.color"
-                                           :type="page.right.block3.chart1.type"
-                                           :legend="page.right.block3.chart1.legend"
-                                           :units="page.right.block3.chart1.units"></deptFeiGongDangEchart>
-                </div>
-            </container>
-            <container class=" full-width h-2-9" :title="page.right.block4.title"
-                       :chinaMap="page.right.block4.chinaMap">
-                <div class="full-width h-1-9">
-                    <changeTab :data="page.right.block4.tab" v-on:changeTabView="changeTabViewTagQy"></changeTab>
-                </div>
-                <div class="full-width h-8-9">
-                    <deptEchartYsbl v-if="quShow===1" :data="page.right.block4.chart1.data"
-                                    :dimensions="page.right.block4.chart1.dimensions"
-                                    :colors="page.right.block4.chart1.color"
-                                    :type="page.right.block4.chart1.type"
-                                    :legend="page.right.block4.chart1.legend"
-                                    :units="page.right.block4.chart1.units "
-                                    v-on:changeMap="changeMapView"></deptEchartYsbl>
-                    <deptAreaLine v-else-if="quShow===2" :data="page.right.block4.chart2.data"
-                                  :title="page.right.block4.chart2.title"
-                                  :dimensions="page.right.block4.chart2.dimensions"
-                                  :colors="page.right.block4.chart2.color"
-                                  :type="page.right.block4.chart2.type"
-                                  :legend="page.right.block4.chart2.legend"
-                                  :unit="page.right.block4.chart2.units"></deptAreaLine>
-                </div>
+            <container class=" full-width h-3-9" :title="page.right.block3.title">
+                <img-block :data="page.right.block3.img" class="full"/>
             </container>
         </div>
         <transition name="bounce" mode="out-in">
@@ -169,29 +89,19 @@ import deptEchartsMap from './components/deptEchartsMap.vue'
 import initEchartMap from './components/initEchartMap.vue'
 import deptChartBarLine from './components/deptChartBarLine.vue'
 import deptMinitEnt from './components/deptMinitEnt.vue'
-import deptChartGauge from './components/deptChartGauge'
-import deptChartHuoli from './components/deptChartHuoli.vue'
-import deptEntyKB from './components/deptEntyKB'
 import deptTaskSg from './components/deptTaskSg'
 import mapView from './components/mapView'
-import deptJgxk from './components/deptJgxk'
-import deptZzfl from './components/deptZzfl'
-import deptEntyKBEchart from './components/deptEntyKbEchart'
 import deptShangGaiEchart from './components/deptShangGaiEchart'
-import deptChartZzfl from './components/deptChartZzfl'
-import deptChartPer from './components/deptChartPermission'
-import deptFeiGongDangEchart from './components/deptFeiGongDangEchart'
-import deptEchartYsbl from './components/deptEchartYsbl'
-import deptAreaLine from './components/deptAreaLine'
 import initGongDangMap from './components/initGongdangMap'
 import deptXinShe from './components/deptxinshe'
-import deptGongDang from './components/deptGongDang'
-import HuoLiDia from '../index/components/DialogImg/HuoLiDia'
+import HuoLiDia from '../index/DialogImg/HuoLiDia'
 import CenterTitle from '../common/CenterTitle'
+import ImgBlock from '../common/ImgBlock'
 
 export default {
   name: 'deptIndex',
   components: {
+    ImgBlock,
     CenterTitle,
     HuoLiDia,
     changeTab,
@@ -200,27 +110,16 @@ export default {
     initEchartMap,
     deptChartBarLine,
     deptMinitEnt,
-    deptChartGauge,
-    deptChartHuoli,
-    deptEntyKB,
     deptTaskSg,
     mapView,
-    deptJgxk,
-    deptZzfl,
-    deptEntyKBEchart,
     deptShangGaiEchart,
-    deptChartZzfl,
-    deptChartPer,
-    deptFeiGongDangEchart,
-    deptEchartYsbl,
-    deptAreaLine,
     initGongDangMap,
-    deptXinShe,
-    deptGongDang
+    deptXinShe
   },
   data () {
     return {
       dia3: false,
+      tabSelect2: 0,
       page: {
         titles: {
           left: ['主体市场情况', '小微企业情况', '企业开办情况', '企业活力'],
@@ -413,168 +312,11 @@ export default {
             }
           },
           block3: {
-            title: '企业开办情况',
-            text: {
-              data: [{
-                name: '企业开办业务',
-                value: '13780',
-                unit: '笔'
-              }, {
-                name: '平均办理时长',
-                value: '12',
-                value1: '3',
-                unit: '天'
-              }
-              ]
-            },
-            chart1: {
-              title: '',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['办结量', '天数'],
-              type: ['bar', 'bar'],
-              units: ['笔', ''],
-              yAxisIndex: 0,
-              color: [new graphic.LinearGradient(
-                0,
-                1,
-                0,
-                0,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(247, 143, 53, 1)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(247, 216, 98, 1)'
-                  }
-                ],
-                false
-              ), new graphic.LinearGradient(
-                0,
-                1,
-                0,
-                0,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(34, 174, 197, 1)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(40, 202, 228,1)'
-                  }
-                ],
-                false
-              )],
-              data: [{
-                name: '领取执照',
-                value: Mock.Random.natural(200, 1000),
-                value1: 2
-              }, {
-                name: '公章刻制',
-                value: Mock.Random.natural(200, 1000),
-                value1: 1
-              }, {
-                name: '银行开户',
-                value: Mock.Random.natural(200, 1000),
-                value1: 1
-              }, {
-                name: '领取发票',
-                value: Mock.Random.natural(200, 1000),
-                value1: 1
-              }, {
-                name: '社保、公积金办理',
-                value: Mock.Random.natural(200, 1000),
-                value1: 2
-              }]
-            }
-          },
-          block4: {
-            title: '企业活力',
-            text: {
-              data: [{
-                name: '市场主体',
-                value: [{
-                  name: '市场主体总量',
-                  value: '1.25',
-                  unit: '亿户'
-                }, {
-                  name: '小微企业总量',
-                  value: '203',
-                  unit: '万户'
-                }]
-              }, {
-                name: '平均办结',
-                value: [{
-                  value: '12',
-                  unit: '月'
-                }, {
-                  value: '3',
-                  unit: '月'
-                }]
-              }]
-            },
-            chart1: {
-              title: '企业活力变化趋势分析',
-              dimensions: ['name', 'value1'],
-              legend: ['企业活力'],
-              type: ['line'],
-              units: [''],
-              color: [new graphic.LinearGradient(
-                0,
-                1,
-                0,
-                0,
-                [
-                  {
-                    offset: 0,
-                    color: '#50E3C2'
-                  },
-                  {
-                    offset: 1,
-                    color: '#50E3C2'
-                  }
-                ],
-                false
-              ), '#50E3C2'],
-              data: [{
-                name: '3月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '4月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '5月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '6月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '7月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '8月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '9月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '10月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '11月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '12月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '1月',
-                value1: Mock.Random.natural(70, 98)
-              }, {
-                name: '2月',
-                value1: Mock.Random.natural(70, 98)
-              }]
+            title: '小微企业情况',
+            img: {
+              img: require('./BlockImg/小微企业情况@2x.png'),
+              width: 1032 / 2,
+              height: 524 / 2
             }
           }
         },
@@ -737,392 +479,50 @@ export default {
         },
         right: {
           block1: {
-            title: '市场监管许可情况',
-            tab: [{
-              title: '累计许可',
-              id: 1
-            }, {
-              title: '本月许可',
-              id: 2
-            }],
-            text: {
-              data: [
-                {
-                  name: '累计许可',
-                  value: '901',
-                  unit: '万件'
-                },
-                {
-                  name: '本月新增',
-                  value: '19',
-                  unit: '万件'
-                },
-                {
-                  name: '同比',
-                  value: '12.3%',
-                  unit: '',
-                  ra: 'up'
-                }
-              ]
-            },
-            chart1: {
-              title: '简易注销',
-              yAxisIndex: 0,
-              dimensions: ['name', 'value', 'value1', 'value2'],
-              legend: ['申请量', '异议量', '办结量'],
-              type: ['bar', 'bar', 'bar'],
-              units: '万件',
-              color: [new graphic.LinearGradient(0, 0, 1, 0, [{
-                offset: 0,
-                color: 'rgba(116,205,254,1)'
-              }, {
-                offset: 1,
-                color: 'rgba(27,152,232,1)'
-              }])],
-              data: [
-                {
-                  name: '信息传输、计算',
-                  value: 55,
-                  sum: 1000,
-                  unit: '万件'
-                },
-                {
-                  name: '房地产',
-                  value: 27,
-                  sum: 1000,
-                  unit: '万件'
-                },
-                {
-                  name: '文化体育和娱乐业',
-                  value: 41,
-                  sum: 1000,
-                  unit: '万件'
-                },
-                {
-                  name: '农、林、牧、渔业',
-                  value: 19,
-                  sum: 1000,
-                  unit: '万件'
-                },
-                {
-                  name: '建筑业',
-                  value: 33,
-                  sum: 1000,
-                  unit: '万件'
-                },
-                {
-                  name: '金融业',
-                  value: 43,
-                  sum: 1000,
-                  unit: '万件'
-                },
-                {
-                  name: '居民服务',
-                  value: 35,
-                  sum: 1000,
-                  unit: '万件'
-                }
-              ]
+            title: '注册工作开展情况',
+            img: {
+              img: require('./BlockImg/注册工作开展@2x.png'),
+              width: 1040 / 2,
+              height: 452 / 2
             }
           },
           block2: {
-            title: '证照分离许可事项',
-            text: {
-              data1: [
-                {
-                  name: '证照分离企业数量',
-                  value: '1296',
-                  unit: '万户'
-                },
-                {
-                  name: '许可事项办理数量',
-                  value: '523',
-                  unit: '项'
-                }
-              ],
-              data2: [
-                {
-                  name: '部门数量',
-                  value: '78',
-                  unit: '个'
-                },
-                {
-                  name: '推送情况',
-                  value: '1145',
-                  unit: '条'
-                }
-              ]
+            title: '行政许可情况',
+            tabs: [{
+              name: '办结率发展趋势',
+              value: 0
+            }, {
+              name: '办结类型',
+              value: 1
+            }, {
+              name: '办结承诺时限',
+              value: 2
+            }],
+            img: {
+              img: require('./BlockImg/行政许可情况数据@2x.png'),
+              width: 1020 / 2,
+              height: 90 / 2
             },
-            chart: {
-              title: '证照分离改革',
-              color: ['#4594E8', '#FFD86C', '#FF996C', '#EA4344', '#82D8FF'],
-              data: [
-                {
-                  name: '惠及企业数量',
-                  value: '1905'
-                },
-                {
-                  name: '直接取消审批',
-                  value: '1047'
-                },
-                {
-                  name: '实行告知承诺',
-                  value: '2790'
-                },
-                {
-                  name: '优化审批服务',
-                  value: '4087'
-                }, {
-                  name: '审批改为备案',
-                  value: '315'
-                }
-              ]
-            }
+            imgs: [{
+              img: require('./BlockImg/办结率发展趋势@2x.png'),
+              width: 1024 / 2,
+              height: 416 / 2
+            }, {
+              img: require('./BlockImg/办结类型@2x.png'),
+              width: 908 / 2,
+              height: 376 / 2
+            }, {
+              img: require('./BlockImg/办结承诺时限@2x.png'),
+              width: 1008 / 2,
+              height: 416 / 2
+            }]
           },
           block3: {
-            title: '全国非公党建分布',
-            chinaMap: true,
-            chart1: {
-              title: '重点区域检查',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['党员担任法人数', '非公有制经济党组织数'],
-              units: ['万次', '%'],
-              type: ['bar', 'line'],
-              color: ['#FE6941', '#61EADF'],
-              data: ['北京市', '上海市', '天津市', '重庆市', '河北省', '山西省', '辽宁省', '吉林省']
-            },
-            gongdangData: [
-              {
-                title: '企业中有党组织数',
-                value: 65,
-                unit: '万个'
-              }, {
-                title: '全国法人数量',
-                value: 8537,
-                unit: '万个'
-              }, {
-                title: '其中党员人数',
-                value: 147,
-                unit: '万人',
-                percent: '1.8%'
-              }
-            ]
-          },
-          block4: {
-            title: '市场主体现状分析、预测',
-            chinaMap: true,
-            tab: [{
-              title: '重点区域相互投资情况',
-              id: 1
-            }, {
-              title: '营商便利度',
-              id: 2
-            }],
-            chart1: {
-              title: '',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['投资金额', '被投资金额'],
-              units: ['万次'],
-              type: ['bar', 'bar'],
-              color: [new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(79, 255, 148, 0.68)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(79, 255, 245, 0.4)'
-                  }
-                ],
-                false
-              ), 'rgba(247, 216, 98, 1)'],
-              data: [{
-                name: '北京',
-                value: 72.3,
-                value1: -92.3
-              }, {
-                name: '上海',
-                value: 84.4,
-                value1: -104.4
-              }, {
-                name: '河北',
-                value: 36.5,
-                value1: -26.5
-              }, {
-                name: '内蒙古',
-                value: 65.1,
-                value1: -75.1
-              }, {
-                name: '江苏',
-                value: 54.8,
-                value1: -34.8
-              }, {
-                name: '山东',
-                value: 39.9,
-                value1: -29.9
-              }, {
-                name: '四川',
-                value: 40.7,
-                value1: -50.7
-              }, {
-                name: '河南',
-                value: 58.3,
-                value1: -68.3
-              }, {
-                name: '山西',
-                value: 87.2,
-                value1: -67.2
-              }, {
-                name: '湖北',
-                value: 60.9,
-                value1: -30.9
-              }, {
-                name: '贵州',
-                value: 46.9,
-                value1: -26.9
-              }, {
-                name: '广州',
-                value: 76.4,
-                value1: -96.4
-              }, {
-                name: '云南',
-                value: 32.6,
-                value1: -22.6
-              }, {
-                name: '辽宁',
-                value: 28.9,
-                value1: -23.9
-              }]
-            },
-            chart2: {
-              title: '',
-              dimensions: ['name', 'value', 'value1', 'value2'],
-              legend: ['营商便利度', '综合前沿距离分数', '开办企业便利度前沿距离分数'],
-              color: [new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(50, 197, 255, 0.6)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(0,0,0,0)'
-                  }
-                ],
-                false
-              ), new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(255, 213, 137, 0.6)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(0,0,0,0)'
-                  }
-                ],
-                false
-              ), new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: 'rgba(126, 211, 33, 0.6)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(0,0,0,0)'
-                  }
-                ],
-                false
-              )],
-              data: [{
-                name: '北京',
-                value: 86.8,
-                value1: 24,
-                value2: 18
-              }, {
-                name: '上海',
-                value: 82.9,
-                value1: 26,
-                value2: 12
-              }, {
-                name: '河北',
-                value: 67.2,
-                value1: 38,
-                value2: 39
-              }, {
-                name: '内蒙古',
-                value: 65.1,
-                value1: 36,
-                value2: 25
-              }, {
-                name: '江苏',
-                value: 84.8,
-                value1: 32,
-                value2: 38
-              }, {
-                name: '山东',
-                value: 69.9,
-                value1: 44,
-                value2: 40
-              }, {
-                name: '四川',
-                value: 60.7,
-                value1: 36,
-                value2: 44
-              }, {
-                name: '河南',
-                value: 58.3,
-                value1: 38,
-                value2: 36
-              }, {
-                name: '山西',
-                value: 77.2,
-                value1: 48,
-                value2: 32
-              }, {
-                name: '湖北',
-                value: 60.9,
-                value1: 42,
-                value2: 44
-              }, {
-                name: '贵州',
-                value: 66.9,
-                value1: 39,
-                value2: 38
-              }, {
-                name: '广州',
-                value: 76.4,
-                value1: 25,
-                value2: 36
-              }, {
-                name: '云南',
-                value: 62.6,
-                value1: 44,
-                value2: 48
-              }, {
-                name: '辽宁',
-                value: 50.8,
-                value1: 50,
-                value2: 42
-              }]
+            title: '个体工商户情况',
+            img: {
+              img: require('./BlockImg/个体工商户情况@2x.png'),
+              width: 1032 / 2,
+              height: 524 / 2
             }
           }
         }

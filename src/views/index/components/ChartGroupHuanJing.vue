@@ -17,10 +17,10 @@ export default {
     return {
       dataIndex: 0,
       radio: [{
-        name: '品类',
+        name: '商品类',
         value: 0
       }, {
-        name: '性质',
+        name: '服务类',
         value: 1
       }]
     }

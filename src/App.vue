@@ -65,10 +65,12 @@ export default {
       this.$set(this.style, 'width', this.width + 'px')
       const zoom = bWidth / this.width
       this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
-      this.$set(this.style, 'margin-top', bHeight / 2 - this.height * zoom / 2 + 'px')
       this.$set(this.style, 'overflow', 'hidden')
       this.$set(this.style, 'transform-origin', 'left top')
-      this.$set(this.style2, 'overflow', 'hidden')
+      if (bWidth / bHeight < this.width / this.height) { // 超比例问题
+        this.$set(this.style, 'margin-top', bHeight / 2 - this.height * zoom / 2 + 'px')
+        this.$set(this.style2, 'overflow', 'hidden')
+      }
     },
     setAdaptHeight () {
       const bHeight = window.innerHeight

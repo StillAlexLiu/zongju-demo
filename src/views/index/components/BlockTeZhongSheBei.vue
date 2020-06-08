@@ -24,8 +24,8 @@
                 <img :src="data[0].img" class="w-1-3"/>
                 <img :src="data[1].img" class="w-1-3"/>
                 <img :src="data[2].img" class="w-1-3"/>
-<!--                <img :src="data[1].img"/>-->
-<!--                <img :src="data[2].img"/>-->
+                <!--                <img :src="data[1].img"/>-->
+                <!--                <img :src="data[2].img"/>-->
             </div>
         </div>
     </div>
@@ -81,22 +81,22 @@ export default {
 
 <style scoped lang="less">
 .BlockTeZhongSheBei {
-    padding-top: 5px;
 
     .title {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        height: 52px;
+        height: 40px;
         justify-content: space-around;
         background-image: linear-gradient(270deg, rgba(51, 75, 115, 0.00) 3%, rgba(51, 75, 115, 0.35) 51%, rgba(51, 75, 115, 0.00) 100%);
 
         .name {
-            line-height: 26px;
+            line-height: 20px;
         }
 
         .value {
             font-size: 12px;
+            line-height: 20px;
 
             .number-font {
                 font-size: 20px;
@@ -105,9 +105,9 @@ export default {
     }
 
     .center {
-        height: 28px;
+        height: 24px;
         font-size: 14px;
-        line-height: 30px;
+        line-height: 24px;
         padding-left: 10px;
 
         .add {
@@ -125,7 +125,7 @@ export default {
     }
 
     .img {
-        height: calc(100% - 52px - 28px);
+        height: calc(100% - 40px - 24px);
         overflow: hidden;
 
         .scroll {

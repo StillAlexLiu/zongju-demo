@@ -38,7 +38,7 @@ export default {
 <style scoped lang="less">
 .deptTaskSg {
     .deptTaskSgBg {
-        padding: 8px 5px;
+        padding: 8px 3px;
 
         .deptTaskSgPadding {
             background: linear-gradient(270deg, rgba(51, 75, 115, 0) 0%, rgba(51, 75, 115, 0.5) 50%, rgba(51, 75, 115, 0) 100%);

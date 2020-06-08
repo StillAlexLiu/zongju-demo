@@ -9,6 +9,8 @@ import superviseIndex from '../views/superIndex/superviseIndex.vue'
 import productIndex from '../views/productIndex/productIndex.vue'
 import countryIndex from '../views/index/countryIndex'
 import provinceIndex from '../views/index/provinceIndex'
+import LawIndex from '../views/Topic/Law/LawIndex'
+import ConsultationIndex from '../views/Consultation/ConsultationIndex'
 
 Vue.use(VueRouter)
 
@@ -57,6 +59,16 @@ const routes = [
         path: '/productIndex',
         name: 'productIndex',
         component: productIndex
+      },
+      {
+        path: '/LawIndex',
+        name: 'LawIndex',
+        component: LawIndex
+      },
+      {
+        path: '/ConsultationIndex',
+        name: 'ConsultationIndex',
+        component: ConsultationIndex
       }
     ]
   }

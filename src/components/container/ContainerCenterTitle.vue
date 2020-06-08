@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@TitleHeight: 40px;
+@TitleHeight: 35px;
 @point: linear-gradient(0, #8D9FBD 0%, #8D9FBD 100%);
 @line: linear-gradient(270deg, rgba(160, 180, 205, 0.24) 0%, rgba(103, 125, 159, 0.63) 100%);
 @BgColor: linear-gradient(180deg, rgba(32, 35, 58, .5) 0%, rgba(36, 41, 66, .5) 100%);
@@ -42,7 +42,7 @@ export default {
 @BottomLeft: url("./img/bottom-left.png");
 @BottomRight: url("./img/bottom-right.png");
 .Container {
-    padding: 9px 15px;
+    padding: 5px 5px;
 
     .main {
         height: 100%;
@@ -88,7 +88,7 @@ export default {
 
         .body {
             height: calc(-@TitleHeight + ~"-3px + 100%");
-            padding: 5px 10px;
+            padding: 0 10px 5px 10px;
         }
     }
 

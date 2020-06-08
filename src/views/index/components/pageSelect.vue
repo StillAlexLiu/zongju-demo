@@ -35,6 +35,12 @@ export default {
       }, {
         name: '产品质量',
         value: '/productIndex'
+      }, {
+        name: '专题-执法',
+        value: '/LawIndex'
+      }, {
+        name: '会商',
+        value: '/ConsultationIndex'
       }],
       data: []
     }

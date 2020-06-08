@@ -1,162 +1,169 @@
 <template>
     <div class="Index full">
-        <div class="side full-height w-2-7">
-            <container :title="page.left.block1.title" class=" full-width h-1-4">
-                <group-zhun-ru class="h-3-10" :data="page.left.block1.text.data"/>
-                <div class="h-7-10">
-                    <div class="w-1-4 full-height">
-                        <ChartGauge :data="page.left.block1.chart" @click="openDia()"/>
+        <div class="h-4-5">
+            <div class="side full-height w-2-7">
+                <container :title="page.left.block1.title" class=" full-width h-1-4">
+                    <group-zhun-ru class="h-3-11" :data="page.left.block1.text.data"/>
+                    <div class="h-8-11">
+                        <div class="w-1-4 full-height">
+                            <ChartGauge :data="page.left.block1.chart" @click="openDia()"/>
+                        </div>
+                        <div class="w-3-4 full-height">
+                            <ChartBarLine
+                                :data="page.left.block1.chart1.data"
+                                :title="page.left.block1.chart1.title"
+                                :dimensions="page.left.block1.chart1.dimensions"
+                                :colors="page.left.block1.chart1.color"
+                                :type="page.left.block1.chart1.type"
+                                :legend="page.left.block1.chart1.legend"
+                                :units="page.left.block1.chart1.units"
+                            />
+                        </div>
                     </div>
-                    <div class="w-3-4 full-height">
+                </container>
+                <container :title="page.left.block2.title" class=" full-width h-1-4">
+                    <div class="h-1-5">
+                        <GroupJingZheng :data="page.left.block2.text"/>
+                    </div>
+                    <div class="h-4-5">
+                        <div class="full-height w-1-2">
+                            <ChartBarLine :data="page.left.block2.chart1.data"
+                                          :title="page.left.block2.chart1.title"
+                                          :dimensions="page.left.block2.chart1.dimensions"
+                                          :colors="page.left.block2.chart1.color"
+                                          :type="page.left.block2.chart1.type"
+                                          :legend="page.left.block2.chart1.legend"
+                                          :isArea="true"
+                                          :units="page.left.block2.chart1.units"/>
+                        </div>
+                        <div class="full-height w-1-2">
+                            <ChartBarLine
+                                :data="page.left.block2.chart2.data"
+                                :title="page.left.block2.chart2.title"
+                                :dimensions="page.left.block2.chart2.dimensions"
+                                :colors="page.left.block2.chart2.color"
+                                :type="page.left.block2.chart2.type"
+                                :legend="page.left.block2.chart2.legend"
+                                :units="page.left.block2.chart2.units"
+                            />
+                        </div>
+                    </div>
+                </container>
+                <container :title="page.left.block3.title" class=" full-width h-1-4">
+                    <div class="w-3-9 full-height">
+                        <ChartWord/>
+                    </div>
+                    <div class="w-6-9 full-height">
+                        <GroupXiaoFei class="h-3-10" :data="page.left.block3.text"/>
+                        <div class="h-7-10">
+                            <ChartGroupHuanJing :title="page.left.block3.chart1.title"
+                                                :data="page.left.block3.chart1.data"/>
+                        </div>
+                    </div>
+                </container>
+                <container :title="page.left.block4.title" class=" full-width h-1-4">
+                    <template v-if="page.name==='china'">
+                        <div class="full-height w-3-10">
+                            <BlockChanQuan :data="page.left.block4.text1"/>
+                        </div>
+                        <div class="full-height w-7-10">
+                            <GroupChanQuan :data="page.left.block4.text2"/>
+                        </div>
+                    </template>
+                    <template v-else>
                         <ChartBarLine
-                            :data="page.left.block1.chart1.data"
-                            :title="page.left.block1.chart1.title"
-                            :dimensions="page.left.block1.chart1.dimensions"
-                            :colors="page.left.block1.chart1.color"
-                            :type="page.left.block1.chart1.type"
-                            :legend="page.left.block1.chart1.legend"
-                            :units="page.left.block1.chart1.units"
+                            :data="page.left.block4.chart1.data"
+                            :title="page.left.block4.chart1.title"
+                            :dimensions="page.left.block4.chart1.dimensions"
+                            :colors="page.left.block4.chart1.color"
+                            :type="page.left.block4.chart1.type"
+                            :legend="page.left.block4.chart1.legend"
+                            :units="page.left.block4.chart1.units"
+                            :two-axis="false"
                         />
-                    </div>
-                </div>
-            </container>
-            <container :title="page.left.block2.title" class=" full-width h-1-4">
-                <div class="h-1-4">
-                    <GroupJingZheng :data="page.left.block2.text"/>
-                </div>
-                <div class="h-3-4">
-                    <div class="full-height w-1-2">
-                        <ChartBarLine :data="page.left.block2.chart1.data"
-                                      :title="page.left.block2.chart1.title"
-                                      :dimensions="page.left.block2.chart1.dimensions"
-                                      :colors="page.left.block2.chart1.color"
-                                      :type="page.left.block2.chart1.type"
-                                      :legend="page.left.block2.chart1.legend"
-                                      :isArea="true"
-                                      :units="page.left.block2.chart1.units"/>
-                    </div>
-                    <div class="full-height w-1-2">
-                        <ChartBarLine
-                            :data="page.left.block2.chart2.data"
-                            :title="page.left.block2.chart2.title"
-                            :dimensions="page.left.block2.chart2.dimensions"
-                            :colors="page.left.block2.chart2.color"
-                            :type="page.left.block2.chart2.type"
-                            :legend="page.left.block2.chart2.legend"
-                            :units="page.left.block2.chart2.units"
-                        />
-                    </div>
-                </div>
-            </container>
-            <container :title="page.left.block3.title" class=" full-width h-1-4">
-                <div class="w-4-9 full-height">
-                    <ChartWord/>
-                </div>
-                <div class="w-5-9 full-height">
-                    <GroupXiaoFei class="h-3-10" :data="page.left.block3.text"/>
-                    <div class="h-7-10">
-                        <ChartGroupHuanJing :title="page.left.block3.chart1.title"
-                                            :data="page.left.block3.chart1.data"/>
-                    </div>
-                </div>
-            </container>
-            <container :title="page.left.block4.title" class=" full-width h-1-4">
-                <template v-if="page.name==='china'">
-                    <div class="full-height w-4-10">
-                        <BlockChanQuan :data="page.left.block4.text1"/>
-                    </div>
-                    <div class="full-height w-6-10">
-                        <GroupChanQuan :data="page.left.block4.text2"/>
-                    </div>
-                </template>
-                <template v-else>
-                    <ChartBarLine
-                        :data="page.left.block4.chart1.data"
-                        :title="page.left.block4.chart1.title"
-                        :dimensions="page.left.block4.chart1.dimensions"
-                        :colors="page.left.block4.chart1.color"
-                        :type="page.left.block4.chart1.type"
-                        :legend="page.left.block4.chart1.legend"
-                        :units="page.left.block4.chart1.units"
-                        :two-axis="false"
-                    />
-                </template>
-            </container>
-        </div>
-        <div class="center full-height  w-3-7">
-
-            <div class="h-3-4">
-                <div class="title h-1-7">
-                    <CenterTitle/>
-                    <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
-                </div>
-                <div class="h-6-7" style="position: relative">
-                    <EchartsMap v-if="map1Show" :config="page.center.map"/>
-                    <NumberRoll :number="1.254" v-if="map1Show&&page.name==='china'" title="市场主体" unit="亿户"
-                                class="number"/>
-                    <EchartsMapRenWu v-if="map2Show" :config="page.center.map"/>
-                    <MapText class="map-text" v-if="map2Show" title="重点任务" text="中共中央政治局常务委员会召开会议..."/>
-                </div>
+                    </template>
+                </container>
             </div>
-            <container
-                :title="[page.center.block1.title,page.center.block2.title,page.center.block3.title][centerIndex]"
-                class="center-bottom full-width h-1-4">
-                <trans class="full-height float-left" :data1="page.center.block1" :data2="page.center.block2"
-                       :data3="page.center.block3"
-                       :selectIndex="centerIndex"
-                       style="width: calc(100% - 20px)"
-                />
-                <tab-point style="width: 20px" class="float-left full-height" :max="3" v-model="centerIndex"/>
-            </container>
-        </div>
-        <div class="side full-height w-2-7">
-            <container :title="page.right.block1.title" class=" full-width h-1-4">
-                <GroupShiPin class="h-2-5" :data="page.right.block1.text"/>
-                <div class="h-3-5 " style="padding:0">
-                    <BlockShiPin class="full-height w-1-5" :data="page.right.block1.text2"></BlockShiPin>
-                    <ChartCustomPie class="w-4-5 full-height" :data="page.right.block1.chart1.data"
-                                    :title="page.right.block1.chart1.title"/>
-                </div>
-            </container>
-            <container :title="page.right.block2.title" class=" full-width h-1-4">
-                <GroupYaoPin class="h-1-4 full-width" :data="page.right.block2.text"/>
-                <ChartGroup class="h-3-4 full-width" :data="page.right.block2.charts" :tab="page.right.block2.tab"/>
-            </container>
-            <container :title="page.right.block3.title" class=" full-width h-1-4">
-                <div class="w-3-5 full-height">
-                    <BlockTeZhongSheBei :data="page.right.block3.charts"/>
-                </div>
-                <div class="w-2-5 full-height">
-                    <ChartPieCircleDouble :data="page.right.block3.chart2.data"
-                                          :title="page.right.block3.chart2.title"/>
-                </div>
-            </container>
-            <container :title="page.right.block4.title" class=" full-width h-1-4">
-                <div class="h-2-7">
-                    <GroupGongYe :data="page.right.block4.text"/>
-                </div>
-                <div class="h-5-7">
-                    <div class="full-height w-1-2">
-                        <ChartAcross :title="page.right.block4.chart1.title" :data="page.right.block4.chart1"/>
-                    </div>
-                    <div class="full-height w-1-2">
-                        <ChartAreaLine :data="page.right.block4.chart2.data"
-                                       :title="page.right.block4.chart2.title"
-                                       :dimensions="page.right.block4.chart2.dimensions"
-                                       :colors="page.right.block4.chart2.color"
-                                       :type="page.right.block4.chart2.type"
-                                       :legend="page.right.block4.chart2.legend"
-                                       :line-with-circle="false"
-                                       :unit="page.right.block4.chart2.units"/>
+            <div class="center full-height  w-3-7">
 
+                <div class="h-4-4">
+                    <div class="title h-1-7">
+                        <CenterTitle/>
+                        <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
+                    </div>
+                    <div class="h-6-7" style="position: relative">
+                        <EchartsMap v-if="map1Show" :config="page.center.map"/>
+                        <NumberRoll :number="1.254" v-if="map1Show&&page.name==='china'" title="市场主体" unit="亿户"
+                                    class="number"/>
+                        <EchartsMapRenWu v-if="map2Show" :config="page.center.map"/>
+                        <MapText class="map-text" v-if="map2Show" title="重点任务" text="中共中央政治局常务委员会召开会议..."/>
                     </div>
                 </div>
+
+            </div>
+            <div class="side full-height w-2-7">
+                <container :title="page.right.block1.title" class=" full-width h-1-4">
+                    <GroupShiPin class="h-1-3" :data="page.right.block1.text"/>
+                    <div class="h-2-3 " style="padding:0">
+                        <BlockShiPin class="full-height w-1-5" :data="page.right.block1.text2"></BlockShiPin>
+                        <ChartCustomPie class="w-4-5 full-height" :data="page.right.block1.chart1.data"
+                                        :title="page.right.block1.chart1.title"/>
+                    </div>
+                </container>
+                <container :title="page.right.block2.title" class=" full-width h-1-4">
+                    <GroupYaoPin class="h-1-4 full-width" :data="page.right.block2.text"/>
+                    <ChartGroup class="h-3-4 full-width" :data="page.right.block2.charts" :tab="page.right.block2.tab"/>
+                </container>
+                <container :title="page.right.block3.title" class=" full-width h-1-4">
+                    <div class="w-6-12 full-height">
+                        <BlockTeZhongSheBei :data="page.right.block3.charts"/>
+                    </div>
+                    <div class="w-6-12 full-height">
+                        <ChartPieCircleDouble :data="page.right.block3.chart2.data"
+                                              :title="page.right.block3.chart2.title"/>
+                    </div>
+                </container>
+                <container :title="page.right.block4.title" class=" full-width h-1-4">
+                    <div class="h-1-4">
+                        <GroupGongYe :data="page.right.block4.text"/>
+                    </div>
+                    <div class="h-3-4">
+                        <div class="full-height w-1-2">
+                            <ChartAcross :title="page.right.block4.chart1.title" :data="page.right.block4.chart1"/>
+                        </div>
+                        <div class="full-height w-1-2">
+                            <ChartAreaLine :data="page.right.block4.chart2.data"
+                                           :title="page.right.block4.chart2.title"
+                                           :dimensions="page.right.block4.chart2.dimensions"
+                                           :colors="page.right.block4.chart2.color"
+                                           :type="page.right.block4.chart2.type"
+                                           :legend="page.right.block4.chart2.legend"
+                                           :line-with-circle="false"
+                                           :unit="page.right.block4.chart2.units"/>
+
+                        </div>
+                    </div>
+                </container>
+            </div>
+        </div>
+        <div class="h-1-5 full-width">
+            <container title="质量提升" class="full-height w-1-4">
+                <GroupZhiLiang :data="page.center.block1.data"/>
+            </container>
+            <container title="风险管控"
+                       class=" w-1-4 full-height">
+                <img-block class="full" :data="data.bottom.chart2"/>
+            </container>
+            <container title="重点监管" class="full-height w-1-4">
+                <ZhongDianJianGuan :data="page.center.block3"/>
+            </container>
+            <container title="综合执法" class="full-height w-1-4">
+                <ZongHeZhiFa :data="page.center.block2"/>
             </container>
         </div>
-
         <transition name="bounce" mode="out-in">
-            <MapDia1 class="dia" v-if="dia1" @close="close"/>
-            <MapDia2 class="dia" v-if="dia2" @close="close"/>
+            <Consultation class="dia" v-if="dia1" @close="close"/>
+            <Commander class="dia" v-if="dia2" @close="close"/>
             <HuoLiDia class="dia" v-if="dia3" @close="close"/>
         </transition>
     </div>
@@ -184,28 +191,32 @@ import ChartGroup from './components/ChartGroup'
 import BlockTeZhongSheBei from './components/BlockTeZhongSheBei'
 import ChartPieCircleDouble from './components/ChartPieCircleDouble'
 import GroupGongYe from './components/GroupGongYe'
-import MapDia1 from './components/DialogImg/MapDia1'
-import MapDia2 from './components/DialogImg/MapDia2'
+import Consultation from './DialogImg/Consultation'
+import Commander from './DialogImg/Command'
 import EchartsMapRenWu from './components/EchartsMapRenWu'
 import NumberRoll from './components/Number/numberRoll'
 import MapText from './components/mapText'
-import Trans from './components/trans'
-import TabPoint from '../../components/tab/TabPoint'
-import HuoLiDia from './components/DialogImg/HuoLiDia'
+import HuoLiDia from './DialogImg/HuoLiDia'
 import CenterTitle from '../common/CenterTitle'
+import GroupZhiLiang from './components/GroupZhiLiang'
+import ZongHeZhiFa from './components/ZongHeZhiFa'
+import ZhongDianJianGuan from './components/ZhongDianJianGuan'
+import ImgBlock from '../common/ImgBlock'
 
 export default {
   name: 'Index',
   components: {
+    ImgBlock,
+    ZhongDianJianGuan,
+    ZongHeZhiFa,
+    GroupZhiLiang,
     CenterTitle,
     HuoLiDia,
-    TabPoint,
-    Trans,
     MapText,
     NumberRoll,
     EchartsMapRenWu,
-    MapDia2,
-    MapDia1,
+    Commander,
+    Consultation,
     GroupGongYe,
     ChartPieCircleDouble,
     BlockTeZhongSheBei,
@@ -236,7 +247,7 @@ export default {
       mapTabActive: 0,
       centerIndex: 0,
       dia1: false,
-      dia2: false,
+      dia2: true,
       dia3: false,
       map1Show: true,
       map2Show: false,
@@ -253,7 +264,16 @@ export default {
         name: '指挥',
         value: 3
       }],
-      options: []
+      options: [],
+      data: {
+        bottom: {
+          chart2: {
+            img: require('./BlockImg/编组 10@2x.png'),
+            width: 844 / 2,
+            height: 324 / 2
+          }
+        }
+      }
     }
   },
   props: {

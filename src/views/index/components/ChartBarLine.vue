@@ -10,6 +10,10 @@ export default {
       type: String,
       default: ''
     },
+    titleSize: {
+      type: Number,
+      default: 14
+    },
     data: {
       type: Array,
       default: () => {
@@ -69,6 +73,10 @@ export default {
     rotate: {
       type: Number,
       default: 0
+    },
+    bottom: {
+      type: Number,
+      default: 20
     }
   },
   computed: {
@@ -149,7 +157,18 @@ export default {
       return {
         color: this.colors,
         title: {
-          text: this.title
+          text: this.title,
+          te: this.titleSize,
+          textStyle: {
+            fontSize: this.titleSize,
+            fontWeight: 'normal'
+          }
+        },
+        grid: {
+          left: 40,
+          top: 40,
+          right: 20,
+          bottom: this.rotate > 0 ? this.bottom : 20
         },
         legend: {
           show: true,
@@ -167,8 +186,8 @@ export default {
           type: 'category',
           boundaryGap: true,
           axisLabel: {
-            interval: 0
-            // rotate: -12
+            interval: 0,
+            rotate: this.rotate
           }
         },
         yAxis: yAxis,

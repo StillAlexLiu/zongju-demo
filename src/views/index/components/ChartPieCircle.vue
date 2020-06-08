@@ -58,8 +58,8 @@ export default {
               }
             },
             labelLine: {
-              length: 0,
-              length2: 6
+              length: 5,
+              length2: 8
             },
             data: this.data
           }

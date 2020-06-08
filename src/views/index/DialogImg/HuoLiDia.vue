@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HuoLiDia',
+  name: 'Consultation',
   methods: {
     close () {
       this.$emit('close')

@@ -1,7 +1,7 @@
 <template>
     <div class="GroupZhongDian">
         <div v-for="(item,index) in data" :key="index" class="w-1-3 full-height " :class="index!==0?'line':''">
-            <span class="">{{item.name}}</span>
+            <span class="" style="white-space:pre; line-height: 15px">{{item.name}}</span>
             <span class="number-font">{{item.value}}</span>
             <span class="unit-font">{{item.unit}}</span>
         </div>

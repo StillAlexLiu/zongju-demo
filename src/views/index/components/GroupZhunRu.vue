@@ -115,7 +115,7 @@ export default {
         justify-content: flex-start;
 
         > div, > span {
-            line-height: 60px;
+            line-height: 40px;
         }
     }
 }

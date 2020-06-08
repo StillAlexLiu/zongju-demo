@@ -73,10 +73,14 @@ export default {
             type: 'pie',
             radius: ['26%', '36%'],
             center: center,
+            left: 0,
+            right: 0,
             avoidLabelOverlap: false,
             label: {
               normal: {
+                alignTo: 'edge',
                 show: true,
+                margin: 20,
                 fontSize: 10,
                 formatter: (params) => {
                   const data = params.data
@@ -97,7 +101,7 @@ export default {
             },
             labelLine: {
               length: 3,
-              length2: 3
+              length2: 33
             },
             data: this.data.outData.data
           },

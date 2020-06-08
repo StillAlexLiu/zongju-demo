@@ -27,23 +27,27 @@ export default {
     background-size: 96% auto;
     background-repeat: no-repeat;
     background-position: center;
-    padding: 30px 0;
+    padding: 12px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
     > div {
-        height: 54px;
-        padding-left: 20px;
+        /*height: 54px;*/
+        padding-left: 15px;
 
         > div {
             float: left;
             width: 50%;
         }
-        .name{
-            text-indent: 10px;
+
+        .name {
+            text-indent: 1px;
         }
+
         .value {
             text-align: center;
-            padding-right: 30px;
-            line-height: 0;
+            padding-right: 20px;
         }
     }
 }

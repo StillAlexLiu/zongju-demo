@@ -29,7 +29,7 @@ export default {
     justify-content: space-around;
 
     > div {
-        height: 64px;
+        height: 60px;
         background-image: linear-gradient(270deg, rgba(51, 75, 115, 0.00) 3%, rgba(51, 75, 115, 0.35) 51%, rgba(51, 75, 115, 0.00) 100%);
 
         .number-font {

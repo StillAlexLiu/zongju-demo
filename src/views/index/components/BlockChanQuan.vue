@@ -28,8 +28,8 @@
                 </div>
             </div>
         </div>
-        <div class="img full">
-            <img src="./img/zhishichanquan.png" style="width: 100%">
+        <div class="img full" style="text-align: center">
+            <img src="./img/zhishichanquan.png" style="height: 100%">
         </div>
     </div>
 </template>

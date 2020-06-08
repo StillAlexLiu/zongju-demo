@@ -190,27 +190,23 @@ export default {
               type: ['bar', 'line'],
               color: ['#91D243', '#FE6941'],
               data: [{
-                name: '1月',
+                name: '水电',
                 value: Mock.Random.natural(60, 100),
                 value1: Mock.Random.natural(10, 40)
               }, {
-                name: '2月',
+                name: '中介收费',
                 value: Mock.Random.natural(60, 100),
                 value1: Mock.Random.natural(10, 40)
               }, {
-                name: '3月',
+                name: '租金',
                 value: Mock.Random.natural(60, 100),
                 value1: Mock.Random.natural(10, 40)
               }, {
-                name: '4月',
+                name: '气价',
                 value: Mock.Random.natural(60, 100),
                 value1: Mock.Random.natural(10, 40)
               }, {
-                name: '5月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(10, 40)
-              }, {
-                name: '6月',
+                name: '医疗物资',
                 value: Mock.Random.natural(60, 100),
                 value1: Mock.Random.natural(10, 40)
               }]
@@ -1225,15 +1221,15 @@ export default {
           block3: {
             title: '重点监管',
             text: [{
-              name: '异常名录',
+              name: '异常\n名录',
               value: '686',
               unit: '万户'
             }, {
-              name: '严重违法失信',
+              name: '严重违\n法失信',
               value: '81.2',
               unit: '万户'
             }, {
-              name: '联合惩戒',
+              name: '联合\n惩戒',
               value: '26.1',
               unit: '万户'
             }],
