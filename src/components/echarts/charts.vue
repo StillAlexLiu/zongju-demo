@@ -1,6 +1,7 @@
 <template>
     <div class="charts">
-        <v-chart :options='computedOptions' :autoresize='true' theme="screen" @click="this.handler"/>
+        <v-chart :options='computedOptions' :autoresize='true' theme="screen" @click="this.handler"
+                 :initOptions="initOptions"/>
         <!--        {{computedOptions}}-->
     </div>
 </template>
@@ -18,6 +19,9 @@ export default {
   },
   data () {
     return {
+      initOptions: {
+        // renderer:'svg'
+      },
       defaultOption: {
         title: {
           textStyle: {

@@ -7,10 +7,9 @@ import metering from '../views/metering/metering'
 import foodIndex from '../views/foodConfig/foodIndex.vue'
 import superviseIndex from '../views/superIndex/superviseIndex.vue'
 import productIndex from '../views/productIndex/productIndex.vue'
-import countryIndex from '../views/index/countryIndex'
-import provinceIndex from '../views/index/provinceIndex'
 import LawIndex from '../views/Topic/Law/LawIndex'
 import ConsultationIndex from '../views/Consultation/ConsultationIndex'
+import Province from '../views/province/Province'
 
 Vue.use(VueRouter)
 
@@ -19,7 +18,7 @@ const routes = [
     path: '/',
     name: 'main',
     component: main,
-    redirect: '/countryIndex',
+    redirect: '/index',
     children: [
       {
         path: '/index',
@@ -27,15 +26,11 @@ const routes = [
         component: Index
       },
       {
-        path: '/countryIndex',
-        name: 'countryIndex',
-        component: countryIndex
+        path: '/province',
+        name: 'province',
+        component: Province
       },
       {
-        path: '/provinceIndex',
-        name: 'provinceIndex',
-        component: provinceIndex
-      }, {
         path: '/deptIndex',
         name: 'deptIndex',
         component: deptIndex

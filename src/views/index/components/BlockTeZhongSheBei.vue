@@ -133,6 +133,7 @@ export default {
             height: 100%;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             white-space: nowrap;
             overflow-y: hidden;
             overflow-x: scroll;

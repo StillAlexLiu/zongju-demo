@@ -16,10 +16,10 @@ export default {
       show: false,
       list: [{
         name: '国家总局',
-        value: '/countryIndex'
+        value: '/index'
       }, {
         name: '河北局',
-        value: '/provinceIndex'
+        value: '/province'
       }, {
         name: '食品',
         value: '/foodIndex'

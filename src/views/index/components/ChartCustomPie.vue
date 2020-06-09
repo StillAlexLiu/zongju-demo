@@ -48,6 +48,7 @@ export default {
         flex-wrap: nowrap;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
 
         > div {
             flex-grow: 1;

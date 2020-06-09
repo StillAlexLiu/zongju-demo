@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'ChartPieCircle',
+  name: 'ChartAcross',
   data () {
     return {}
   },

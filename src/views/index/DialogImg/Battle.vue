@@ -36,6 +36,7 @@
         <div v-if="page.rightBottom.active" class="page" :style="{backgroundImage:'url('+page.rightBottom.img+')'}">
             <div class="back" @click="openPage('rightBottom','home')"></div>
         </div>
+        <div @click="close" style="height: 63px;width: 360px;position: absolute;top: 61px;left: 780px"></div>
     </div>
 </template>
 
@@ -81,6 +82,9 @@ export default {
       this.page[old].active = false
       this.page[page].active = true
       console.log(old, page)
+    },
+    close () {
+      this.$emit('close')
     }
   }
 }
@@ -88,6 +92,8 @@ export default {
 
 <style scoped lang="less">
 .Battle {
+    position: relative;
+
     .page {
         position: relative;
         width: 100%;
