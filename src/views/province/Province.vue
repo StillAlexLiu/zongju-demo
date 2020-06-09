@@ -842,7 +842,75 @@ export default {
                 toUnit: '个月'
               }]
             }],
-
+          chart1: {
+            title: '商标地标专利增长情况',
+            dimensions: ['name', 'value', 'value1', 'value2'],
+            legend: ['商标', '专利', '地理标志'],
+            type: ['line', 'line', 'line'],
+            units: ['%'],
+            color: ['#91D243', '#E3475A', '#32C5FF'],
+            data: [{
+              name: '3月',
+              value: 13.34,
+              value1: 18.30,
+              value2: 15.33
+            }, {
+              name: '4月',
+              value: 7.34,
+              value1: 13.20,
+              value2: 9.28
+            }, {
+              name: '5月',
+              value: 9.23,
+              value1: 8.10,
+              value2: 12.3
+            }, {
+              name: '6月',
+              value: 13.19,
+              value1: 3.00,
+              value2: 8.3
+            }, {
+              name: '7月',
+              value: 8.63,
+              value1: 2.10,
+              value2: 11.32
+            }, {
+              name: '8月',
+              value: 14.08,
+              value1: 9.20,
+              value2: 12.3
+            }, {
+              name: '9月',
+              value: 14.52,
+              value1: 19.30,
+              value2: 9.3
+            }, {
+              name: '10月',
+              value: 14.97,
+              value1: 20.40,
+              value2: 10.13
+            }, {
+              name: '11月',
+              value: 6.41,
+              value1: 12.50,
+              value2: 8.31
+            }, {
+              name: '12月',
+              value: 8.86,
+              value1: 17.60,
+              value2: 7.3
+            }, {
+              name: '1月',
+              value: 11.3,
+              value1: 12.70,
+              value2: 6.82
+            }, {
+              name: '2月',
+              value: 9.75,
+              value1: 17.80,
+              value2: 0
+            }]
+          }
         }
       }
     }
