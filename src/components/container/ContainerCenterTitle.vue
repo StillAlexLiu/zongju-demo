@@ -1,7 +1,7 @@
 <template>
     <div class="Container">
         <div class="main">
-            <div class="title">
+            <div class="title" v-if="title!==''">
                 <div class="slot">
                     <slot name="title-left"/>
                 </div>
@@ -10,7 +10,7 @@
                     <slot name="title-right"/>
                 </div>
             </div>
-            <div class="body">
+            <div class="body" :style="{height:title===''?'100%':''}">
                 <slot/>
             </div>
         </div>

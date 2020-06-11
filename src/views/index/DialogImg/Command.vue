@@ -152,10 +152,10 @@ export default {
         case '执法人员':
           this.diaImg = this.dias[0]
           break
-        case '车辆':
+        case '站所':
           this.diaImg = this.dias[1]
           break
-        case '站所':
+        case '车辆':
           this.diaImg = this.dias[2]
           break
         default:

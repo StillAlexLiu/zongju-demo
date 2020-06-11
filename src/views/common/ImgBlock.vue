@@ -1,6 +1,6 @@
 <template>
     <div class='ImgBlock'>
-        <img :src="data.img" :style="{width:data.width+'px',height:data.height+'px'}" alt="">
+        <img :src="data.img" :style="{width:data.width+'px',height:data.height+'px'}" alt="" draggable="false">
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class='PageChanger full'>
+    <div class='PageChanger full' style="padding-top: 5px">
         <div v-if="dataIndex===0" class="full">
             <GroupShiPin class="h-1-3" :data="data.block1.text"/>
             <div class="h-2-3 " style="padding:0">

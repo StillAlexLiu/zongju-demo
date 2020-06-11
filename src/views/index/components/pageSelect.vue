@@ -34,13 +34,16 @@ export default {
         value: '/superviseIndex'
       }, {
         name: '产品质量',
-        value: '/productIndex'
+        value: '/product'
       }, {
         name: '专题-执法',
         value: '/LawIndex'
       }, {
-        name: '会商',
-        value: '/ConsultationIndex'
+        name: '综合风险专题',
+        value: '/Risk'
+      }, {
+        name: '工业品和消费品',
+        value: '/Industry'
       }],
       data: []
     }

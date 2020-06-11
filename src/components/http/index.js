@@ -9,6 +9,16 @@ const post = (url, data) => {
     })
   })
 }
+const get = (url, data) => {
+  return new Promise(resolve => {
+    axios.get(url, data).then(response => {
+      resolve(response.data)
+    }).catch(response => {
+      console.log('请求失败', response)
+    })
+  })
+}
 export default {
-  post
+  post,
+  get
 }

@@ -287,24 +287,26 @@ export default {
               ],
               data2: [
                 [{
-                  name: '小微企业党建总量',
-                  value: '92.35%'
+
+                  name: ' 小微企业党组织数',
+                  value: '321'
                 }, {
-                  name: '占比',
-                  value: '20%'
+                  name: '党员担任法人数',
+                  value: '345'
                 }, {
-                  name: '同比',
+                  name: '覆盖率',
                   value: '20%',
                   status: 'up'
                 }],
                 [{
-                  name: '个体工商户党建总量',
-                  value: '92.35%'
+
+                  name: '个体工商户党组织数',
+                  value: '321'
                 }, {
-                  name: '占比',
-                  value: '20%'
+                  name: '党员担任法人数',
+                  value: '345'
                 }, {
-                  name: '同比',
+                  name: '覆盖率',
                   value: '20%',
                   status: 'down'
                 }]
