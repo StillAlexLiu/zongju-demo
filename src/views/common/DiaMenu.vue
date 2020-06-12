@@ -34,7 +34,8 @@ export default {
       this.$router.push({
         path: item.path,
         query: {
-          action: item.action ? item.action : null
+          action: item.action ? item.action : null,
+          ts: (new Date()).valueOf()
         }
       })
       this.$emit('close')

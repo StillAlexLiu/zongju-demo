@@ -56,6 +56,7 @@ export default {
         width: 800px;
         left: 560px;
         top: 0;
+        z-index: 99;
     }
 
     .open {

@@ -102,9 +102,9 @@ export default {
             }
 
             .l {
-                height: 1px;
+                height: 2px;
                 width: 100%;
-                top: 5px;
+                top: 4px;
                 border-bottom: 1px dotted #5CA4FF;
             }
         }

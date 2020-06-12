@@ -271,7 +271,7 @@ export default {
         name: '指挥',
         value: 3
       }, {
-        name: '挂图',
+        name: '挂图作战',
         value: 4
       }],
       options: [],
@@ -1063,7 +1063,7 @@ export default {
             aspectScale: 0.7,
             center: [104.075206, 30.659799],
             center2: [114.274791, 30.594985],
-            pointPosition: [82, 23.5],
+            pointPosition: [84, 23.5],
             mapSelectName: '四川',
             style: 0,
             r: 8,
@@ -1577,20 +1577,25 @@ export default {
   //   }
   // },
   watch: {
-    $route: 'getAction'
+    $route: {
+      deep: true,
+      immediate: true,
+      handler: function () {
+
+        const action = this.$route.query.action
+        console.log(this.$route.query)
+        console.log(action)
+        // eslint-disable-next-line no-eval
+        eval(action)
+      }
+    }
   },
   mounted () {
-    // this.$route.params.key
+    // this.
+    // $route.params.key
     // this.getConfig()
   },
   methods: {
-    getAction () {
-      const action = this.$route.query.action
-      console.log(this.$route.query)
-      console.log(action)
-      // eslint-disable-next-line no-eval
-      eval(action)
-    },
     MapChange (i) { // 这个会立刻执行
       console.log(i)
       if (i === 0) {
@@ -1657,12 +1662,13 @@ export default {
 
     .dia {
         position: absolute;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.7);
         width: 100%;
         height: 100%;
         padding: 60px 67px 98px 67px;
         top: 0;
         left: 0;
+        z-index: 199;
         /*width: 1786px;*/
         /*height: 922px;*/
         /*top: 60px;*/
