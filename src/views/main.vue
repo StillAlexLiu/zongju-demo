@@ -3,7 +3,7 @@
         <div class="full-height" style="position: relative">
             <router-view/>
             <RootTitle class="root—title"/>
-            <PageSelect class="selector"/>
+            <PageSelect class="selector" v-if="false"/>
             <div class="open" @click="open">菜单</div>
             <dia-menu v-if="menuShow" @close="close"/>
         </div>

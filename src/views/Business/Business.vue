@@ -25,10 +25,6 @@
             </container>
         </div>
         <container title="消费环境" class="w-2-7 full-height">
-
-            {{dia1}}
-            {{dia2}}
-            {{dia3}}
             <div class="link" slot="title-right" @click="openPage(2)"></div>
             <img-block class="full-height" :data="img.right"/>
         </container>
