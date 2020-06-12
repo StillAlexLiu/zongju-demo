@@ -73,8 +73,8 @@ export default {
         },
         bottom: {
           img: require('./BlockImg/竞争环境.png'),
-          width: 780,
-          height: 376
+          width: 780 / 1.04,
+          height: 376 / 1.04
         },
         center: {
           img: require('./BlockImg/世界排名.png'),
@@ -196,6 +196,7 @@ export default {
         height: 100%;
         padding: 60px 67px 98px 67px;
         top: 0;
+        z-index: 199;
         left: 0;
         /*width: 1786px;*/
         /*height: 922px;*/

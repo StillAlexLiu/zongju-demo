@@ -1662,7 +1662,7 @@ export default {
 
     .dia {
         position: absolute;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.5);
         width: 100%;
         height: 100%;
         padding: 60px 67px 98px 67px;

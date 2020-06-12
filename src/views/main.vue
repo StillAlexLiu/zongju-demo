@@ -4,6 +4,7 @@
             <router-view/>
             <RootTitle class="root—title"/>
             <PageSelect class="selector" v-if="false"/>
+            <div class="pageName">{{pageName}}</div>
             <div class="open" @click="open">菜单</div>
             <dia-menu v-if="menuShow" @close="close"/>
         </div>
@@ -24,7 +25,17 @@ export default {
   },
   data () {
     return {
-      menuShow: false
+      menuShow: false,
+      pageName: ''
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      deep: true,
+      handler: function () {
+        this.pageName = this.$route.name
+      }
     }
   },
   methods: {
@@ -57,6 +68,20 @@ export default {
         left: 560px;
         top: 0;
         z-index: 99;
+    }
+
+    .pageName {
+        position: absolute;
+        top: 22px;
+        left: 1115px;
+        z-index: 110;
+        width: 184px;
+        text-align: center;
+        color: #fff;
+        height: 30px;
+        line-height: 30px;
+        background-size: 184px 30px;
+        background-image: url("./common/img/小标题背景框@2x.png");
     }
 
     .open {

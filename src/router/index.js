@@ -32,7 +32,7 @@ const routes = [
     children: [
       {
         path: '/index',
-        name: 'index',
+        name: '国家局',
         meta: {
           login_require: true
         },
@@ -40,7 +40,7 @@ const routes = [
       },
       {
         path: '/province',
-        name: 'province',
+        name: '河北',
         meta: {
           login_require: true
         },
@@ -48,7 +48,7 @@ const routes = [
       },
       {
         path: '/deptIndex',
-        name: 'deptIndex',
+        name: '登记注册局',
         meta: {
           login_require: true
         },
@@ -64,7 +64,7 @@ const routes = [
       },
       {
         path: '/foodIndex',
-        name: 'foodIndex',
+        name: '食品安全',
         meta: {
           login_require: true
         },
@@ -88,7 +88,7 @@ const routes = [
       },
       {
         path: '/LawIndex',
-        name: 'LawIndex',
+        name: '执法稽查局',
         meta: {
           login_require: true
         },
@@ -96,7 +96,7 @@ const routes = [
       },
       {
         path: '/product',
-        name: 'Product',
+        name: '产品质量安全监督管理司',
         meta: {
           login_require: true
         },
@@ -111,35 +111,35 @@ const routes = [
         component: ConsultationIndex
       }, {
         path: '/Risk',
-        name: 'Risk',
+        name: '综合风险',
         meta: {
           login_require: true
         },
         component: Risk
       }, {
         path: '/Industry',
-        name: 'Industry',
+        name: '工业品和消费品',
         meta: {
           login_require: true
         },
         component: Industry
       }, {
         path: '/Hotspot',
-        name: 'Hotspot',
+        name: '舆情热点',
         meta: {
           login_require: true
         },
         component: Hotspot
       }, {
         path: '/DrugSafety',
-        name: 'DrugSafety',
+        name: '药品安全',
         meta: {
           login_require: true
         },
         component: DrugSafety
       }, {
         path: '/Business',
-        name: 'Business',
+        name: '营商环境',
         meta: {
           login_require: true
         },
