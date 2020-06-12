@@ -1,9 +1,9 @@
 <template>
     <div class="BlockShiPin text-center">
-        <div class="h-1-4 name">
+        <div class=" name">
             {{data.name}}
         </div>
-        <div class="h-3-4 value number-font">
+        <div class=" value number-font">
             {{data.value}}
         </div>
     </div>
@@ -29,15 +29,18 @@ export default {
     background-size: 100% 70%;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
 
     .name {
-        line-height: 60px;
     }
 
     .value {
         font-size: 40px;
         font-family: 'LESLIE';
-        line-height: 64px;
+        line-height: 42px;
         color: #3FD3D6 !important;
     }
 }

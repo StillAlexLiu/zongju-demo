@@ -19,7 +19,12 @@
             </div>
             <div class="full-height w-1-2">
                 <container class="h-2-3" title="促进业务协同">
-                    <img-block class="full" :data="img.block4"/>
+                    <div style="height: 36px;display: flex;flex-direction: row;justify-content: center">
+                        <TabCustomColor :data="tab3" v-model="tab3Select" style="height: 100%"/>
+                    </div>
+                    <div style="height: calc(100% - 36px)">
+                        <img-block class="full" :data="img.block4"/>
+                    </div>
                 </container>
                 <container class="h-1-3" title="落实重点监管">
                     <div style="height: 36px;display: flex;flex-direction: row;justify-content: center">
@@ -51,6 +56,7 @@ export default {
   data () {
     return {
       tab2Select: 0,
+      tab3Select: 0,
       tab2: [{
         name: '食品',
         value: 0
@@ -66,6 +72,19 @@ export default {
       }, {
         name: '知识产权',
         value: 4
+      }],
+      tab3: [{
+        name: '部门内协同',
+        value: 0
+      }, {
+        name: '外部们协同',
+        value: 1
+      }, {
+        name: '跨地区协同',
+        value: 2
+      }, {
+        name: '国际交流与协作',
+        value: 3
       }],
       img: {
         map: {
@@ -97,12 +116,12 @@ export default {
               name: '市场主体',
               value: [{
                 name: '市场主体总量',
-                value: '1.25',
-                unit: '亿户'
+                value: '616.9',
+                unit: '万户'
               }, {
                 name: '小微企业总量',
-                value: '1.16',
-                unit: '亿户'
+                value: '78.34',
+                unit: '万户'
               }]
             }, {
               name: '平均办结',
@@ -110,7 +129,7 @@ export default {
                 value: '12',
                 unit: '天'
               }, {
-                value: '3',
+                value: '4',
                 unit: '天'
               }]
             }]
@@ -181,16 +200,16 @@ export default {
           title: '竞争环境',
           text: [{
             title: '不正当竞争案件',
-            value: '13',
-            unit: '万件',
-            per: '15%',
-            trend: 'down'
+            value: '3270',
+            unit: '件',
+            per: '13.4%',
+            trend: 'up'
           }, {
             title: '反垄断案件',
-            value: '306',
+            value: '8',
             unit: '件',
-            per: '8%',
-            trend: '-'
+            per: '13.3%',
+            trend: 'down'
           }],
           chart1: {
             title: '价格指数变化趋势',

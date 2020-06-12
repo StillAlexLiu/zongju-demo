@@ -14,6 +14,9 @@ import Product from '../views/product/Product'
 import Login from '../views/login/Login'
 import Risk from '../views/Topic/Risk/Risk'
 import Industry from '../views/Industry/Industry'
+import Hotspot from '../views/Hotspot/Hotspot'
+import DrugSafety from '../views/DrugSafety/DrugSafety'
+import Business from '../views/Business/Business'
 
 Vue.use(VueRouter)
 
@@ -120,6 +123,27 @@ const routes = [
           login_require: true
         },
         component: Industry
+      }, {
+        path: '/Hotspot',
+        name: 'Hotspot',
+        meta: {
+          login_require: true
+        },
+        component: Hotspot
+      }, {
+        path: '/DrugSafety',
+        name: 'DrugSafety',
+        meta: {
+          login_require: true
+        },
+        component: DrugSafety
+      }, {
+        path: '/Business',
+        name: 'Business',
+        meta: {
+          login_require: true
+        },
+        component: Business
       }
     ]
   },

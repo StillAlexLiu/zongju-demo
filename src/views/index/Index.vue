@@ -5,10 +5,10 @@
                 <container :title="page.left.block1.title" class=" full-width h-1-4">
                     <group-zhun-ru class="h-3-11" :data="page.left.block1.text.data"/>
                     <div class="h-8-11">
-                        <div class="w-1-4 full-height">
-                            <ChartGauge :data="page.left.block1.chart" @click="openDia()"/>
+                        <div class="w-3-8 full-height">
+                            <ChartGauge/>
                         </div>
-                        <div class="w-3-4 full-height">
+                        <div class="w-5-8 full-height">
                             <ChartBarLine
                                 :data="page.left.block1.chart1.data"
                                 :title="page.left.block1.chart1.title"
@@ -17,6 +17,7 @@
                                 :type="page.left.block1.chart1.type"
                                 :legend="page.left.block1.chart1.legend"
                                 :units="page.left.block1.chart1.units"
+                                :is-area="true"
                             />
                         </div>
                     </div>
@@ -316,12 +317,28 @@ export default {
               value: '98'
             },
             chart1: {
-              title: '新设企业增长趋势分析',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['新设企业数量', '新设企业同比'],
-              type: ['bar', 'line'],
-              units: ['户数', '%'],
-              color: ['#FE6941', '#32C5FF'],
+              title: '企业活力变化趋势',
+              dimensions: ['name', 'value'],
+              legend: ['企业活力'],
+              type: ['line'],
+              units: ['%'],
+              color: [new graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: '#8CD142'
+                  },
+                  {
+                    offset: 1,
+                    color: 'rgba(184, 233, 134, .4)'
+                  }
+                ],
+                false
+              )],
               data: [{
                 name: '3月',
                 value: Mock.Random.natural(60, 100),
@@ -458,7 +475,7 @@ export default {
               legend: ['检查次数', '变化率'],
               units: ['万次', '%'],
               type: ['bar', 'line'],
-              color: ['#91D243', '#FE6941'],
+              color: ['#F6B850', '#F86A47'],
               data: [{
                 name: '水电',
                 value: Mock.Random.natural(60, 100),
@@ -1534,12 +1551,12 @@ export default {
             },
             chart2: [
               {
-                name: '立案查处',
-                value: '172万'
+                name: '立案查处数',
+                value: '172万件'
               },
               {
-                name: '数违法线索',
-                value: '23万'
+                name: '违法线索',
+                value: '23万个'
               },
               {
                 name: '网络交易主体',
@@ -1559,10 +1576,21 @@ export default {
   //     }
   //   }
   // },
+  watch: {
+    $route: 'getAction'
+  },
   mounted () {
+    // this.$route.params.key
     // this.getConfig()
   },
   methods: {
+    getAction () {
+      const action = this.$route.query.action
+      console.log(this.$route.query)
+      console.log(action)
+      // eslint-disable-next-line no-eval
+      eval(action)
+    },
     MapChange (i) { // 这个会立刻执行
       console.log(i)
       if (i === 0) {
@@ -1642,6 +1670,18 @@ export default {
 
     }
 
+    .number {
+        position: absolute;
+        top: 26px;
+        left: 260px;
+    }
+
+    .map-text {
+        position: absolute;
+        top: 26px;
+        left: 80px;
+    }
+
     .bounce-enter-active {
         animation: bounce-in 0.8s;
     }
@@ -1661,18 +1701,6 @@ export default {
         100% {
             transform: scale(1);
         }
-    }
-
-    .number {
-        position: absolute;
-        top: 26px;
-        left: 260px;
-    }
-
-    .map-text {
-        position: absolute;
-        top: 26px;
-        left: 80px;
     }
 
     .bounce-tab-enter-active {

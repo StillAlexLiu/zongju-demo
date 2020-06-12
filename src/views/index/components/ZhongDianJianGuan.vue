@@ -14,7 +14,14 @@
                     :two-axis="false"
                 />
             </div>
-            <Fliter class="full-height w-1-2" :data="data.chart2"></Fliter>
+            <div class="full-height w-1-2">
+                <div style="height: 20px">
+                    网络交易监管
+                </div>
+                <div style="height: calc(100% - 20px)">
+                    <Fliter class="full" :data="data.chart2"></Fliter>
+                </div>
+            </div>
         </div>
     </div>
 </template>

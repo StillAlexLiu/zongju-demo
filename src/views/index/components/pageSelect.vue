@@ -44,6 +44,12 @@ export default {
       }, {
         name: '工业品和消费品',
         value: '/Industry'
+      }, {
+        name: '舆情热点',
+        value: '/Hotspot'
+      }, {
+        name: '药品安全',
+        value: '/DrugSafety'
       }],
       data: []
     }
