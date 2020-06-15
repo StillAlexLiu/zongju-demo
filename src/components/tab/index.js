@@ -5,6 +5,7 @@ import TabSimplePoint from './TabSimplePoint'
 import TabCustomColor from './TabCustomColor'
 import TabBlock from './TabBlock'
 import TabSide from './TabSide'
+import TabFreedom from './TabFreedom'
 
 export default {
   install: (Vue) => {
@@ -15,5 +16,6 @@ export default {
     Vue.component('TabCustomColor', TabCustomColor)
     Vue.component('TabBlock', TabBlock)
     Vue.component('TabSide', TabSide)
+    Vue.component('TabFreedom', TabFreedom)
   }
 }

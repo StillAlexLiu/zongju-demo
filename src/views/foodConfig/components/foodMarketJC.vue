@@ -1,6 +1,6 @@
 <template>
     <div class="foodMarket full" v-if="data.length>0">
-        <div class="full-height w-1-4 bgImg" v-for="(item,index) in data" :key="index">
+        <div class="full-height w-1-4 bgImg" v-for="(item,index) in data" :key="index" @click="click(item)">
             <div class="full foodMarketCont ">
                 <div class="value text-center number-font h-4-6 w-4-5">{{item.value}}
                     <br><span class="unit-font">{{item.unit}}</span>
@@ -22,13 +22,18 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    click (item) {
+      this.$emit('click', item)
+    }
+  }
 }
 </script>
 
 <style scoped lang="less">
 .foodMarket {
     .bgImg {
+        cursor: pointer;
     }
 
     .foodMarketCont {

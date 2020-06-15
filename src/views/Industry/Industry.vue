@@ -6,7 +6,26 @@
             </container>
             <div class="full-height w-4-10" style="padding-top: 60px">
                 <container class="full">
-                    <img-block class="full" :data="img.center"/>
+                    <div class="h-7-9">
+                        <div class="w-2-3 full-height">
+                            <img-block class="full" :data="img.center"/>
+                        </div>
+                        <div class="w-1-3 full-height">
+                            <div class="h-1-3">
+                                <info-block3 :data="tabList[tabListIndex]"/>
+                            </div>
+                            <div class="h-2-3">
+                                <img-block class="full" :data="img.center2"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-2-9">
+                        <TabFreedom :data="tabList" class="full" v-model="tabListIndex">
+                            <template v-slot:default="row">
+                                <TabItem :data="row.item" :index="row.index"/>
+                            </template>
+                        </TabFreedom>
+                    </div>
                 </container>
             </div>
             <container title="事后监管" class="full-height w-3-10">
@@ -41,10 +60,14 @@ import ImgBlock from '../common/ImgBlock'
 import LeftBlock from './components/LeftBlock'
 import ChartBarLine from '../index/components/ChartBarLine'
 import Mock from 'mockjs'
+import TabItem from './components/TabItem'
+import InfoBlock3 from './components/InfoBlock3'
 
 export default {
   name: 'Industry',
   components: {
+    InfoBlock3,
+    TabItem,
     ChartBarLine,
     LeftBlock,
     ImgBlock
@@ -58,6 +81,26 @@ export default {
         name: '不合格产品排名',
         value: 1
       }],
+      tabListIndex: 0,
+      tabList: [{
+        name: '电动自行车',
+        value: '95%'
+      }, {
+        name: '电冰箱',
+        value: '90%'
+      }, {
+        name: '洗衣机',
+        value: '87%'
+      }, {
+        name: '电视机',
+        value: '85%'
+      }, {
+        name: '电风扇',
+        value: '83%'
+      }, {
+        name: '空调',
+        value: '81%'
+      }],
       selectedIndex: 0,
       img: {
         bottom: {
@@ -66,14 +109,14 @@ export default {
           height: 389
         },
         center: {
-          img: require('./BlockImg/中间地图.png'),
-          width: 694,
-          height: 478
+          img: require('./BlockImg/小地图.png'),
+          width: 371,
+          height: 310
         },
-        left: {
-          img: require('./BlockImg/中间地图.png'),
-          width: 694,
-          height: 478
+        center2: {
+          img: require('./BlockImg/风险top2.png'),
+          width: 210,
+          height: 138
         },
         right: {
           img: require('./BlockImg/事后监管.png'),
@@ -139,46 +182,34 @@ export default {
         units: ['户数'],
         color: ['#F78F35'],
         data: [{
-          name: '北京',
+          name: '电动自行车',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '上海',
+          name: '电冰箱',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '河北',
+          name: '洗衣机',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '内蒙古',
+          name: '电视机',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '江苏',
+          name: '电风扇',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '山东',
+          name: '空调',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '四川',
+          name: '奶粉',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '河南',
+          name: '卤制品',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '山西',
+          name: '食用冰',
           value: Mock.Random.natural(60, 100)
         }, {
-          name: '湖北',
-          value: Mock.Random.natural(60, 100)
-        }, {
-          name: '贵州',
-          value: Mock.Random.natural(60, 100)
-        }, {
-          name: '广州',
-          value: Mock.Random.natural(60, 100)
-        }, {
-          name: '云南',
-          value: Mock.Random.natural(60, 100)
-        }, {
-          name: '辽宁',
+          name: '果茶',
           value: Mock.Random.natural(60, 100)
         }]
       }]

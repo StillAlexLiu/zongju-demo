@@ -47,14 +47,16 @@
                         <img-block :data="page.left.block2.img"/>
                     </div>
                     <div class="w-2-3 full-height">
-                        <TabBottomLine :data="tab4" style="height: 25px"/>
+                        <TabBottomLine :data="tab4" style="height: 25px" v-model="tab4Selected"/>
                         <div style="height: calc(100% - 25px);">
-                            <ChartsPie :data="page.left.block2.chart1.data" :show-legend="false" :show-all="true"
+                            <ChartsPie :data="page.left.block2.chart1[tab4Selected].data" :show-legend="false"
+                                       :show-all="true"
                                        :radius-circle="['60%','65%']"
                                        :radius-pie-center="[0,'50%']"
                                        :unit="'件'"
+                                       :color="['#22AEC5','#87A0F6','#FFD589','#91D243']"
                                        :unit-center="'件'"
-                                       :double-pie="true" :center-data="page.left.block2.chart1.data2"/>
+                                       :double-pie="true" :center-data="page.left.block2.chart1[tab4Selected].data2"/>
                         </div>
                     </div>
                 </div>
@@ -92,7 +94,8 @@
         </div>
         <div class="center full-height w-3-7">
             <div class="map h-7-10">
-                <EchartsMap :config="page.center.map"/>
+                <EchartsMap :config="page.center.map" v-if="false"/>
+                <img-block :data="mapImg" class="full"/>
             </div>
             <container :title="page.center.block1.title" class=" full-width h-3-10">
                 <div class="full-height w-1-3">
@@ -141,32 +144,33 @@
                 </div>
             </container>
             <container class="h-4-10" title="重点专项">
-                <TabBottomLine :data="tab3" style="height: 35px"/>
+                <TabBottomLine :data="tab3" style="height: 35px" v-model="tab3Selected"/>
                 <div style="height: calc(100% - 35px)">
-                    <div class="w-1-4 full-height">
-                        <div class="h-1-3" style="padding: 30px 0">
-                            <InfoCard class="" :data="page.right.block2.info"/>
-                        </div>
-                        <div class="h-2-3" style="padding: 10px">
-                            <img-block :data="page.right.block2.img"/>
-                        </div>
-                    </div>
-                    <div class="w-3-4 full-height">
-                        <div class="h-4-8">
-                            <ChartBarLine
-                                :data="page.right.block2.chart2.data"
-                                :title="page.right.block2.chart2.title"
-                                :dimensions="page.right.block2.chart2.dimensions"
-                                :colors="page.right.block2.chart2.color"
-                                :type="page.right.block2.chart2.type"
-                                :legend="page.right.block2.chart2.legend"
-                                :units="page.right.block2.chart2.units"
-                            />
-                        </div>
-                        <div class="h-4-8" style="padding-left: 10px;padding-top: 5px">
-                            <img-block :data="page.right.block2.img2" class="w-10-12"/>
-                        </div>
-                    </div>
+                    <page-tab :data="page.right.block2.imgs[tab3Selected]" class="full"/>
+                    <!--                    <div class="w-1-4 full-height">-->
+                    <!--                        <div class="h-1-3" style="padding: 30px 0">-->
+                    <!--                            <InfoCard class="" :data="page.right.block2.info"/>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="h-2-3" style="padding: 10px">-->
+                    <!--                            <img-block :data="page.right.block2.img"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="w-3-4 full-height">-->
+                    <!--                        <div class="h-4-8">-->
+                    <!--                            <ChartBarLine-->
+                    <!--                                :data="page.right.block2.chart2.data"-->
+                    <!--                                :title="page.right.block2.chart2.title"-->
+                    <!--                                :dimensions="page.right.block2.chart2.dimensions"-->
+                    <!--                                :colors="page.right.block2.chart2.color"-->
+                    <!--                                :type="page.right.block2.chart2.type"-->
+                    <!--                                :legend="page.right.block2.chart2.legend"-->
+                    <!--                                :units="page.right.block2.chart2.units"-->
+                    <!--                            />-->
+                    <!--                        </div>-->
+                    <!--                        <div class="h-4-8" style="padding-left: 10px;padding-top: 5px">-->
+                    <!--                            <img-block :data="page.right.block2.img2" class="w-10-12"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </container>
             <container class="h-3-10" title="联合执法">
@@ -190,14 +194,16 @@ import graphic from 'echarts/lib/util/graphic'
 import ChartBarH from './components/ChartBarH'
 import ChartsPie from './components/ChartsPie'
 import ImgBlock from '../../common/ImgBlock'
-import InfoCard from './components/InfoCard'
+// import InfoCard from './components/InfoCard'
 import InfoCardFor from './components/InfoCardFor'
+import PageTab from './components/PageTab'
 
 export default {
   name: 'LawIndex',
   components: {
+    PageTab,
     InfoCardFor,
-    InfoCard,
+    // InfoCard,
     ImgBlock,
     ChartsPie,
     ChartBarH,
@@ -208,6 +214,12 @@ export default {
   },
   data () {
     return {
+      mapImg: {
+        img: require('./BlockImg/地图@1x.png'),
+        width: 1322 / 1.5,
+        height: 730 / 1.3
+      },
+      tab3Selected: 0,
       tab: [{
         name: '案件复议',
         value: 0
@@ -239,6 +251,7 @@ export default {
         name: '防疫物资专项执法',
         value: 1
       }],
+      tab4Selected: 0,
       tab4: [{
         name: '适用程序',
         value: 0
@@ -428,7 +441,23 @@ export default {
               width: 632 / 2,
               height: 288 / 2
             },
-            chart1: {
+            chart1: [{
+              data: [{
+                name: '简易程序案件',
+                value: 150
+              }, {
+                name: '一般程序案件',
+                value: 232
+              }],
+              data2: [
+                {
+                  name: '已办结',
+                  value: 223
+                }, {
+                  name: '办理中',
+                  value: 145
+                }]
+            }, {
               data: [{
                 name: '简易程序案件',
                 value: 232
@@ -444,7 +473,7 @@ export default {
                   name: '办理中',
                   value: 231
                 }]
-            },
+            }],
             chart2: {
               title: '平均处置时长变化趋势',
               dimensions: ['name', 'value', 'value1'],
@@ -690,94 +719,19 @@ export default {
           },
           block2: {
             title: '重点专项',
-            img: {
-              img: require('./BlockImg/食品安全问题分布@2x.png'),
-              width: 266 / 2,
-              height: 386 / 2
-            },
-            img2: {
-              img: require('./BlockImg/食品安全高发地区@2x.png'),
-              width: 630 / 2,
-              height: 320 / 2
-            },
-            info: {
-              name: '食品案件数量',
-              value: '5.1',
-              unit: '万件'
-            },
-            chart2: {
-              title: '本年度过去月份累计',
-              dimensions: ['name', 'value', 'value1'],
-              legend: ['新增线索数量', '同比'],
-              type: ['bar', 'line'],
-              units: ['万件'],
-              color: [new graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: '#1EDFFF'
-                  },
-                  {
-                    offset: 1,
-                    color: '#2C6DEB'
-                  }
-                ],
-                false
-              ), '#FE6941'],
-              data: [{
-                name: '6月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '7月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '8月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '9月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '10月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '11月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '12月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '1月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '2月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '3月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '4月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }, {
-                name: '5月',
-                value: Mock.Random.natural(60, 100),
-                value1: Mock.Random.natural(60, 100)
-              }]
-            }
+            imgs: [{
+              img: require('./BlockImg/tab/食品安全.png'),
+              width: 500,
+              height: 304
+            }, {
+              img: require('./BlockImg/tab/知识产权 28.png'),
+              width: 500,
+              height: 304
+            }, {
+              img: require('./BlockImg/tab/防汛.png'),
+              width: 500,
+              height: 304
+            }]
           },
           block3: {
             title: '联合执法',

@@ -48,12 +48,14 @@
                         <CenterTitle/>
                     </div>
                     <div class="h-1-2 full-width">
-                        <mapList :data="page.center.mapList" v-on:foodChangetabMap="foodChangetabMap"></mapList>
+                        <mapList :data="page.center.mapList"
+                                 @foodChangetabMap="ChangeMapType(0)"
+                                 v-model="mapIndex"></mapList>
                     </div>
-                    <div class="titleBg"><p>{{titleName}}</p></div>
+                    <div class="titleBg"><p>{{mapIndex.name}}</p></div>
                 </div>
                 <div class="h-5-6 full-width">
-                    <foodEchartsMap :mapIndex='mapIndex'/>
+                    <foodEchartsMap :mapIndex='mapItem' :map-type="mapType" @click="mapClick"/>
                 </div>
             </div>
             <container class=" full-width h-4-11" :title="page.center.block.title">
@@ -77,6 +79,7 @@
         <div class="side full-height w-2-7">
             <container class=" full-width h-7-11" :title="page.right.block1.title">
                 <foodMarketJC :data="page.right.block1.text5.data" class="full-width h-2-6"
+                              @click="rightClick"
                               style="padding:10px"></foodMarketJC>
                 <foodJgxk :data="page.right.block1.text.data" class=" full-width h-1-6"></foodJgxk>
                 <foodJgxk :data="page.right.block1.text1.data" class=" full-width h-1-6"></foodJgxk>
@@ -112,6 +115,10 @@
                 </div>
             </container>
         </div>
+
+        <transition name="bounce" mode="out-in">
+            <FoodDia class="dia" v-if="dia1" @close="close"/>
+        </transition>
     </div>
 </template>
 <script>
@@ -134,10 +141,12 @@ import foodMarketCard from './components/foodMarketCard' // 信息list
 import foodMarketMain from './components/foodMarketMain' // 信息card
 import foodMarketMainRight from './components/foodMarketMainRight' // 信息card
 import foodMarketZBR from './components/foodMarketZBR'
-import CenterTitle from '../common/CenterTitle' // 信息card
+import CenterTitle from '../common/CenterTitle'
+import FoodDia from './components/FoodDia' // 信息card
 export default {
   name: 'foodIndex',
   components: {
+    FoodDia,
     CenterTitle,
     foodChangeTitle,
     foodChangetab,
@@ -160,6 +169,9 @@ export default {
   data () {
     return {
       mapIndex: {},
+      mapType: 0,
+      dia1: false,
+      mapItem: {},
       titleName: '特食注册备案地区分布',
       page: {
         left: {
@@ -534,24 +546,28 @@ export default {
                   name: '年度食品安全抽检',
                   value: '3234',
                   unit: '批',
+                  id: 0,
                   img: require('./img/多边形@2x.png')
                 },
                 {
                   name: '完成抽检批次',
                   value: '5434',
                   unit: '批',
+                  id: 1,
                   img: require('./img/多边形@2x.png')
                 },
                 {
                   name: '抽检抽检企业',
                   value: '2100',
                   unit: '家',
+                  id: 2,
                   img: require('./img/多边形@2x.png')
                 },
                 {
                   name: '本月新增抽检批次',
                   value: '273',
                   unit: '批',
+                  id: 3,
                   img: require('./img/多边形@2x.png')
                 }
               ]
@@ -787,7 +803,31 @@ export default {
     },
     foodChangetabMap (item) {
       this.titleName = item.name
-      this.mapIndex = item
+      // this.mapIndex = item
+    },
+    ChangeMapType (type) {
+      this.mapType = type
+    },
+    rightClick (item) {
+      this.ChangeMapType(1)
+      this.mapItem = item
+    },
+    mapClick (item) {
+      if (item.value[2] === 1) {
+        this.dia1 = true
+      }
+    },
+    close () {
+      this.dia1 = false
+    }
+  },
+  watch: {
+    mapIndex: {
+      deep: true,
+      immediate: true,
+      handler: function () {
+        this.mapItem = this.mapIndex
+      }
     }
   }
 }
@@ -870,5 +910,44 @@ export default {
     .food-center-title-sub {
         height: calc(100% - 35px);
     }
+
+    .bounce-enter-active {
+        animation: bounce-in 0.8s;
+    }
+
+    .bounce-leave-active {
+        /*animation: bounce-out 0.5s;*/
+        animation: bounce-in 0.8s reverse;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        /*50% {*/
+        /*    transform: scale();*/
+        /*}*/
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .dia {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.85);
+        /*background: rgba(0, 0, 0, 0.5);*/
+        width: 100%;
+        height: 100%;
+        padding: 60px 67px 98px 67px;
+        top: 0;
+        left: 0;
+        z-index: 199;
+        /*width: 1786px;*/
+        /*height: 922px;*/
+        /*top: 60px;*/
+        /*left: 67px;*/
+
+    }
+
 }
 </style>

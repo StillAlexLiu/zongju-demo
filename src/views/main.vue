@@ -73,15 +73,18 @@ export default {
     .pageName {
         position: absolute;
         top: 22px;
-        left: 1115px;
+        left: 1140px;
         z-index: 110;
         width: 184px;
         text-align: center;
         color: #fff;
         height: 30px;
         line-height: 30px;
-        background-size: 184px 30px;
-        background-image: url("./common/img/小标题背景框@2x.png");
+        background-size: 158px 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        /*background-image: url("./common/img/小标题背景框@2x.png");*/
+        background-image: url("./common/img/小标题背景框-窄@2x.png");
     }
 
     .open {

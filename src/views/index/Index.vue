@@ -702,6 +702,14 @@ export default {
               name: '药品流通企业',
               value: '50.8',
               unit: '万户'
+            }, {
+              name: '医疗器械生产企业',
+              value: '2.1',
+              unit: '万户'
+            }, {
+              name: '医疗器械流通企业',
+              value: '52.3',
+              unit: '万户'
             }],
             tab: [{
               name: '抽检不合格',
@@ -1662,7 +1670,8 @@ export default {
 
     .dia {
         position: absolute;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.85);
+        /*background: rgba(0, 0, 0, 0.5);*/
         width: 100%;
         height: 100%;
         padding: 60px 67px 98px 67px;

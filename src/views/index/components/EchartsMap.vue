@@ -6,6 +6,7 @@
 import echarts from 'echarts'
 
 const mapInfo = require('./img/mapInfo.png')
+
 export default {
   name: 'EchartsMap',
   data () {

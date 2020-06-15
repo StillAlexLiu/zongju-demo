@@ -168,21 +168,22 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log(to)
   console.log(from)
-  if (to.meta.login_require) {
-    // 需要登录
-    const loginStr = sessionStorage.getItem('login')
-    console.log(loginStr)
-    if (loginStr !== null && loginStr === 'true') {
-      console.log('已登录')
-      next()
-      // 已登录
-    } else {
-      // 未登录 跳转
-      console.log('未登录')
-      next({ path: 'login' })
-    }
-  } else {
-    next()
-  }
+  // if (to.meta.login_require) {
+  //   // 需要登录
+  //   const loginStr = sessionStorage.getItem('login')
+  //   console.log(loginStr)
+  //   if (loginStr !== null && loginStr === 'true') {
+  //     console.log('已登录')
+  //     next()
+  //     // 已登录
+  //   } else {
+  //     // 未登录 跳转
+  //     console.log('未登录')
+  //     next({ path: 'login' })
+  //   }
+  // } else {
+  //   next()
+  // }
+  next()
 })
 export default router

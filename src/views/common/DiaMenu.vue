@@ -6,21 +6,20 @@
                    @click="click"/>
         <menu-list :data="menu.rightBottom" position="left" style="position: absolute;top: 307px;right: 80px;"
                    @click="click"/>
-        <div class="centerMenu">
-
-        </div>
-        <div class="indexMenu" @click="indexClick">
-            首页
-        </div>
+        <CenterMenu class="indexMenu" @click="indexClick"/>
     </div>
 </template>
 
 <script>
 import MenuList from './MenuList'
+import CenterMenu from './CenterMenu'
 
 export default {
   name: 'DiaMenu',
-  components: { MenuList },
+  components: {
+    CenterMenu,
+    MenuList
+  },
   methods: {
     indexClick () {
       this.click({
@@ -391,8 +390,8 @@ export default {
     position: absolute;
     /*background-color: rgba(5, 8, 22, 0.7);*/
     background-color: #0F1529;
-    background-image: url("./img/编组 4@2x.png");
-    background-size: 1142px 1142px;
+    background-image: url("./img/椭圆形.png");
+    background-size: 1062px 1062px;
     background-position: center;
     background-repeat: no-repeat;
     top: 0;
@@ -403,10 +402,8 @@ export default {
     align-items: center;
 
     .indexMenu {
-        width: 140px;
-        height: 140px;
-        cursor: pointer;
-        line-height: 140px;
+        width: 872px;
+        height: 872px;
         font-size: 32px;
         color: #ffffff;
         text-align: center;

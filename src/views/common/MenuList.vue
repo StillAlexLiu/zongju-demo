@@ -2,6 +2,7 @@
     <div class='MenuList'>
         <div class="menu" :style="{order:position==='right'?'0':'2'}">
             <div v-for="(item,index) in data" :key="index"
+                 @mouseover="mouseOver(index)" @mouseleave="mouseOut(index)"
                  :class="[index===active?'active':'',item.disable?'disable':'default']" @click="click(item,index)">
                 {{item.name}}
             </div>
@@ -59,6 +60,12 @@ export default {
         this.active = index
         this.$emit('click', item)
       }
+    },
+    mouseOver (index) {
+      this.active = index
+    },
+    mouseOut (event) {
+      this.active = null
     }
   }
 }

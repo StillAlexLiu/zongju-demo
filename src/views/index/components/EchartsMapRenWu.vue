@@ -1,22 +1,23 @@
 <template>
-    <v-chart class="" :autoresize='true' :options='options' ref="echarts"/>
+    <v-chart class="" :autoresize='true' :options='options' ref="echarts" @click="handler"/>
 </template>
 
 <script>
 import echarts from 'echarts'
 
 const mapInfo = require('./img/mapInfo2.png')
+const mapInfo2 = require('./img/mapInfo3.png')
 
 export default {
   name: 'EchartsMapRenWu',
   data () {
     return {
-      options: {},
       center: [104.075206, 30.659799],
       mapSelectName: '湖北',
       timer: 0,
       isIn: true,
       inpoints: [],
+      mapInfoImg: mapInfo,
       aspectScale: 0.75 // 地图长宽比
     }
   },
@@ -32,7 +33,6 @@ export default {
     clearInterval(this.timer)
   },
   mounted () {
-    this.options = this.getOption()
     this.$nextTick(() => {
       this.$refs.echarts.dispatchAction({
         type: 'geoSelect',
@@ -41,47 +41,8 @@ export default {
       })
     })
   },
-  methods: {
-    handler (event) {
-      if (event.componentType === 'geo') {
-        this.mapSelectName = event.name
-        const find = this.getCPByName(event.name)
-        if (find) {
-          this.config.center2 = find.properties.cp
-        }
-        console.log(this.config.center2)
-        this.options = this.getOption()
-        this.$nextTick(() => {
-          this.$refs.echarts.dispatchAction({
-            type: 'geoSelect',
-            seriesName: 'geo',
-            name: this.mapSelectName
-          })
-        })
-      }
-    },
-    getCPByName (name) {
-      const find = echarts.getMap(this.config.name).geoJson.features.find(value => {
-        return value.properties.name === name
-      })
-      return find
-    },
-    makeData () {
-      this.inpoints = []
-      for (let i = 0; i < this.config.pointData.length; i++) {
-        const item = this.config.pointData[i]
-        this.inpoints.push({
-          value: item.coords,
-          symbol: 'circle',
-          symbolSize: item.value / 2,
-          name: item.name,
-          itemStyle: {
-            color: item.value > 50 ? '#FE5C70' : '#FBD420'
-          }
-        })
-      }
-    },
-    getOption () {
+  computed: {
+    options () {
       const style = this.config.style
       this.makeData()
       const mapSelectName = this.mapSelectName
@@ -293,12 +254,59 @@ export default {
           silent: true,
           data: [{
             value: this.config.pointPosition,
-            symbol: 'image://' + mapInfo,
+            symbol: 'image://' + this.mapInfoImg,
             symbolSize: ['212', '212'],
             name: '信息'
           }]
         }]
       }
+    }
+  },
+  methods: {
+    handler (event) {
+      if (event.componentType === 'geo') {
+        this.mapSelectName = event.name
+        const find = this.getCPByName(event.name)
+        if (find) {
+          this.config.center2 = find.properties.cp
+        }
+        // mapInfoImg
+        if (this.mapSelectName === '北京') {
+          this.mapInfoImg = mapInfo2
+        } else {
+          this.mapInfoImg = mapInfo
+        }
+        this.$nextTick(() => {
+          this.$refs.echarts.dispatchAction({
+            type: 'geoSelect',
+            seriesName: 'geo',
+            name: this.mapSelectName
+          })
+        })
+      }
+    },
+    getCPByName (name) {
+      const find = echarts.getMap(this.config.name).geoJson.features.find(value => {
+        return value.properties.name === name
+      })
+      return find
+    },
+    makeData () {
+      this.inpoints = []
+      for (let i = 0; i < this.config.pointData.length; i++) {
+        const item = this.config.pointData[i]
+        this.inpoints.push({
+          value: item.coords,
+          symbol: 'circle',
+          symbolSize: item.value / 2,
+          name: item.name,
+          itemStyle: {
+            color: item.value > 50 ? '#FE5C70' : '#FBD420'
+          }
+        })
+      }
+    },
+    getOption () {
     },
     getPoint (coords) {
       const fixed = coords[0]
@@ -306,7 +314,6 @@ export default {
       const rad = Math.atan2(change[1] - fixed[1], change[0] - fixed[0])
       const r = this.config.r
       const rtn2 = [fixed[0] + Math.cos(rad) * r, fixed[1] + Math.sin(rad) * r * this.aspectScale]
-      console.log([rtn2, change])
       return [rtn2, change]
     }
   }

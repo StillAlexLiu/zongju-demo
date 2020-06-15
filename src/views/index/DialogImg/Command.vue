@@ -12,7 +12,19 @@
             <div class="title" @click="close">调度指挥</div>
             <left-tab/>
             <img-block class="img1" :data="img"/>
+            <img-block class="img2" :data="eventImg" v-if="eventShow"/>
             <BottomMenu class="menu" :data="menu" :points="points"/>
+            <div class="event fc" @click="openEvent">
+                <div class="fc">
+                    <div class="fc">
+                        <div class="fc">
+                            <div class="fc">
+                                <div class="cp"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="dia">
                 <img-block :data="diaImg"/>
             </div>
@@ -39,6 +51,12 @@ export default {
         width: 644 / 2,
         height: 1422 / 2
       },
+      eventImg: {
+        img: require('./../BlockImg/事件现场.png'),
+        width: 398,
+        height: 373
+      },
+      eventShow: false,
       points: [],
       diaImg: {},
       dias: [
@@ -147,16 +165,31 @@ export default {
     close () {
       this.$emit('close')
     },
+    openEvent () {
+      this.eventShow = !this.eventShow
+    },
     pointClick (name) {
       switch (name) {
         case '执法人员':
-          this.diaImg = this.dias[0]
+          if (this.diaImg.img) {
+            this.diaImg = {}
+          } else {
+            this.diaImg = this.dias[0]
+          }
           break
         case '站所':
-          this.diaImg = this.dias[1]
+          if (this.diaImg.img) {
+            this.diaImg = {}
+          } else {
+            this.diaImg = this.dias[1]
+          }
           break
         case '车辆':
-          this.diaImg = this.dias[2]
+          if (this.diaImg.img) {
+            this.diaImg = {}
+          } else {
+            this.diaImg = this.dias[2]
+          }
           break
         default:
           this.diaImg = {}
@@ -202,6 +235,11 @@ export default {
         height: 711px;
     }
 
+    .img2{
+        position: absolute;
+        left: 600px;
+        top: 100px;
+    }
     .menu {
         position: absolute;
         bottom: 0;
@@ -230,6 +268,39 @@ export default {
         cursor: pointer;
         top: 0;
         right: 0;
+    }
+
+    .event {
+        cursor: pointer;
+        position: absolute;
+        opacity: 0.5;
+        width: 260px;
+        height: 260px;
+        top: 200px;
+        left: 400px;
+    }
+
+    .cp {
+        width: 18px;
+        height: 18px;
+        background: #FF596D;
+        box-shadow: 0 0 11px 5px #D0021B;
+        border-radius: 50%;
+    }
+
+    .fc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(208, 2, 27, 0.22);
+        border: 1px solid #FF95A2;
+        box-shadow: 0 0 11px 5px rgba(208, 2, 27, 0.28);
+        border-radius: 50%;
+
+        > div {
+            width: 61%;
+            height: 61%;
+        }
     }
 }
 </style>

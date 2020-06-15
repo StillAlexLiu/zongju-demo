@@ -124,9 +124,10 @@ export default {
         width: calc(100% - 24px);
 
         .name {
-            text-indent: 8px;
+            /*text-indent: 8px;*/
             line-height: 24px;
-            height: 24px;
+            padding-left: 8px;
+            /*height: 24px;*/
             cursor: pointer;
 
         }

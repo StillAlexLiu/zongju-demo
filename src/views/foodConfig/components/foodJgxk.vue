@@ -96,7 +96,6 @@ export default {
 
     .info {
         position: relative;
-        z-index: 2;
 
         > span {
             padding: 0 4px;
@@ -107,7 +106,7 @@ export default {
 
         .value {
             position: relative;
-            z-index: 2;
+            /*z-index: 2;*/
             padding-left: 0;
         }
 

@@ -14,8 +14,29 @@
                         <TabBottomLine :data="tab" v-model="tabSelected"/>
                     </div>
                     <div style="height: calc(100% - 33px)">
-
-                        <img-block class="full" :data="img.center2[tabSelected]"/>
+                        <ChartBarLine
+                            :data="chart1.data"
+                            :title="chart1.title"
+                            :dimensions="chart1.dimensions"
+                            :colors="chart1.color"
+                            :type="chart1.type"
+                            :legend="chart1.legend"
+                            :units="chart1.units"
+                            v-if="tabSelected===0"
+                            :two-axis="false"
+                        />
+                        <ChartBarLine
+                            :data="chart2.data"
+                            :title="chart2.title"
+                            :dimensions="chart2.dimensions"
+                            :colors="chart2.color"
+                            :type="chart2.type"
+                            :legend="chart2.legend"
+                            :units="chart2.units"
+                            v-if="tabSelected===1"
+                            :two-axis="false"
+                            :bar-width="16"
+                        />
                     </div>
                 </div>
             </container>
@@ -41,10 +62,14 @@ import ImgBlock from '../common/ImgBlock'
 import BusinessDia1 from './Dia/BusinessDia1'
 import BusinessDia2 from './Dia/BusinessDia2'
 import BusinessDia3 from './Dia/BusinessDia3'
+import graphic from 'echarts/lib/util/graphic'
+import Mock from 'mockjs'
+import ChartBarLine from '../index/components/ChartBarLine'
 
 export default {
   name: 'Business',
   components: {
+    ChartBarLine,
     BusinessDia3,
     BusinessDia2,
     BusinessDia1,
@@ -93,7 +118,103 @@ export default {
       },
       dia1: false,
       dia2: false,
-      dia3: false
+      dia3: false,
+      chart1: {
+        title: '',
+        dimensions: ['name', 'value', 'value1', 'value2', 'value3', 'value4'],
+        legend: ['中国', '美国', '印度', '英国', '新加坡'],
+        type: ['line', 'line', 'line', 'line', 'line'],
+        units: ['指数'],
+        color: [new graphic.LinearGradient(
+          0,
+          0,
+          0,
+          1,
+          [
+            {
+              offset: 0,
+              color: '#8CD142'
+            },
+            {
+              offset: 1,
+              color: 'rgba(184, 233, 134, .4)'
+            }
+          ],
+          false
+        )],
+        data: [{
+          name: '2015年',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(60, 100),
+          value2: Mock.Random.natural(60, 100),
+          value3: Mock.Random.natural(60, 100),
+          value4: Mock.Random.natural(60, 100)
+        }, {
+          name: '2016年',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(60, 100),
+          value2: Mock.Random.natural(60, 100),
+          value3: Mock.Random.natural(60, 100),
+          value4: Mock.Random.natural(60, 100)
+        }, {
+          name: '2017年',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(60, 100),
+          value2: Mock.Random.natural(60, 100),
+          value3: Mock.Random.natural(60, 100),
+          value4: Mock.Random.natural(60, 100)
+        }, {
+          name: '2018年',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(60, 100),
+          value2: Mock.Random.natural(60, 100),
+          value3: Mock.Random.natural(60, 100),
+          value4: Mock.Random.natural(60, 100)
+        }, {
+          name: '2019年',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(60, 100),
+          value2: Mock.Random.natural(60, 100),
+          value3: Mock.Random.natural(60, 100),
+          value4: Mock.Random.natural(60, 100)
+        }]
+      },
+      chart2: {
+        title: '',
+        dimensions: ['name', 'value'],
+        legend: ['活跃度'],
+        type: ['bar'],
+        units: ['%'],
+        color: ['#F7CB5A'],
+        data: [{
+          name: '北京',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '上海',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '河北',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '内蒙古',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '江苏',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '四川',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '河南',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '山西',
+          value: Mock.Random.natural(60, 100)
+        }, {
+          name: '湖北',
+          value: Mock.Random.natural(60, 100)
+        }]
+      }
     }
   },
   methods: {
@@ -191,7 +312,7 @@ export default {
 
     .dia {
         position: absolute;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.85);
         width: 100%;
         height: 100%;
         padding: 60px 67px 98px 67px;
