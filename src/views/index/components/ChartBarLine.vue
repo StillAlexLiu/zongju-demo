@@ -1,5 +1,5 @@
 <template>
-    <chart :options='options'/>
+    <chart :options='options' @click="click"/>
 </template>
 
 <script>
@@ -156,6 +156,10 @@ export default {
       }
       return {
         color: this.colors,
+        tooltip: {
+          show: false,
+          trigger: 'axis'
+        },
         title: {
           text: this.title,
           te: this.titleSize,
@@ -195,7 +199,11 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    click (args) {
+      this.$emit('click', args)
+    }
+  }
 }
 </script>
 

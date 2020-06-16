@@ -6,7 +6,7 @@
                 <group-zhun-ru class="h-3-11" :data="data.block1.text.data"/>
                 <div class="h-8-11">
                     <div class="w-1-4 full-height">
-                        <ChartGauge :data="data.block1.chart"/>
+                        <ChartGauge :data="data.block1.chart" @click="$emit('click')"/>
                     </div>
                     <div class="w-3-4 full-height">
                         <ChartBarLine

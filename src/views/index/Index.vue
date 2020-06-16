@@ -148,17 +148,17 @@
             </div>
         </div>
         <div class="h-1-5 full-width">
-            <container title="质量提升" class="full-height w-1-4">
+            <container title="质量提升" class="full-height w-1-3">
                 <GroupZhiLiang :data="page.center.block1.data"/>
             </container>
-            <container title="风险管控"
-                       class=" w-1-4 full-height">
-                <img-block class="full" :data="data.bottom.chart2"/>
-            </container>
-            <container title="重点监管" class="full-height w-1-4">
+<!--            <container title="风险管控"-->
+<!--                       class=" w-1-4 full-height">-->
+<!--                <img-block class="full" :data="data.bottom.chart2"/>-->
+<!--            </container>-->
+            <container title="重点监管" class="full-height w-1-3">
                 <ZhongDianJianGuan :data="page.center.block3"/>
             </container>
-            <container title="综合执法" class="full-height w-1-4">
+            <container title="综合执法" class="full-height w-1-3">
                 <ZongHeZhiFa :data="page.center.block2"/>
             </container>
         </div>
@@ -203,7 +203,6 @@ import CenterTitle from '../common/CenterTitle'
 import GroupZhiLiang from './components/GroupZhiLiang'
 import ZongHeZhiFa from './components/ZongHeZhiFa'
 import ZhongDianJianGuan from './components/ZhongDianJianGuan'
-import ImgBlock from '../common/ImgBlock'
 import Battle from './DialogImg/Battle'
 import Mock from 'mockjs'
 import graphic from 'echarts/lib/util/graphic'
@@ -212,7 +211,6 @@ export default {
   name: 'Index',
   components: {
     Battle,
-    ImgBlock,
     ZhongDianJianGuan,
     ZongHeZhiFa,
     GroupZhiLiang,
@@ -1589,7 +1587,6 @@ export default {
       deep: true,
       immediate: true,
       handler: function () {
-
         const action = this.$route.query.action
         console.log(this.$route.query)
         console.log(action)

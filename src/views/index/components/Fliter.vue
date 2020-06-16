@@ -24,7 +24,7 @@ export default {
 <style scoped lang="less">
 .Fliter {
     background-image: url("./img/fliter.png");
-    background-size: 96% auto;
+    background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
     padding: 12px 0 10px 0;
@@ -34,20 +34,25 @@ export default {
 
     > div {
         /*height: 54px;*/
-        padding-left: 15px;
+        padding-left: 45px;
+        display: flex;
+        justify-content: space-between;
 
         > div {
             float: left;
-            width: 50%;
+            /*width: 50%;*/
         }
 
         .name {
             text-indent: 1px;
+            width: 50%;
         }
 
         .value {
             text-align: center;
-            padding-right: 20px;
+            padding-right: 35px;
+            width: 50%;
+            /*flex-basis: 30%;*/
         }
     }
 }

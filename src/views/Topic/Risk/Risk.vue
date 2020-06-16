@@ -12,7 +12,8 @@
             </container>
         </div>
         <div class="full-height c-w-2" style="position: relative;padding-top: 62px">
-            <img-block class="full-height" :data="img.center[selectedIndex]"/>
+            <MapGif v-if="selectedIndex===0"/>
+            <img-block class="full-height" v-else :data="img.center[selectedIndex]"/>
             <TabBlock :data="tab" v-model="selectedIndex" style="position: absolute;top: 90px;left:20px;"/>
         </div>
         <div class="full-height c-w-1">
@@ -29,10 +30,14 @@
 
 <script>
 import ImgBlock from '../../common/ImgBlock'
+import MapGif from './components/MapGif'
 
 export default {
   name: 'Risk',
-  components: { ImgBlock },
+  components: {
+    MapGif,
+    ImgBlock
+  },
   data () {
     return {
       selectedIndex: 0,

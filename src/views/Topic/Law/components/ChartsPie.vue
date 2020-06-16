@@ -223,6 +223,10 @@ export default {
             }
           }
         },
+        labelLine: {
+          length: 5,
+          length2: 8
+        },
         data: this.data
       })
       return {

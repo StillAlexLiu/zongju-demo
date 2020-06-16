@@ -102,9 +102,9 @@ export default {
           height: 376 / 1.04
         },
         center: {
-          img: require('./BlockImg/世界排名.png'),
+          img: require('./BlockImg/yuqing.png'),
           width: 748,
-          height: 273
+          height: 258
         },
         center2: [{
           img: require('./BlockImg/国际指标.png'),

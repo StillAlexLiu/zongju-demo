@@ -2,7 +2,8 @@
     <div class='Province full'>
         <div class="full-height w-5-12">
             <div class="map h-7-10 full-width" style="padding-top: 8px">
-                <img-block class="full" :data="img.map"/>
+                <MapComponent class="full" :mapFlag="showHuoli"/>
+                <!--                <img-block class="full" :data="img.map"/>-->
             </div>
             <container title="强化风险防控" class="h-3-10">
                 <img-block class="full" :data="img.block1"/>
@@ -11,10 +12,11 @@
         <div class="full-height w-7-12" style="padding-top: 60px">
             <div class="full-height w-1-2">
                 <container class="h-1-2" title="改善营商环境">
-                    <PageCenter :data="left"/>
+                    <PageCenter :data="left" @click="click"/>
                 </container>
                 <container class="h-1-2" title="加强精准监管">
-                    <img-block class="full" :data="img.block3"/>
+                    <PageCenterBottom class="full"/>
+                    <!--                    <img-block class="full" :data="img.block3"/>-->
                 </container>
             </div>
             <div class="full-height w-1-2">
@@ -23,7 +25,8 @@
                         <TabCustomColor :data="tab3" v-model="tab3Select" style="height: 100%"/>
                     </div>
                     <div style="height: calc(100% - 36px)">
-                        <img-block class="full" :data="img.block4"/>
+                        <PageRight :data="rightData[tab3Select]" :tableTitle="tab3[tab3Select].name+'重大专项'"/>
+                        <!--                        <img-block class="full" :data="img.block4"/>-->
                     </div>
                 </container>
                 <container class="h-1-3" title="落实重点监管">
@@ -45,10 +48,16 @@ import Mock from 'mockjs'
 import graphic from 'echarts/lib/util/graphic'
 import PageChanger from './components/PageChanger'
 import PageCenter from './components/PageCenter'
+import PageCenterBottom from './components/PageCenterBottom'
+import PageRight from './components/PageRight'
+import MapComponent from './components/MapComponent'
 
 export default {
   name: 'Province',
   components: {
+    MapComponent,
+    PageRight,
+    PageCenterBottom,
     PageCenter,
     PageChanger,
     ImgBlock
@@ -67,7 +76,7 @@ export default {
         name: '特种设备',
         value: 2
       }, {
-        name: '工业品与消费品质量',
+        name: '工业品与消费品',
         value: 3
       }, {
         name: '知识产权',
@@ -931,7 +940,334 @@ export default {
             }]
           }
         }
-      }
+      },
+      rightData: [{
+        info: {
+          name: '协同案件数',
+          value: '1.3',
+          unit: '万件'
+        },
+        list: [{
+          name: '省案件总数',
+          value: '9.8',
+          unit: '万件'
+        }, {
+          name: '占比',
+          value: '13',
+          unit: '%'
+        }, {
+          name: '同比',
+          value: '2.3',
+          unit: '%',
+          status: 'up'
+        }],
+        chart: [{
+          name: '3月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '4月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '5月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '6月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '7月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '8月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '9月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '10月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '11月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '12月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '1月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '2月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }],
+        titles: [
+          '发起时间', '专项名称', '任务数(处理中/已完成)', '案件数(处理中/已办结)', '当 前状态'
+        ],
+        table: [
+          [4.28, '联合双打行动', '2863/3456', '189/675', '执行中'],
+          [4.28, '网剑行动', '234/3456', '289/675', '执行中'],
+          [4.28, '线上净网线下清源', '163/3456', '489/675', '执行中'],
+          [4.28, '网剑行动', '1463/3456', '289/675', '执行中'],
+          [4.28, '联合双打行动', '963/3456', '389/675', '执行中'],
+          [4.28, '线上净网线下清源', '2463/3456', '389/675', '执行中'],
+          [4.28, '网剑行动', '286/3456', '231/675', '执行中']]
+      }, {
+        info: {
+          name: '协同案件数',
+          value: '1.7',
+          unit: '万件'
+        },
+        list: [{
+          name: '省案件总数',
+          value: '7.3',
+          unit: '万件'
+        }, {
+          name: '占比',
+          value: '12',
+          unit: '%'
+        }, {
+          name: '同比',
+          value: '1.9',
+          unit: '%',
+          status: 'up'
+        }],
+        chart: [{
+          name: '3月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '4月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '5月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '6月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '7月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '8月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '9月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '10月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '11月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '12月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '1月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '2月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }],
+        titles: [
+          '发起时间', '专项名称', '任务数(处理中/已完成)', '案件数(处理中/已办结)', '当 前状态'
+        ],
+        table: [
+          [4.28, '联合双打行动', '963/3456', '389/675', '执行中'],
+          [4.28, '网剑行动', '234/3456', '289/675', '执行中'],
+          [4.28, '线上净网线下清源', '2463/3456', '389/675', '执行中'],
+          [4.28, '网剑行动', '1463/3456', '289/675', '执行中'],
+          [4.28, '线上净网线下清源', '163/3456', '489/675', '执行中'],
+          [4.28, '联合双打行动', '2863/3456', '189/675', '执行中'],
+          [4.28, '网剑行动', '286/3456', '231/675', '执行中']]
+      }, {
+        info: {
+          name: '协同案件数',
+          value: '9431',
+          unit: '件'
+        },
+        list: [{
+          name: '省案件总数',
+          value: '6.9',
+          unit: '万件'
+        }, {
+          name: '占比',
+          value: '16',
+          unit: '%'
+        }, {
+          name: '同比',
+          value: '3.6',
+          unit: '%',
+          status: 'up'
+        }],
+        chart: [{
+          name: '3月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '4月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '5月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '6月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '7月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '8月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '9月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '10月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '11月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '12月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '1月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '2月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }],
+        titles: [
+          '发起时间', '专项名称', '任务数(处理中/已完成)', '案件数(处理中/已办结)', '当 前状态'
+        ],
+        table: [
+          [4.28, '网剑行动', '1463/3456', '289/675', '执行中'],
+          [4.28, '联合双打行动', '963/3456', '389/675', '执行中'],
+          [4.28, '线上净网线下清源', '163/3456', '489/675', '执行中'],
+          [4.28, '联合双打行动', '2863/3456', '189/675', '执行中'],
+          [4.28, '网剑行动', '234/3456', '289/675', '执行中'],
+          [4.28, '线上净网线下清源', '2463/3456', '389/675', '执行中'],
+          [4.28, '网剑行动', '286/3456', '231/675', '执行中']]
+      }, {
+        info: {
+          name: '协同案件数',
+          value: '8721',
+          unit: '件'
+        },
+        list: [{
+          name: '省案件总数',
+          value: '8.4',
+          unit: '万件'
+        }, {
+          name: '占比',
+          value: '11',
+          unit: '%'
+        }, {
+          name: '同比',
+          value: '2.7',
+          unit: '%',
+          status: 'up'
+        }],
+        chart: [{
+          name: '3月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '4月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '5月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '6月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '7月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '8月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '9月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '10月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '11月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '12月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '1月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }, {
+          name: '2月',
+          value: Mock.Random.natural(60, 100),
+          value1: Mock.Random.natural(10, 40)
+        }],
+        titles: [
+          '发起时间', '专项名称', '任务数(处理中/已完成)', '案件数(处理中/已办结)', '当 前状态'
+        ],
+        table: [
+          [4.28, '线上净网线下清源', '2463/3456', '389/675', '执行中'],
+          [4.28, '联合双打行动', '2863/3456', '189/675', '执行中'],
+          [4.28, '联合双打行动', '963/3456', '389/675', '执行中'],
+          [4.28, '网剑行动', '234/3456', '289/675', '执行中'],
+          [4.28, '网剑行动', '1463/3456', '289/675', '执行中'],
+          [4.28, '线上净网线下清源', '163/3456', '489/675', '执行中'],
+          [4.28, '网剑行动', '286/3456', '231/675', '执行中']]
+      }],
+      showHuoli: true
+    }
+  },
+  methods: {
+    click () {
+      this.showHuoli = !this.showHuoli
     }
   }
 }

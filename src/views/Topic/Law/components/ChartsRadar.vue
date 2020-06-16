@@ -32,8 +32,11 @@ export default {
       const indicator = []
       for (let i = 0; i < this.indicator.length; i++) {
         const item = this.indicator[i]
-        item.name = item.name + '\n' + this.data[0].value[i] + '%'
-        indicator.push(item)
+        const name = item.name + '\n' + this.data[0].value[i] + '%'
+        indicator.push({
+          name: name,
+          max: item.max
+        })
       }
       return {
         title: {

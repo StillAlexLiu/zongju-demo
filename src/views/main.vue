@@ -5,7 +5,7 @@
             <RootTitle class="root—title"/>
             <PageSelect class="selector" v-if="false"/>
             <div class="pageName">{{pageName}}</div>
-            <div class="open" @click="open">菜单</div>
+            <div class="open" @click="open">导航</div>
             <dia-menu v-if="menuShow" @close="close"/>
         </div>
     </div>
@@ -89,15 +89,15 @@ export default {
 
     .open {
         position: absolute;
-        width: 122px;
-        height: 122px;
+        width: 52px;
+        height: 52px;
         background-size: 100% 100%;
-        line-height: 122px;
+        line-height: 52px;
         text-align: center;
         color: #fff;
-        background-image: url("./common/img/圆环-07@2x.png");
-        top: -30px;
-        left: -30px;
+        background-image: url("./common/img/Shape@2x.png");
+        top: 5px;
+        left: 5px;
         cursor: pointer;
     }
 }

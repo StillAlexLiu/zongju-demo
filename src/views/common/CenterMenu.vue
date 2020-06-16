@@ -8,7 +8,7 @@
                  :style="{backgroundImage:'url('+(index===active?item.btnActive:item.btn)+')'}"
                  @mouseover="mouseOver(index)" @mouseleave="mouseOut(index)">
                 <span><img :src="item.icon"></span>
-                <span>{{item.name}}</span>
+                <span class="btn-name">{{item.name}}</span>
             </div>
         </div>
         <div class="btn-top">
@@ -16,7 +16,7 @@
             <Roll class="full" :data="bg4"/>
             <Roll class="full" :data="bg5"/>
         </div>
-        <div class="main-page">
+        <div class="main-page" @click="toIndex">
             首页
         </div>
     </div>
@@ -87,6 +87,9 @@ export default {
     },
     mouseOut (event) {
       this.active = null
+    },
+    toIndex () {
+      this.$emit('click')
     }
   }
 }
@@ -130,7 +133,6 @@ export default {
             justify-content: center;
             /*line-height: 20px;*/
             cursor: pointer;
-            font-size: 24px;
             align-items: stretch;
             background-size: 100% 100%;
             background-position: center;
@@ -139,6 +141,9 @@ export default {
             img {
                 height: 30px;
             }
+        }
+        .btn-name{
+            font-size: 24px;
         }
     }
 
@@ -149,6 +154,7 @@ export default {
 
     .main-page {
         font-size: 36px;
+        cursor: pointer;
     }
 }
 </style>

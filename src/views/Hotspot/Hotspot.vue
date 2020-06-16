@@ -1,36 +1,20 @@
 <template>
-    <div class='Hotspot full'>
-        <div class="w-5-12 full-height">
-            <div class="h-7-10" style="padding-top: 8px">
-                <img-block class="full" :data="img.map"/>
+    <div class='Hotspot full' style="padding-top: 60px">
+        <container class="w-3-9 full-height" title="热点舆情">
+            <img-block class="full" :data="img.left"/>
+        </container>
+        <div class="w-4-9 full-height">
+            <div class="h-2-3" style="position: relative">
+                <img-block class="full" :data="img.maps[mapSelected]"/>
+                <div class="btn" @click="change"></div>
             </div>
-            <div class="h-3-10">
-                <container class="full-height w-1-2" title="传播趋势">
-                    <img-block class="full" :data="img.left1"/>
-                </container>
-                <container class="full-height w-1-2" title="整体情感">
-                    <img-block class="full" :data="img.left2"/>
-                </container>
-            </div>
-        </div>
-        <div class="w-7-12 full-height" style="padding-top: 60px">
-            <container class="w-4-11 full-height" title="受众分析">
-                <img-block class="full" :data="img.center"/>
+            <container class="h-1-3" title="事件分析">
+                <img-block class="full" :data="img.bottom"/>
             </container>
-            <div class="w-7-11 full-height">
-                <container class="h-3-5" title="热点舆情事件">
-                    <div style="height: 44px">
-                        <TabBottomLine :data="tab" v-model="selectedIndex"/>
-                    </div>
-                    <div style="height: calc(100% - 44px);">
-                        <img-block class="full" :data="img.right1"/>
-                    </div>
-                </container>
-                <container class="h-2-5" title="热点舆情处置">
-                    <img-block class="full" :data="img.right2"/>
-                </container>
-            </div>
         </div>
+        <container class="w-2-9 full-height" title="事件精准监控">
+            <img-block class="full" :data="img.right"/>
+        </container>
     </div>
 </template>
 
@@ -42,46 +26,38 @@ export default {
   components: { ImgBlock },
   data () {
     return {
-      selectedIndex: 0,
-      tab: [{
-        name: '口罩舆情',
-        value: 0
-      }, {
-        name: '疫苗舆情',
-        value: 1
-      }],
+      mapSelected: 0,
       img: {
-        map: {
-          img: require('./BlockImg/舆情地图.png'),
-          width: 780,
-          height: 690
+        maps: [{
+          img: require('./BlockImg/new/地图1.png'),
+          width: 800 * 1.025,
+          height: 646 * 1.025
+        }, {
+          img: require('./BlockImg/new/地图2.png'),
+          width: 800 * 1.025,
+          height: 646 * 1.025
+        }],
+        left: {
+          img: require('./BlockImg/new/左侧.png'),
+          width: 619,
+          height: 937
         },
-        left1: {
-          img: require('./BlockImg/传播趋势.png'),
-          width: 351,
-          height: 230
+        bottom: {
+          img: require('./BlockImg/new/下方.png'),
+          width: 754,
+          height: 264
         },
-        left2: {
-          img: require('./BlockImg/整体情感.png'),
-          width: 350,
-          height: 233
-        },
-        center: {
-          img: require('./BlockImg/受众分析.png'),
+        right: {
+          img: require('./BlockImg/new/右侧.png'),
           width: 360,
-          height: 921
-        },
-        right1: {
-          img: require('./BlockImg/热点舆情事件-口罩舆情.png'),
-          width: 620,
-          height: 456
-        },
-        right2: {
-          img: require('./BlockImg/热点舆情处置.png'),
-          width: 580,
-          height: 348
+          height: 915
         }
       }
+    }
+  },
+  methods: {
+    change () {
+      this.mapSelected = this.mapSelected === 0 ? 1 : 0
     }
   }
 }
@@ -91,5 +67,16 @@ export default {
 .Hotspot {
     padding: 15px 20px;
     color: #ffffff;
+
+    .btn {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        right: 9px;
+        top: 6px;
+        cursor: pointer;
+        background-size: 100% 100%;
+        background-image: url("./BlockImg/new/左侧菜单_收起.png");
+    }
 }
 </style>

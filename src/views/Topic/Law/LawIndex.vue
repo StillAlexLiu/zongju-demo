@@ -49,43 +49,44 @@
                     <div class="w-2-3 full-height">
                         <TabBottomLine :data="tab4" style="height: 25px" v-model="tab4Selected"/>
                         <div style="height: calc(100% - 25px);">
-                            <ChartsPie :data="page.left.block2.chart1[tab4Selected].data" :show-legend="false"
-                                       :show-all="true"
-                                       :radius-circle="['60%','65%']"
-                                       :radius-pie-center="[0,'50%']"
-                                       :unit="'件'"
-                                       :color="['#22AEC5','#87A0F6','#FFD589','#91D243']"
-                                       :unit-center="'件'"
-                                       :double-pie="true" :center-data="page.left.block2.chart1[tab4Selected].data2"/>
+                            <img-block :data="page.left.block2.img0[tab4Selected]" class="full"/>
+                            <!--                            <ChartsPie :data="page.left.block2.chart1[tab4Selected].data" :show-legend="false"-->
+                            <!--                                       :show-all="true"-->
+                            <!--                                       :radius-circle="['60%','65%']"-->
+                            <!--                                       :radius-pie-center="[0,'50%']"-->
+                            <!--                                       :unit="'件'"-->
+                            <!--                                       :color="['#22AEC5','#87A0F6','#FFD589','#91D243']"-->
+                            <!--                                       :unit-center="'件'"-->
+                            <!--                                       :double-pie="true" :center-data="page.left.block2.chart1[tab4Selected].data2"/>-->
                         </div>
                     </div>
                 </div>
                 <div class="h-3-5">
                     <div class="h-4-9">
-                        <TabBottomLine :data="tab5" style="height: 25px"/>
+                        <TabBottomLine :data="tab5" style="height: 25px" v-model="tab5Selected"/>
                         <div style="height: calc(100% - 25px);padding-top: 10px">
                             <ChartBarLine
-                                :data="page.left.block2.chart2.data"
-                                :title="page.left.block2.chart2.title"
-                                :dimensions="page.left.block2.chart2.dimensions"
-                                :colors="page.left.block2.chart2.color"
-                                :type="page.left.block2.chart2.type"
-                                :legend="page.left.block2.chart2.legend"
-                                :units="page.left.block2.chart2.units"
+                                :data="page.left.block2.chart2[tab5Selected].data"
+                                :title="page.left.block2.chart2[tab5Selected].title"
+                                :dimensions="page.left.block2.chart2[tab5Selected].dimensions"
+                                :colors="page.left.block2.chart2[tab5Selected].color"
+                                :type="page.left.block2.chart2[tab5Selected].type"
+                                :legend="page.left.block2.chart2[tab5Selected].legend"
+                                :units="page.left.block2.chart2[tab5Selected].units"
                             />
                         </div>
                     </div>
                     <div class="h-5-9">
                         <div class="w-1-3 full-height">
-                            <TabBottomLine :data="tab" style="height: 25px"/>
+                            <TabBottomLine :data="tab" style="height: 25px" v-model="tabSelected"/>
                             <div style="height: calc(100% - 25px);padding-top: 10px">
-                                <img-block :data="page.left.block2.img1"/>
+                                <img-block :data="page.left.block2.img1[tabSelected]"/>
                             </div>
                         </div>
                         <div class="w-2-3 full-height">
                             <div style="font-size: 16px;height: 25px;text-indent: 10px">复议案件类型分布</div>
                             <div style="height: calc(100% - 25px);padding-top: 10px;">
-                                <img-block :data="page.left.block2.img2"/>
+                                <img-block :data="page.left.block2.img2[tabSelected]"/>
                             </div>
                         </div>
                     </div>
@@ -93,9 +94,15 @@
             </container>
         </div>
         <div class="center full-height w-3-7">
-            <div class="map h-7-10">
+            <div class="map h-7-10" style="position: relative">
                 <EchartsMap :config="page.center.map" v-if="false"/>
-                <img-block :data="mapImg" class="full"/>
+                <img-block :data="mapImg" class="full center-map"/>
+                <div class="point">
+                    <div v-for="(item,index) in points" :key="index"
+                         :style="{left:item.left+'px',top:item.top+'px'}"></div>
+                </div>
+                <div class="lines"></div>
+                <img-block :data="mapBlock" style="position: absolute;left: 20px;bottom: 40px"/>
             </div>
             <container :title="page.center.block1.title" class=" full-width h-3-10">
                 <div class="full-height w-1-3">
@@ -138,9 +145,9 @@
         </div>
         <div class="side full-height w-2-7">
             <container :title="page.right.block1.title" class=" full-width h-3-10">
-                <TabBottomLine :data="tab2" style="height: 25px"/>
+                <TabBottomLine :data="tab2" style="height: 25px" v-model="tab2Selected"/>
                 <div style="height: calc(100% - 25px)">
-                    <img-block :data="page.right.block1.img"/>
+                    <img-block :data="page.right.block1.img[tab2Selected]"/>
                 </div>
             </container>
             <container class="h-4-10" title="重点专项">
@@ -216,10 +223,35 @@ export default {
     return {
       mapImg: {
         img: require('./BlockImg/地图@1x.png'),
-        width: 1322 / 1.5,
-        height: 730 / 1.3
+        width: 1322 / 1.6,
+        height: 730 / 1.2
       },
+      mapBlock: {
+        img: require('./BlockImg/地图弹出.png'),
+        width: 262,
+        height: 266
+      },
+      points: [{
+        left: 500,
+        top: 330
+      }, {
+        left: 330,
+        top: 340
+      }, {
+        left: 490,
+        top: 510
+      }, {
+        left: 360,
+        top: 270
+      }, {
+        left: 490,
+        top: 600
+      }, {
+        left: 600,
+        top: 310
+      }],
       tab3Selected: 0,
+      tabSelected: 0,
       tab: [{
         name: '案件复议',
         value: 0
@@ -234,6 +266,7 @@ export default {
         name: '处罚金额',
         value: 1
       }],
+      tab2Selected: 0,
       tab2: [{
         name: '重点关注案件',
         value: 0
@@ -259,6 +292,7 @@ export default {
         name: '案件类型',
         value: 1
       }],
+      tab5Selected: 0,
       tab5: [{
         name: '案件发展趋势',
         value: 0
@@ -431,16 +465,33 @@ export default {
               width: 312 / 2,
               height: 362 / 2
             },
-            img1: {
+            img0: [{
+              img: require('./BlockImg/环形图带标题带图例.png'),
+              width: 310,
+              height: 136
+            }, {
+              img: require('./BlockImg/案件类型.png'),
+              width: 311,
+              height: 145
+            }],
+            img1: [{
               img: require('./BlockImg/复议案件数量@2x.png'),
               width: 312 / 2,
               height: 282 / 2
-            },
-            img2: {
+            }, {
+              img: require('./BlockImg/编组 12.png'),
+              width: 157,
+              height: 144
+            }],
+            img2: [{
               img: require('./BlockImg/复议案件类型分布@2x.png'),
               width: 632 / 2,
               height: 288 / 2
-            },
+            }, {
+              img: require('./BlockImg/复议案件类型分布.png'),
+              width: 316,
+              height: 144
+            }],
             chart1: [{
               data: [{
                 name: '简易程序案件',
@@ -474,8 +525,8 @@ export default {
                   value: 231
                 }]
             }],
-            chart2: {
-              title: '平均处置时长变化趋势',
+            chart2: [{
+              title: '案件发展趋势',
               dimensions: ['name', 'value', 'value1'],
               legend: ['新增线索数量', '同比'],
               type: ['bar', 'line'],
@@ -546,7 +597,151 @@ export default {
                 value: Mock.Random.natural(60, 100),
                 value1: Mock.Random.natural(60, 100)
               }]
-            }
+            }, {
+              title: '平均处置时长变化趋势',
+              dimensions: ['name', 'value', 'value1'],
+              legend: ['新增线索数量', '同比'],
+              type: ['bar', 'line'],
+              units: ['万件'],
+              color: [new graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: '#3CB4E2'
+                  },
+                  {
+                    offset: 1,
+                    color: '#3CEAC9'
+                  }
+                ],
+                false
+              ), '#E26F6F'],
+              data: [{
+                name: '6月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '7月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '8月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '9月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '10月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '11月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '12月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '1月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '2月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '3月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '4月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '5月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }]
+            }, {
+              title: '延期案件数量',
+              dimensions: ['name', 'value', 'value1'],
+              legend: ['新增线索数量', '同比'],
+              type: ['bar', 'line'],
+              units: ['万件'],
+              color: [new graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: '#21CCFC'
+                  },
+                  {
+                    offset: 1,
+                    color: '#2890F1'
+                  }
+                ],
+                false
+              ), '#B8E986'],
+              data: [{
+                name: '6月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '7月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '8月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '9月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '10月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '11月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '12月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '1月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '2月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '3月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '4月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }, {
+                name: '5月',
+                value: Mock.Random.natural(60, 100),
+                value1: Mock.Random.natural(60, 100)
+              }]
+            }]
           }
         },
         center: {
@@ -710,12 +905,16 @@ export default {
         },
         right: {
           block1: {
-            title: '线索情况',
-            img: {
+            title: '重大案件',
+            img: [{
               img: require('./BlockImg/线索情况@2x.png'),
               width: 1036 / 2.1,
               height: 494 / 2.1
-            }
+            }, {
+              img: require('./BlockImg/全国性跨省要案@1x.png'),
+              width: 518 / 1.05,
+              height: 247 / 1.05
+            }]
           },
           block2: {
             title: '重点专项',
@@ -783,5 +982,32 @@ export default {
 .LawIndex {
     color: #ffffff;
     padding: 15px 20px;
+
+    .point {
+        width: 100%;
+        height: 100%;
+
+        > div {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url("./components/img/黄色打点@1x.png");
+        }
+    }
+
+    .lines {
+        position: absolute;
+        background-image: url("./components/img/红色带线@1x.png");
+        width: 421px;
+        height: 79px;
+        background-size: 100% 100%;
+        bottom: 230px;
+        left: 270px;
+    }
+
+    .center-map {
+        position: absolute;
+        top: 50px;
+    }
 }
 </style>

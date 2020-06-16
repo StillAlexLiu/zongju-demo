@@ -1,15 +1,19 @@
 <template>
     <div class='LeftBlock full'>
         <div class="h-1-2">
-            <div class="w-2-9 full-height">
-                <div class="sub-title">工业生产许可</div>
-                <TabSide :data="tab1" v-model="selected1" class="tab"/>
-            </div>
-            <div class="w-7-9 full-height">
-                <div class="w-3-7 full-height" style="padding-top: 44px">
+            <div class="w-5-9 full-height" style="padding-top: 10px">
+                <div style="height: 44px">
+                    <div class="w-1-2 sub-title">工业生产许可</div>
+                    <div class="w-1-2" style="padding-top: 10px">
+                        <TabBottomLine :data="tab1" v-model="selected1" class="tab" />
+                    </div>
+                </div>
+                <div style="height: calc(100% - 44px);">
                     <InfoBlock :data="list1[selected1]" class="full"/>
                 </div>
-                <div class="w-4-7 full-height" style="padding-top: 20px">
+            </div>
+            <div class="w-4-9 full-height">
+                <div class="full" style="padding-top: 20px">
                     <img-block class="full" :data="left"/>
                 </div>
             </div>
@@ -123,73 +127,73 @@ export default {
         value: '2200'
       }], [{
         name: '申请数量',
-        value: '3652'
+        value: '2652'
       }, {
         name: '受理数量',
-        value: '1254'
+        value: '1454'
       }, {
         name: '审查数量',
-        value: '3258'
+        value: '1258'
       }, {
         name: '决定数量',
-        value: '2258'
+        value: '2858'
       }, {
         name: '制证数量',
-        value: '4587'
+        value: '1287'
       }, {
         name: '送达数量',
-        value: '1200'
+        value: '900'
       }], [{
         name: '申请数量',
-        value: '3652'
+        value: '652'
       }, {
         name: '受理数量',
-        value: '1254'
+        value: '254'
       }, {
         name: '审查数量',
-        value: '3258'
+        value: '158'
       }, {
         name: '决定数量',
-        value: '2258'
+        value: '1958'
       }, {
         name: '制证数量',
-        value: '4587'
+        value: '3287'
       }, {
         name: '送达数量',
-        value: '1200'
+        value: '900'
       }], [{
         name: '申请数量',
-        value: '3652'
+        value: '852'
       }, {
         name: '受理数量',
-        value: '1254'
+        value: '254'
       }, {
         name: '审查数量',
-        value: '3258'
+        value: '580'
       }, {
         name: '决定数量',
-        value: '2258'
+        value: '248'
       }, {
         name: '制证数量',
-        value: '4587'
+        value: '387'
       }, {
         name: '送达数量',
-        value: '1200'
+        value: '120'
       }], [{
         name: '申请数量',
-        value: '3652'
+        value: '3752'
       }, {
         name: '受理数量',
-        value: '1254'
+        value: '2654'
       }, {
         name: '审查数量',
-        value: '3258'
+        value: '1958'
       }, {
         name: '决定数量',
-        value: '2258'
+        value: '1158'
       }, {
         name: '制证数量',
-        value: '4587'
+        value: '4837'
       }, {
         name: '送达数量',
         value: '1200'

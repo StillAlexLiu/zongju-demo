@@ -30,7 +30,8 @@ export default {
     }
   },
   mounted () {
-    this.setStyle(0)
+    this.setStyle(1)
+    // this.setStyle(0)
     // window.onresize = () => {
     //   return this.setStyle()
     // }
