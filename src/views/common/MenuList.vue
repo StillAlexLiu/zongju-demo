@@ -1,6 +1,7 @@
 <template>
     <div class='MenuList'>
-        <div class="menu" :style="{order:position==='right'?'0':'2'}">
+        <div class="menu"
+             :style="{order:position==='right'?'0':'2','justify-content':flex,flexDirection:flexDirection,flexWrap:flexWrap}">
             <div v-for="(item,index) in data" :key="index"
                  @mouseover="mouseOver(index)" @mouseleave="mouseOut(index)"
                  :class="[index===active?'active':'',item.disable?'disable':'default']" @click="click(item,index)">
@@ -34,6 +35,18 @@ export default {
     position: {
       type: String,
       default: 'right'
+    },
+    flex: {
+      type: String,
+      default: 'flex-start'
+    },
+    flexDirection: {
+      type: String,
+      default: 'row'
+    },
+    flexWrap: {
+      type: String,
+      default: 'wrap '
     }
   },
   computed: {
@@ -79,11 +92,12 @@ export default {
     flex-direction: row;
 
     .line2 {
-        flex-basis: 1px;
+        flex-basis: 2px;
         padding: 28px 0;
 
         > div {
             height: 100%;
+            width: 100%;
             border-right: 1px dotted #5CA4FF;
         }
     }
@@ -119,10 +133,12 @@ export default {
 
     .menu {
         display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        flex-wrap: wrap;
+        /*justify-content: space-between;*/
+        /*flex-direction: row;*/
+        /*justify-content: flex-end;*/
+        /*flex-wrap: wrap;*/
         flex-basis: 460px;
+        /*align-items: flex-end;*/
 
         > div {
             flex-basis: calc(50% - 10px);

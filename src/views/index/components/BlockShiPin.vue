@@ -3,7 +3,7 @@
         <div class=" name">
             {{data.name}}
         </div>
-        <div class=" value number-font">
+        <div class=" value ">
             {{data.value}}
         </div>
     </div>
@@ -39,7 +39,7 @@ export default {
 
     .value {
         font-size: 40px;
-        font-family: 'LESLIE';
+        font-family: 'LCD';
         line-height: 42px;
         color: #3FD3D6 !important;
     }

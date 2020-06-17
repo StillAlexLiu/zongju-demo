@@ -1,7 +1,7 @@
 <template>
     <div class="ChartGroupHuanJing full">
-        <ChartPieCircle :title="title" :data="data[dataIndex]" :is-pie="true"/>
-        <div class="radioBox">
+        <ChartPieCircle :title="title" :data="data[dataIndex]" :color="color" :is-pie="true"/>
+        <div class="radioBox" >
             <CheckAndRadioBox :data="radio" v-model="dataIndex"/>
         </div>
     </div>
@@ -31,6 +31,12 @@ export default {
       default: ''
     },
     data: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    color: {
       type: Array,
       default: () => {
         return []

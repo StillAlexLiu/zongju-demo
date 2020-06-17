@@ -104,10 +104,10 @@ export default {
         }
         if (this.type[i] === 'line') {
           if (this.lineWithCircle) {
-            item.symbolSize = 8
+            item.symbolSize = 5
             item.itemStyle = {
               borderColor: '#fff',
-              borderWidth: 1
+              borderWidth: 0
             }
           } else {
             item.symbolSize = 0

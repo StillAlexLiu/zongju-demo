@@ -24,17 +24,17 @@ export default {
 <style scoped lang="less">
 .Fliter {
     background-image: url("./img/fliter.png");
-    background-size: auto 100%;
+    background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
-    padding: 12px 0 10px 0;
+    padding: 12px 0 8px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 
     > div {
         /*height: 54px;*/
-        padding-left: 45px;
+        padding-left: 20px;
         display: flex;
         justify-content: space-between;
 
@@ -50,7 +50,7 @@ export default {
 
         .value {
             text-align: center;
-            padding-right: 35px;
+            padding-right: 20px;
             width: 50%;
             /*flex-basis: 30%;*/
         }

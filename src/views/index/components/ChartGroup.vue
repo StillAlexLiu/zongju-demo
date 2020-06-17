@@ -15,7 +15,7 @@
                 />
             </div>
             <div class="w-2-5 full-height">
-                <ChartPieCircle :data="data[dataIndex].chart2.data" :title="data[dataIndex].chart2.title"/>
+                <ChartPieCircle :data="data[dataIndex].chart2.data" :color="['#3651AF','#4A90E2','#94CCFF','#67ADFF']" :title="data[dataIndex].chart2.title"/>
             </div>
         </div>
     </div>

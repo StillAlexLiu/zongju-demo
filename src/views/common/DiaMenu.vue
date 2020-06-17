@@ -1,7 +1,11 @@
 <template>
     <div class='DiaMenu full'>
-        <menu-list :data="menu.leftTop" style="position: absolute;top: 89px;left: 83px;" @click="click"/>
-        <menu-list :data="menu.leftBottom" style="position: absolute;top: 307px;left: 83px;" @click="click"/>
+        <menu-list :data="menu.leftTop" style="position: absolute;top: 89px;left: 83px;" @click="click"
+                   flexDirection="row-reverse"
+                   flex-wrap="wrap-reverse"
+                   flex="flex-start"/>
+        <menu-list :data="menu.leftBottom" style="position: absolute;top: 365px;left: 83px;" @click="click"
+                   flex="flex-end"/>
         <menu-list :data="menu.rightTop" position="left" style="position: absolute;top: 118px;right: 80px;"
                    @click="click"/>
         <menu-list :data="menu.rightBottom" position="left" style="position: absolute;top: 307px;right: 80px;"
@@ -44,23 +48,8 @@ export default {
     return {
       menu: {
         leftTop: [{
-          name: '工业品和消费品',
-          path: '/Industry',
-          active: false,
-          disable: false
-        }, {
-          name: '营商环境',
-          path: '/Business',
-          active: false,
-          disable: false
-        }, {
           name: '综合风险',
           path: '/Risk',
-          active: false,
-          disable: false
-        }, {
-          name: '食品安全',
-          path: '/foodIndex',
           active: false,
           disable: false
         }, {
@@ -73,46 +62,42 @@ export default {
           path: '/DrugSafety',
           active: false,
           disable: false
+        }, {
+          name: '特种设备安全',
+          path: '',
+          active: false,
+          disable: true
+        }, {
+          name: '食品安全',
+          path: '/foodIndex',
+          active: false,
+          disable: false
+        }, {
+          name: '工业品和消费品',
+          path: '/Industry',
+          active: false,
+          disable: false
+        }, {
+          name: '营商环境',
+          path: '/Business',
+          active: false,
+          disable: false
         }],
         leftBottom: [
           {
-            name: '特殊食品安全监督管理司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
             name: '执法稽查局',
             path: '/LawIndex',
-            active: false,
+            active: true,
             disable: false
-          },
-          {
-            name: '食品安全抽检监测司',
-            path: '',
-            active: false,
-            disable: true
           },
           {
             name: '登记注册局',
             path: '/deptIndex',
-            active: false,
+            active: true,
             disable: false
           },
           {
-            name: '特种设备安全监察局',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
             name: '信用监督管理司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
-            name: '计量司',
             path: '',
             active: false,
             disable: true
@@ -124,19 +109,7 @@ export default {
             disable: true
           },
           {
-            name: '标准技术管理司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
-            name: '价监局',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
-            name: '标准创新管理司',
+            name: '价格反不正当竞争局',
             path: '',
             active: false,
             disable: true
@@ -148,19 +121,7 @@ export default {
             disable: true
           },
           {
-            name: '认证监督管理司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
             name: '广告监督管理司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
-            name: '认可与检测检验监督管理司',
             path: '',
             active: false,
             disable: true
@@ -172,31 +133,13 @@ export default {
             disable: true
           },
           {
-            name: '科技和财务司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
             name: '产品质量安全监督管理司',
             path: '/product',
-            active: false,
+            active: true,
             disable: false
           },
           {
-            name: '国家知识产权局',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
             name: '食品安全协调司',
-            path: '',
-            active: false,
-            disable: true
-          },
-          {
-            name: '国家药品监督管理局',
             path: '',
             active: false,
             disable: true
@@ -212,8 +155,76 @@ export default {
             path: '',
             active: false,
             disable: true
+          },
+          {
+            name: '特殊食品安全监督管理司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '食品安全抽检监测司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '特种设备安全监察局',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '计量司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '标准技术管理司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '标准创新管理司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '认证监督管理司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '认可与检测检验监督管理司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '科技和财务司',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '国家知识产权局',
+            path: '',
+            active: false,
+            disable: true
+          },
+          {
+            name: '国家药品监督管理局',
+            path: '',
+            active: false,
+            disable: true
           }
+
         ],
+
         rightTop: [{
           name: '指挥调度',
           path: '/index',

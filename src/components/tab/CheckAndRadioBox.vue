@@ -65,13 +65,14 @@ export default {
         height: 24px;
         text-align: center;
         line-height: 24px;
-        margin: 0 10px;
+        margin: 0 5px;
+        font-size: 12px;
         background-size: 100% 100%;
         cursor: pointer;
 
         img {
-            width: 20px;
-            height: 20px;
+            width: 10px;
+            height: 10px;
             vertical-align: middle;
         }
     }

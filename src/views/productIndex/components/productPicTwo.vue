@@ -5,7 +5,7 @@
 <script>
 
 export default {
-  name: 'ChartPieCircle',
+  name: 'productPicTwo',
   props: {
     title: {
       type: String,

@@ -1,8 +1,8 @@
 <template>
     <div class='boxChart'>
-        <div class='wordCloub' style="height: calc(100% - 30px)"></div>
-        <div style="height: 30px;text-align: center;font-size: 14px;line-height: 30px">舆情分析
+        <div style="height: 30px;text-align: left;font-size: 14px;line-height: 30px">舆情分析
         </div>
+        <div class='wordCloub' style="height: calc(100% - 30px)"></div>
     </div>
 </template>
 <script>

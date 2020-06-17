@@ -20,6 +20,12 @@ export default {
     isPie: {
       type: Boolean,
       default: false
+    },
+    color: {
+      type: Array,
+      default: () => {
+        return null
+      }
     }
   },
   computed: {
@@ -28,6 +34,7 @@ export default {
         title: {
           text: this.title
         },
+        color: this.color,
         series: [
           {
             name: '访问来源',
@@ -43,14 +50,8 @@ export default {
                 formatter: (params) => {
                   const data = params.data
                   const percent = params.percent
-                  const trend = data.trend ? ' {trend|' + data.trend + '}' : ''
-                  return '{name|' + data.name + '}\n{percent|' + percent + '%}' + trend
-                },
-                rich: {
-                  name: {},
-                  percent: {},
-                  trend: {},
-                  status: {}
+                  const trend = data.trend ? +data.trend + '%' : ''
+                  return data.name + '\n' + percent + ' ' + trend
                 }
               },
               emphasis: {

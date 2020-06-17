@@ -19,9 +19,9 @@ export default {
   },
   data () {
     return {
-      initOptions: {
-        // renderer:'svg'
-      },
+      // initOptions: {
+      //   // renderer:'svg'
+      // },
       defaultOption: {
         title: {
           textStyle: {
@@ -40,6 +40,15 @@ export default {
     }
   },
   computed: {
+    initOptions () {
+      const str = JSON.stringify(this.computedOptions)
+      const reg = RegExp(/rich/)
+      if (str.match(reg)) {
+        return {}
+      } else {
+        return { renderer: 'svg' }
+      }
+    },
     computedOptions () {
       if (!this.options.grid) {
         const assign = {

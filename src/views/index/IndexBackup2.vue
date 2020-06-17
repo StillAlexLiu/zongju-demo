@@ -3,7 +3,7 @@
         <div class="h-4-5">
             <div class="side full-height w-2-7">
                 <container :title="page.left.block1.title" class=" full-width h-1-4">
-                    <GroupZhunRuNew class="h-3-11" :data="page.left.block1.text.data"/>
+                    <group-zhun-ru class="h-3-11" :data="page.left.block1.text.data"/>
                     <div class="h-8-11">
                         <div class="w-3-8 full-height">
                             <ChartGauge/>
@@ -55,21 +55,34 @@
                         <ChartWord/>
                     </div>
                     <div class="w-6-9 full-height">
-                        <GroupXiaoFeiNew class="h-3-11" :data="page.left.block3.text"/>
-                        <div class="h-8-11">
+                        <GroupXiaoFei class="h-3-10" :data="page.left.block3.text"/>
+                        <div class="h-7-10">
                             <ChartGroupHuanJing :title="page.left.block3.chart1.title"
-                                                :color="['#3651AF','#4A90E2','#94CCFF','#67ADFF']"
                                                 :data="page.left.block3.chart1.data"/>
                         </div>
                     </div>
                 </container>
                 <container :title="page.left.block4.title" class=" full-width h-1-4">
-                    <div class="full-height w-3-10">
-                        <BlockChanQuan :data="page.left.block4.text1"/>
-                    </div>
-                    <div class="full-height w-7-10">
-                        <GroupChanQuanNew :data="page.left.block4.text2"/>
-                    </div>
+                    <template v-if="page.name==='china'">
+                        <div class="full-height w-3-10">
+                            <BlockChanQuan :data="page.left.block4.text1"/>
+                        </div>
+                        <div class="full-height w-7-10">
+                            <GroupChanQuan :data="page.left.block4.text2"/>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <ChartBarLine
+                            :data="page.left.block4.chart1.data"
+                            :title="page.left.block4.chart1.title"
+                            :dimensions="page.left.block4.chart1.dimensions"
+                            :colors="page.left.block4.chart1.color"
+                            :type="page.left.block4.chart1.type"
+                            :legend="page.left.block4.chart1.legend"
+                            :units="page.left.block4.chart1.units"
+                            :two-axis="false"
+                        />
+                    </template>
                 </container>
             </div>
             <div class="center full-height  w-3-7">
@@ -80,18 +93,18 @@
                         <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
                     </div>
                     <div class="h-6-7" style="position: relative">
-                        <EchartsMapNew v-if="map1Show" :config="page.center.map"/>
+                        <EchartsMap v-if="map1Show" :config="page.center.map"/>
                         <NumberRoll :number="1.254" v-if="map1Show&&page.name==='china'" title="市场主体" unit="亿户"
                                     class="number"/>
-                        <EchartsMapRenWuNew v-if="map2Show" :config="page.center.map"/>
-                        <MapText class="map-text" v-if="map2Show" title="重点任务" text="中共中央政治局常务委员会召开..."/>
+                        <EchartsMapRenWu v-if="map2Show" :config="page.center.map"/>
+                        <MapText class="map-text" v-if="map2Show" title="重点任务" text="中共中央政治局常务委员会召开会议..."/>
                     </div>
                 </div>
 
             </div>
             <div class="side full-height w-2-7">
                 <container :title="page.right.block1.title" class=" full-width h-1-4">
-                    <GroupShiPinNew class="h-1-3" :data="page.right.block1.text"/>
+                    <GroupShiPin class="h-1-3" :data="page.right.block1.text"/>
                     <div class="h-2-3 " style="padding:0">
                         <BlockShiPin class="full-height w-1-5" :data="page.right.block1.text2"></BlockShiPin>
                         <ChartCustomPie class="w-4-5 full-height" :data="page.right.block1.chart1.data"
@@ -103,25 +116,19 @@
                     <ChartGroup class="h-3-4 full-width" :data="page.right.block2.charts" :tab="page.right.block2.tab"/>
                 </container>
                 <container :title="page.right.block3.title" class=" full-width h-1-4">
-                    <div style="height: 30px;">
-                        <BlockTeZhongSheBeiGroup :data="page.right.block3.charts" @change="TabChange"/>
+                    <div class="w-6-12 full-height">
+                        <BlockTeZhongSheBei :data="page.right.block3.charts"/>
                     </div>
-                    <div style="height: calc(100% - 30px)">
-                        <div class="w-6-12 full-height">
-                            <BlockTeZhongSheBeiNew :data="page.right.block3.charts" :dataIndex="tabSelect3"/>
-                        </div>
-                        <div class="w-6-12 full-height">
-                            <ChartPieCircle :data="page.right.block3.chart2.data"
-                                            :color="['#3651AF','#4A90E2','#94CCFF','#67ADFF','#4A90E2']"
-                                            :title="page.right.block3.chart2.title"/>
-                        </div>
+                    <div class="w-6-12 full-height">
+                        <ChartPieCircleDouble :data="page.right.block3.chart2.data"
+                                              :title="page.right.block3.chart2.title"/>
                     </div>
                 </container>
                 <container :title="page.right.block4.title" class=" full-width h-1-4">
-                    <div style="height: 40px">
-                        <GroupGongYeNew :data="page.right.block4.text"/>
+                    <div class="h-1-4">
+                        <GroupGongYe :data="page.right.block4.text"/>
                     </div>
-                    <div style="height: calc(100% - 40px)">
+                    <div class="h-3-4">
                         <div class="full-height w-1-2">
                             <ChartAcross :title="page.right.block4.chart1.title" :data="page.right.block4.chart1"/>
                         </div>
@@ -141,17 +148,17 @@
             </div>
         </div>
         <div class="h-1-5 full-width">
-            <container title="质量提升" class="full-height w-2-7">
-                <GroupZhiLiangNew :data="page.center.block1.data"/>
+            <container title="质量提升" class="full-height w-1-3">
+                <GroupZhiLiang :data="page.center.block1.data"/>
             </container>
-            <!--            <container title="风险管控"-->
-            <!--                       class=" w-1-4 full-height">-->
-            <!--                <img-block class="full" :data="data.bottom.chart2"/>-->
-            <!--            </container>-->
-            <container title="重点监管" class="full-height w-3-7">
-                <ZhongDianJianGuanNew :data="page.center.block3"/>
+<!--            <container title="风险管控"-->
+<!--                       class=" w-1-4 full-height">-->
+<!--                <img-block class="full" :data="data.bottom.chart2"/>-->
+<!--            </container>-->
+            <container title="重点监管" class="full-height w-1-3">
+                <ZhongDianJianGuan :data="page.center.block3"/>
             </container>
-            <container title="综合执法" class="full-height w-2-7">
+            <container title="综合执法" class="full-height w-1-3">
                 <ZongHeZhiFa :data="page.center.block2"/>
             </container>
         </div>
@@ -199,34 +206,10 @@ import ZhongDianJianGuan from './components/ZhongDianJianGuan'
 import Battle from './DialogImg/Battle'
 import Mock from 'mockjs'
 import graphic from 'echarts/lib/util/graphic'
-import GroupZhunRuNew from './components/GroupZhunRuNew'
-import GroupXiaoFeiNew from './components/GroupXiaoFeiNew'
-import GroupChanQuanNew from './components/GroupChanQuanNew'
-import GroupZhiLiangNew from './components/GroupZhiLiangNew'
-import GroupShiPinNew from './components/GroupShiPinNew'
-import ChartPieCircle from './components/ChartPieCircle'
-import BlockTeZhongSheBeiNew from './components/BlockTeZhongSheBeiNew'
-import BlockTeZhongSheBeiGroup from './components/BlockTeZhongSheBeiGroup'
-import GroupGongYeNew from './components/GroupGongYeNew'
-import ZhongDianJianGuanNew from './components/ZhongDianJianGuanNew'
-import EchartsMapNew from './components/EchartsMapNew'
-import EchartsMapRenWuNew from './components/EchartsMapRenWuNew'
 
 export default {
   name: 'Index',
   components: {
-    EchartsMapRenWuNew,
-    EchartsMapNew,
-    ZhongDianJianGuanNew,
-    GroupGongYeNew,
-    BlockTeZhongSheBeiGroup,
-    BlockTeZhongSheBeiNew,
-    ChartPieCircle,
-    GroupShiPinNew,
-    GroupZhiLiangNew,
-    GroupChanQuanNew,
-    GroupXiaoFeiNew,
-    GroupZhunRuNew,
     Battle,
     ZhongDianJianGuan,
     ZongHeZhiFa,
@@ -264,7 +247,6 @@ export default {
   data () {
     return {
       tabSelect0: 0,
-      tabSelect3: 0,
       max: 3,
       mapTabActive: 0,
       centerIndex: 0,
@@ -311,15 +293,11 @@ export default {
                 value: [{
                   name: '市场主体总量',
                   value: '1.25',
-                  unit: '亿户',
-                  percent: '12%',
-                  status: 'up'
+                  unit: '亿户'
                 }, {
                   name: '小微企业总量',
-                  value: '203',
-                  unit: '亿户',
-                  percent: '15%',
-                  status: 'up'
+                  value: '1.16',
+                  unit: '亿户'
                 }]
               }, {
                 name: '平均办结',
@@ -350,11 +328,11 @@ export default {
                 [
                   {
                     offset: 0,
-                    color: '#5DC3FF'
+                    color: '#8CD142'
                   },
                   {
                     offset: 1,
-                    color: 'rgba(134,188,233,.17)'
+                    color: 'rgba(184, 233, 134, .4)'
                   }
                 ],
                 false
@@ -438,11 +416,11 @@ export default {
                 [
                   {
                     offset: 0,
-                    color: '#50E3C2'
+                    color: '#B8E986'
                   },
                   {
                     offset: 1,
-                    color: 'rgba(0,0,0,0)'
+                    color: 'rgba(184, 233, 134, .4)'
                   }
                 ],
                 false
@@ -454,11 +432,11 @@ export default {
                 [
                   {
                     offset: 0,
-                    color: '#5DC3FF'
+                    color: '#61E4FF'
                   },
                   {
                     offset: 1,
-                    color: 'rgba(0, 0, 0, 0)'
+                    color: 'rgba(50, 197, 255, 0.4)'
                   }
                 ],
                 false
@@ -495,7 +473,7 @@ export default {
               legend: ['检查次数', '变化率'],
               units: ['万次', '%'],
               type: ['bar', 'line'],
-              color: ['#4A90E2', '#50E3C2'],
+              color: ['#F6B850', '#F86A47'],
               data: [{
                 name: '水电',
                 value: Mock.Random.natural(60, 100),
@@ -523,16 +501,18 @@ export default {
             title: '消费环境',
             text: [
               {
-                title: '投诉',
+                title: '投诉举报总量',
                 value: '4501',
-                unit: '万次'
+                unit: '万次',
+                trend: '8.7%',
+                status: 'down'
               },
               {
-                title: '办结',
+                title: '办结率',
                 value: '100%'
               },
               {
-                title: '诉转',
+                title: '诉转率',
                 value: '15%'
               }
             ],
@@ -593,35 +573,70 @@ export default {
               to: '8'
             }],
             text2: [{
-              name: '商品注册',
-              value: '198',
-              unit: '万件',
-              percent: '25%',
-              status: 'up',
-              text: '时限',
-              subText: '缩短',
-              change: '1',
-              changeUnit: '个月'
+              icon: require('./components/img/icon-chanquan-1.png'),
+              data: [{
+                name: '商品注册',
+                value: '198',
+                unit: '万件'
+              }, {
+                name: '',
+                value: '25%',
+                unit: '',
+                status: 'up'
+              }, {
+                name: '审查时限',
+                value: '',
+                status: '',
+                from: '9',
+                fromUnit: '个月',
+                arrow: true,
+                to: '8',
+                toUnit: '个月'
+              }]
             }, {
-              name: '地理标志',
-              value: '2320',
-              unit: '个',
-              percent: '16%',
-              status: 'up',
-              text: '新增',
-              subText: '',
-              change: '528',
-              changeUnit: '个'
+              icon: require('./components/img/icon-chanquan-2.png'),
+              data: [
+                {
+                  name: '地理标志',
+                  value: '2320',
+                  unit: '个'
+                }, {
+                  name: '',
+                  value: '16%',
+                  status: 'up',
+                  from: '',
+                  fromUnit: '',
+                  arrow: false,
+                  to: '',
+                  toUnit: ''
+                }, {
+                  name: '新增',
+                  unit: '个',
+                  value: '528',
+                  status: 'up'
+                }
+              ]
             }, {
-              name: '专利颁发',
-              value: '283',
-              unit: '万件',
-              percent: '10%',
-              status: 'up',
-              text: '时限',
-              subText: '缩短',
-              change: '3',
-              changeUnit: '个月'
+              icon: require('./components/img/icon-chanquan-3.png'),
+              data: [{
+                name: '专利',
+                value: '283',
+                unit: '万件'
+              }, {
+                name: '',
+                value: '20%',
+                unit: '',
+                status: 'up'
+              }, {
+                name: '审查时限',
+                value: '',
+                status: '',
+                from: '1',
+                fromUnit: '年',
+                arrow: true,
+                to: '9',
+                toUnit: '个月'
+              }]
             }]
           }
         },
@@ -711,7 +726,7 @@ export default {
                 legend: ['抽检批次', '同比'],
                 type: ['bar', 'line'],
                 units: ['次', '%'],
-                color: ['#4A90E2', '#FFBB70'],
+                color: ['rgba(135, 160, 246, 1)', '#FFBB70'],
                 data: [{
                   name: '9月',
                   value: Mock.Random.natural(200, 900),
@@ -878,44 +893,73 @@ export default {
               img: require('./components/img/tabImg/3@2x.png')
             }],
             chart2: {
-              title: '事故行业环节分析',
-              data: [{
-                name: '制造业',
-                value: Mock.Random.natural(10, 100)
-              }, {
-                name: '建筑业',
-                value: Mock.Random.natural(10, 100)
-              }, {
-                name: '安装',
-                value: Mock.Random.natural(10, 100)
-              }, {
-                name: '石化工业',
-                value: Mock.Random.natural(10, 100)
-              }, {
-                name: '改造',
-                value: Mock.Random.natural(10, 100)
-              }]
+              title: '事故各环节分析',
+              data: {
+                inData: {
+                  name: '内环为涉事行业',
+                  data: [{
+                    name: '制造业',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '建设和建筑业',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '冶金石化业',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '运输和物流业',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '其他行业',
+                    value: Mock.Random.natural(10, 100)
+                  }]
+                },
+                outData: {
+                  name: '外环为发生环节',
+                  data: [{
+                    name: '检验检测',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '制造',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '使用',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '安装',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '维修',
+                    value: Mock.Random.natural(10, 100)
+                  }, {
+                    name: '改造',
+                    value: Mock.Random.natural(10, 100)
+                  }]
+                }
+              }
             }
           },
           block4: {
             title: '工业消费品',
             text: [{
-              name: '抽检',
-              value: '23.6',
-              unit: '万批次',
+              title: '抽检',
+              name1: '批次',
+              value1: '23.6',
+              unit: '万',
               name2: '合格率',
               value2: '96.4%',
               status: ''
             }, {
-              name: '缺陷召回',
-              value: '1900',
-              unit: '批次',
+              title: '缺陷召回',
+              name1: '批次',
+              value1: '1900',
+              unit: '',
               name2: '同比',
               value2: '12%',
               status: 'down'
             }],
             chart1: {
-              title: '消费品风险预警',
+              title: '消费品风险预警分析',
               legend: ['低', '中', '高'],
               ydata: [
                 '罐头',
@@ -927,7 +971,7 @@ export default {
               data1: [Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100)],
               data2: [Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100)],
               data3: [Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100), Mock.Random.natural(50, 100)],
-              color: ['#435287', '#4A90E2', '#FE9E55']
+              color: ['#4A90E2', '#F5A623', '#E3475A']
             },
             chart2: {
               title: '缺陷产品召回',
@@ -941,11 +985,11 @@ export default {
                 [
                   {
                     offset: 0,
-                    color: '#50E3C2'
+                    color: '#56BCFF'
                   },
                   {
                     offset: 1,
-                    color: 'rgba(0,0,0,0)'
+                    color: 'rgba(86,188,255,0.20)'
                   }
                 ],
                 false
@@ -957,11 +1001,11 @@ export default {
                 [
                   {
                     offset: 0,
-                    color: '#5DC3FF'
+                    color: 'rgba(254,105,65,0.70)'
                   },
                   {
                     offset: 1,
-                    color: 'rgba(0,0,0,0)'
+                    color: 'rgba(255,174,176,0.20)'
                   }
                 ],
                 false
@@ -1022,7 +1066,7 @@ export default {
           title: {},
           map: {
             name: 'china',
-            aspectScale: 0.8,
+            aspectScale: 0.7,
             center: [104.075206, 30.659799],
             center2: [114.274791, 30.594985],
             pointPosition: [84, 23.5],
@@ -1065,7 +1109,7 @@ export default {
               {
                 title: '标准',
                 value: [{
-                  name: '国家标准',
+                  name: '国家\n标准',
                   value: '2435',
                   unit: '项',
                   status: ''
@@ -1078,7 +1122,7 @@ export default {
               }, {
                 title: '认证\n认可',
                 value: [{
-                  name: '证书总数',
+                  name: '证书\n总数',
                   value: '123',
                   unit: '万份',
                   status: ''
@@ -1091,7 +1135,7 @@ export default {
               }, {
                 title: '计量',
                 value: [{
-                  name: '强检器具',
+                  name: '强检\n器具',
                   value: '2.1',
                   unit: '万个',
                   status: ''
@@ -1104,7 +1148,7 @@ export default {
               }, {
                 title: '检验\n检测',
                 value: [{
-                  name: '检测报告',
+                  name: '检测\n报告',
                   value: '3.5',
                   unit: '亿份',
                   status: ''
@@ -1470,15 +1514,15 @@ export default {
           block3: {
             title: '重点监管',
             text: [{
-              name: '异常名录',
+              name: '异常\n名录',
               value: '686',
               unit: '万户'
             }, {
-              name: '严重违法失信',
+              name: '严重违\n法失信',
               value: '81.2',
               unit: '万户'
             }, {
-              name: '联合惩戒',
+              name: '联合\n惩戒',
               value: '26.1',
               unit: '万户'
             }],
@@ -1557,9 +1601,6 @@ export default {
     // this.getConfig()
   },
   methods: {
-    TabChange (i) {
-      this.tabSelect3 = i
-    },
     MapChange (i) { // 这个会立刻执行
       console.log(i)
       if (i === 0) {
