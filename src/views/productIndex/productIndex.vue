@@ -1,5 +1,5 @@
 <template>
-    <div class="deptIndex full">
+    <div class="productIndex full">
         <div class=" full-width h-5-9">
             <div class="full-height w-1-3">
                 <container class=" full-width h-3-5" :title="page.left.block1.title">
@@ -887,8 +887,8 @@ export default {
   }
 }
 </script>
-<style lang="less">
-.deptIndex {
+<style lang="less" scoped>
+.productIndex {
     padding: 15px 20px;
     color: #ffffff;
 

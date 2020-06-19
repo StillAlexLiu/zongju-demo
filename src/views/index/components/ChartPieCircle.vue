@@ -35,6 +35,10 @@ export default {
           text: this.title
         },
         color: this.color,
+        textStyle: {
+          color: '#fff'
+
+        },
         series: [
           {
             name: '访问来源',

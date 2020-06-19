@@ -125,23 +125,7 @@ export default {
         legend: ['中国', '美国', '印度', '英国', '新加坡'],
         type: ['line', 'line', 'line', 'line', 'line'],
         units: ['指数'],
-        color: [new graphic.LinearGradient(
-          0,
-          0,
-          0,
-          1,
-          [
-            {
-              offset: 0,
-              color: '#8CD142'
-            },
-            {
-              offset: 1,
-              color: 'rgba(184, 233, 134, .4)'
-            }
-          ],
-          false
-        )],
+        color: ['#FE6941', '#468EE5', '#0FAEC7', '#869EF9', '#B8E986'],
         data: [{
           name: '2015年',
           value: Mock.Random.natural(60, 100),

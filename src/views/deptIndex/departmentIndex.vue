@@ -5,6 +5,7 @@
                 <deptMinitEnt :data="page.left.block2.text"></deptMinitEnt>
             </container>
             <container class=" full-width h-3-9" :title="page.left.block1.title">
+                <div class="link" slot="title-right" @click="openPage(1)"></div>
                 <changeTab :data="page.left.block1.tab" v-on:changeTabView="changeTabViewTag"></changeTab>
                 <dept-Market-ZT :data="page.left.block1.text.data" class="h-1-5 full-width"
                                 v-if="changeTabViewTagIsShow===1"/>
@@ -27,13 +28,14 @@
             </container>
         </div>
         <div class="center full-height  w-4-10">
-            <div class="map h-7-11 full-width">
+            <div class="map h-7-11 full-width" style="position: relative">
                 <div class="mapTitleHeight full-width">
                     <div class="full-width">
                         <CenterTitle/>
                     </div>
                     <div class="mapTitleHeight full-width" style="margin-top:10px" v-if="isShowMap===1">
                         <mapView :data="page.center.mapView"></mapView>
+
                     </div>
                 </div>
                 <div class="MapcontenHeight full-width">
@@ -42,6 +44,13 @@
                     <deptEchartsMap v-if="isShowMap===2" :gongdangList="gongdangList"/>
                     <initEchartMap v-if="isShowMap===1"/>
                 </div>
+                <transition name="bounce" mode="out-in">
+                    <div class="dia" v-if="diaShow" @close="close">
+                        <div>
+                            13413
+                        </div>
+                    </div>
+                </transition>
             </div>
             <container class=" full-width h-4-11" :title="page.center.block.title">
                 <div class="h-2-6">
@@ -75,9 +84,6 @@
                 <img-block :data="page.right.block3.img" class="full"/>
             </container>
         </div>
-        <transition name="bounce" mode="out-in">
-            <HuoLiDia class="dia" v-if="dia3" @close="close"/>
-        </transition>
     </div>
 </template>
 <script>
@@ -94,7 +100,6 @@ import mapView from './components/mapView'
 import deptShangGaiEchart from './components/deptShangGaiEchart'
 import initGongDangMap from './components/initGongdangMap'
 import deptXinShe from './components/deptxinshe'
-import HuoLiDia from '../index/DialogImg/HuoLiDia'
 import CenterTitle from '../common/CenterTitle'
 import ImgBlock from '../common/ImgBlock'
 
@@ -103,7 +108,6 @@ export default {
   components: {
     ImgBlock,
     CenterTitle,
-    HuoLiDia,
     changeTab,
     deptMarketZT,
     deptEchartsMap,
@@ -119,6 +123,7 @@ export default {
   data () {
     return {
       dia3: false,
+      diaShow: false,
       tabSelect2: 0,
       page: {
         titles: {
@@ -538,6 +543,9 @@ export default {
   mounted () {
   },
   methods: {
+    openPage () {
+      this.diaShow = !this.diaShow
+    },
     changeTabViewTag (item) {
       if (item.id === 1) {
         this.changeTabViewTagIsShow = 1
@@ -811,7 +819,7 @@ export default {
       this.isShowMap = 1
     },
     close () {
-      this.dia3 = false
+      this.diaShow = false
     },
     openDia () {
       console.log(1)
@@ -820,19 +828,24 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .deptIndex {
     padding: 15px 20px;
     color: #ffffff;
 
     .dia {
         position: absolute;
-        background: rgba(0, 0, 0, 0.5);
         width: 100%;
-        height: 100%;
-        padding: 60px 67px 98px 67px;
-        top: 0;
-        left: 0;
+        height: calc(100% - 50px);
+        top: 50px;
+
+        padding: 5px;
+
+        > div {
+            height: 100%;
+            width: 100%;
+        }
+
         /*width: 1786px;*/
         /*height: 922px;*/
         /*top: 60px;*/
@@ -908,6 +921,17 @@ export default {
             height: 40px;
             display: block;
         }
+    }
+
+    .link {
+        background-image: url("./../Business/img/icon@2x.png");
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        margin-right: 10px;
     }
 }
 </style>

@@ -132,8 +132,9 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .deptIndex {
+    color: #fff;
     padding: 15px 20px;
 
     .foot-center-title {

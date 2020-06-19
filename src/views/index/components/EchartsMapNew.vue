@@ -17,6 +17,7 @@ export default {
       timer: 0,
       isIn: true,
       indata: [],
+      level: 9,
       inpoints: []
     }
   },
@@ -52,8 +53,10 @@ export default {
           this.config.center = find.properties.cp
         }
         this.options = this.getOption()
+        console.log(this.mapSelectName)
         this.$nextTick(() => {
           this.$refs.echarts.dispatchAction({
+            geoIndex: this.level - 1,
             type: 'geoSelect',
             seriesName: 'geo',
             name: this.mapSelectName
@@ -132,7 +135,7 @@ export default {
       this.makeData()
       const mapSelectName = this.mapSelectName
       const geos = []
-      const level = 9
+      const level = this.level
 
       function getMapStyle (i) {
         if (i === 0) { // 上层
@@ -209,21 +212,22 @@ export default {
           },
           emphasis: {
             itemStyle: {
-              color: '#2B5185',
-              // color: i === level - 1 ? {
-              //   type: 'radial',
-              //   x: 0.5,
-              //   y: 0.5,
-              //   r: 0.5,
-              //   colorStops: [{
-              //     offset: 0,
-              //     color: '#32C7E1' // 0% 处的颜色
-              //   }, {
-              //     offset: 0.85,
-              //     color: 'rgba(50,198,223,.40)' // 100% 处的颜色
-              //   }],
-              //   global: false // 缺省为 false
-              // } : 'rgba(0,0,0,0)',
+              // color: '#2B5185',
+              color: i === level - 1 ? {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                  offset: 0,
+                  color: 'rgba(128 ,195, 243,.6)' // 0% 处的颜色
+                }, {
+                  offset: 1,
+                  color: 'rgba(74 ,144, 226,.6)' // 100% 处的颜色
+                }],
+                global: false // 缺省为 false
+              } : '#2B5185',
               // color: i === level - 1 ? new echarts.graphic.LinearGradient(0, 0, 1, 1, [
               //   {
               //     offset: 0,
@@ -234,8 +238,8 @@ export default {
               //     color: 'rgba(50,198,223,.40)'
               //   }
               // ]) : 'rgba(0,0,0,0)',
-              borderWidth: 0,
-              borderColor: 'rgba(89,148,187,.50)'
+              borderWidth: 1,
+              borderColor: i === level - 1 ? getMapLineStyle(0) : getMapLineStyle(1, i, level)
             },
             label: {
               show: i === level - 1,
