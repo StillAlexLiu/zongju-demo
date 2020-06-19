@@ -1,26 +1,9 @@
 <template>
     <div class="Index full">
-        <div class="h-4-5">
+        <div class="h-4-5 full-width">
             <div class="side full-height w-2-7">
                 <container :title="page.left.block1.title" class=" full-width h-1-4">
-                    <GroupZhunRuNew class="h-3-11" :data="page.left.block1.text.data"/>
-                    <div class="h-8-11">
-                        <div class="w-3-8 full-height">
-                            <ChartGauge/>
-                        </div>
-                        <div class="w-5-8 full-height">
-                            <ChartBarLine
-                                :data="page.left.block1.chart1.data"
-                                :title="page.left.block1.chart1.title"
-                                :dimensions="page.left.block1.chart1.dimensions"
-                                :colors="page.left.block1.chart1.color"
-                                :type="page.left.block1.chart1.type"
-                                :legend="page.left.block1.chart1.legend"
-                                :units="page.left.block1.chart1.units"
-                                :is-area="true"
-                            />
-                        </div>
-                    </div>
+                    <ZhunRuBlock :data="page.left.block1" @barClick="barClick"/>
                 </container>
                 <container :title="page.left.block2.title" class=" full-width h-1-4">
                     <div class="h-1-5">
@@ -51,15 +34,19 @@
                     </div>
                 </container>
                 <container :title="page.left.block3.title" class=" full-width h-1-4">
-                    <div class="w-3-9 full-height">
-                        <ChartWord/>
+                    <div style="height: 32px">
+                        <GroupXiaoFeiNew :data="page.left.block3.text" @itemClick="itemClick"/>
                     </div>
-                    <div class="w-6-9 full-height">
-                        <GroupXiaoFeiNew class="h-3-11" :data="page.left.block3.text"/>
-                        <div class="h-8-11">
+                    <div style="height: calc(100% - 32px)">
+                        <div class="w-1-2 full-height">
+                            <ChartWord/>
+                        </div>
+                        <div class="w-1-2 full-height">
                             <ChartGroupHuanJing :title="page.left.block3.chart1.title"
-                                                :color="['#3651AF','#4A90E2','#94CCFF','#67ADFF']"
-                                                :data="page.left.block3.chart1.data"/>
+                                                :color="page.left.block3.chart1.color"
+                                                :data="page.left.block3.chart1.data"
+                                                v-if="xiaoFeiSelected"/>
+                            <ChartGroupHuanJingTab2 v-if="!xiaoFeiSelected"/>
                         </div>
                     </div>
                 </container>
@@ -72,35 +59,67 @@
                     </div>
                 </container>
             </div>
-            <div class="center full-height  w-3-7">
-
-                <div class="h-4-4">
-                    <div class="title h-1-7">
-                        <CenterTitle/>
-                        <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive" @change="MapChange"/>
-                    </div>
-                    <div class="h-6-7" style="position: relative">
+            <div class="center full-height  w-3-7" style="padding-top: 40px;position: relative">
+                <div style="top:80px;height:calc(100% - 80px);" class="full-width"
+                     v-if="!sankShow&&!hotMapShow&&!zhiLiangShow">
+                    <keep-alive>
                         <EchartsMapNew v-if="map1Show" :config="page.center.map"/>
-                        <NumberRoll :number="1.254" v-if="map1Show&&page.name==='china'" title="市场主体" unit="亿户"
-                                    class="number"/>
-                        <EchartsMapRenWuNew v-if="map2Show" :config="page.center.map"/>
-                        <MapText class="map-text" v-if="map2Show" title="重点任务" text="中共中央政治局常务委员会召开..."/>
+
+                    </keep-alive>
+                    <NumberRoll :number="1.254" v-if="map1Show&&page.name==='china'" title="市场主体"
+                                style="top:100px"
+                                unit="亿户"
+                                class="number"/>
+                    <div class="full" v-if="map2Show">
+                        <div style="height: calc(100% - 132px);">
+                            <keep-alive>
+                                <EchartsMapRisk :config="page.center.map"/>
+                            </keep-alive>
+                            <MapText class="map-text" v-if="map2Show"
+                                     style="top:40px;left:20px"/>
+                        </div>
+                        <div style="height:132px">
+                            <MapRiskBlock/>
+                        </div>
                     </div>
+                    <TabSimpleMap class="map-tab" :data="mapTab" v-model="mapTabActive"
+                                  style="width: 100%;top:0;position: absolute"
+                                  @change="MapChange"/>
                 </div>
 
+                <container v-if="sankShow" class="foodCharts full-width" style="top:40px;height:calc(100% - 40px);">
+                    <div style="height: 100px">
+                        <sankey-group/>
+                    </div>
+                    <div style="height: calc(100% - 100px)">
+                        <ChartsSanKey/>
+                    </div>
+                </container>
+                <div v-if="hotMapShow" class="foodCharts full-width" style="top:40px;height:calc(100% - 40px);">
+                    <HotMapBlock class="full" :data="selectedMonth" @close="closeHotMap"/>
+                </div>
+                <div v-if="zhiLiangShow" class="full-width" style="top:40px;height:calc(100% - 40px);">
+                    <dia-group class="full" :index="zhiLiangIndex" @close="zhiLiangClose"/>
+                </div>
             </div>
             <div class="side full-height w-2-7">
                 <container :title="page.right.block1.title" class=" full-width h-1-4">
                     <GroupShiPinNew class="h-1-3" :data="page.right.block1.text"/>
                     <div class="h-2-3 " style="padding:0">
-                        <BlockShiPin class="full-height w-1-5" :data="page.right.block1.text2"></BlockShiPin>
-                        <ChartCustomPie class="w-4-5 full-height" :data="page.right.block1.chart1.data"
-                                        :title="page.right.block1.chart1.title"/>
+                        <BlockShiPin class="full-height w-1-5" :data="page.right.block1.text2"
+                                     @click.native="sankShowClick"
+                        ></BlockShiPin>
+                        <TabPageShipin class="w-4-5 full-height" :data="page.right.block1.chart1" :showPage="sankShow"/>
                     </div>
                 </container>
                 <container :title="page.right.block2.title" class=" full-width h-1-4">
-                    <GroupYaoPin class="h-1-4 full-width" :data="page.right.block2.text"/>
-                    <ChartGroup class="h-3-4 full-width" :data="page.right.block2.charts" :tab="page.right.block2.tab"/>
+                    <div style="height:30px">
+                        <GroupYaoPin class=" full-width" :data="page.right.block2.text"/>
+                    </div>
+                    <div style="height: calc(100% - 30px)">
+                        <ChartGroup class="full full-width" :data="page.right.block2.charts"
+                                    :tab="page.right.block2.tab"/>
+                    </div>
                 </container>
                 <container :title="page.right.block3.title" class=" full-width h-1-4">
                     <div style="height: 30px;">
@@ -112,7 +131,7 @@
                         </div>
                         <div class="w-6-12 full-height">
                             <ChartPieCircle :data="page.right.block3.chart2.data"
-                                            :color="['#3651AF','#4A90E2','#94CCFF','#67ADFF','#4A90E2']"
+                                            :color="page.right.block3.chart2.color"
                                             :title="page.right.block3.chart2.title"/>
                         </div>
                     </div>
@@ -142,7 +161,7 @@
         </div>
         <div class="h-1-5 full-width">
             <container title="质量提升" class="full-height w-2-7">
-                <GroupZhiLiangNew :data="page.center.block1.data"/>
+                <GroupZhiLiangNew :data="page.center.block1.data" @itemClick="zhiLiangClick"/>
             </container>
             <!--            <container title="风险管控"-->
             <!--                       class=" w-1-4 full-height">-->
@@ -165,57 +184,58 @@
 </template>
 
 <script>
-import EchartsMap from './components/EchartsMap'
-import TabSimpleMap from '../../components/tab/TabSimpleMap'
-import GroupZhunRu from './components/GroupZhunRu'
-import ChartGauge from './components/ChartGauge'
-import ChartBarLine from './components/ChartBarLine'
-import GroupJingZheng from './components/GroupJingZheng'
-import ChartAreaLine from './components/ChartAreaLine'
-import ChartGroupHuanJing from './components/ChartGroupHuanJing'
-import GroupXiaoFei from './components/GroupXiaoFei'
-import BlockChanQuan from './components/BlockChanQuan'
-import GroupChanQuan from './components/GroupChanQuan'
-import ChartWord from './components/ChartWordCloud'
-import ChartAcross from './components/ChartAcross'
-import GroupShiPin from './components/GroupShiPin'
-import BlockShiPin from './components/BlockShiPin'
-import ChartCustomPie from './components/ChartCustomPie'
-import GroupYaoPin from './components/GroupYaoPin'
-import ChartGroup from './components/ChartGroup'
-import BlockTeZhongSheBei from './components/BlockTeZhongSheBei'
-import ChartPieCircleDouble from './components/ChartPieCircleDouble'
-import GroupGongYe from './components/GroupGongYe'
-import Consultation from './DialogImg/Consultation'
-import Commander from './DialogImg/Command'
-import EchartsMapRenWu from './components/EchartsMapRenWu'
-import NumberRoll from './components/Number/numberRoll'
-import MapText from './components/mapText'
-import HuoLiDia from './DialogImg/HuoLiDia'
-import CenterTitle from '../common/CenterTitle'
-import GroupZhiLiang from './components/GroupZhiLiang'
-import ZongHeZhiFa from './components/ZongHeZhiFa'
-import ZhongDianJianGuan from './components/ZhongDianJianGuan'
-import Battle from './DialogImg/Battle'
-import Mock from 'mockjs'
 import graphic from 'echarts/lib/util/graphic'
-import GroupZhunRuNew from './components/GroupZhunRuNew'
-import GroupXiaoFeiNew from './components/GroupXiaoFeiNew'
-import GroupChanQuanNew from './components/GroupChanQuanNew'
-import GroupZhiLiangNew from './components/GroupZhiLiangNew'
-import GroupShiPinNew from './components/GroupShiPinNew'
-import ChartPieCircle from './components/ChartPieCircle'
-import BlockTeZhongSheBeiNew from './components/BlockTeZhongSheBeiNew'
+import Mock from 'mockjs'
+import TabSimpleMap from '../../components/tab/TabSimpleMap'
+import BlockChanQuan from './components/BlockChanQuan'
+import BlockShiPin from './components/BlockShiPin'
 import BlockTeZhongSheBeiGroup from './components/BlockTeZhongSheBeiGroup'
-import GroupGongYeNew from './components/GroupGongYeNew'
-import ZhongDianJianGuanNew from './components/ZhongDianJianGuanNew'
+import BlockTeZhongSheBeiNew from './components/BlockTeZhongSheBeiNew'
+import ChartAcross from './components/ChartAcross'
+import ChartAreaLine from './components/ChartAreaLine'
+import ChartBarLine from './components/ChartBarLine'
+import ChartGroup from './components/ChartGroup'
+import ChartGroupHuanJing from './components/ChartGroupHuanJing'
+import ChartGroupHuanJingTab2 from './components/ChartGroupHuanJingTab2'
+import ChartPieCircle from './components/ChartPieCircle'
+import ChartsSanKey from './components/ChartsSanKey'
+import ChartWord from './components/ChartWordCloud'
 import EchartsMapNew from './components/EchartsMapNew'
-import EchartsMapRenWuNew from './components/EchartsMapRenWuNew'
+import EchartsMapRisk from './components/EchartsMapRisk'
+import GroupChanQuanNew from './components/GroupChanQuanNew'
+import GroupGongYeNew from './components/GroupGongYeNew'
+import GroupJingZheng from './components/GroupJingZheng'
+import GroupShiPinNew from './components/GroupShiPinNew'
+import GroupXiaoFeiNew from './components/GroupXiaoFeiNew'
+import GroupYaoPin from './components/GroupYaoPin'
+import GroupZhiLiangNew from './components/GroupZhiLiangNew'
+import HotMapBlock from './components/HotMapBlock'
+import MapRiskBlock from './components/MapRiskBlock'
+import MapText from './components/mapText'
+import NumberRoll from './components/Number/numberRoll'
+import SankeyGroup from './components/SankeyGroup'
+import TabPageShipin from './components/TabPageShipin'
+import ZhongDianJianGuanNew from './components/ZhongDianJianGuanNew'
+import ZhunRuBlock from './components/ZhunRuBlock'
+import ZongHeZhiFa from './components/ZongHeZhiFa'
+import Battle from './DialogImg/Battle'
+import Commander from './DialogImg/Command'
+import Consultation from './DialogImg/Consultation'
+import DiaGroup from './DialogImg/diaGroup/diaGroup'
+import HuoLiDia from './DialogImg/HuoLiDia'
 
 export default {
   name: 'Index',
   components: {
-    EchartsMapRenWuNew,
+    DiaGroup,
+    MapRiskBlock,
+    EchartsMapRisk,
+    ChartGroupHuanJingTab2,
+    HotMapBlock,
+    ZhunRuBlock,
+    SankeyGroup,
+    TabPageShipin,
+    ChartsSanKey,
     EchartsMapNew,
     ZhongDianJianGuanNew,
     GroupGongYeNew,
@@ -226,45 +246,35 @@ export default {
     GroupZhiLiangNew,
     GroupChanQuanNew,
     GroupXiaoFeiNew,
-    GroupZhunRuNew,
     Battle,
-    ZhongDianJianGuan,
     ZongHeZhiFa,
-    GroupZhiLiang,
-    CenterTitle,
     HuoLiDia,
     MapText,
     NumberRoll,
-    EchartsMapRenWu,
     Commander,
     Consultation,
-    GroupGongYe,
-    ChartPieCircleDouble,
-    BlockTeZhongSheBei,
     ChartGroup,
     GroupYaoPin,
-    ChartCustomPie,
     BlockShiPin,
-    GroupShiPin,
-    GroupChanQuan,
     BlockChanQuan,
-    GroupXiaoFei,
     ChartGroupHuanJing,
     ChartAreaLine,
     GroupJingZheng,
     ChartBarLine,
-    ChartGauge,
-    GroupZhunRu,
     TabSimpleMap,
-    EchartsMap,
     ChartWord,
     ChartAcross
     // TabSimplePoint
   },
   data () {
     return {
+      zhiLiangIndex: 0,
+      zhiLiangShow: false,
+      xiaoFeiSelected: true,
       tabSelect0: 0,
       tabSelect3: 0,
+      selectedMonth: '',
+      hotMapShow: false,
       max: 3,
       mapTabActive: 0,
       centerIndex: 0,
@@ -274,11 +284,12 @@ export default {
       dia4: false,
       map1Show: true,
       map2Show: false,
+      sankShow: false,
       mapTab: [{
         name: '主体',
         value: 0
       }, {
-        name: '任务',
+        name: '风险',
         value: 1
       }, {
         name: '会商',
@@ -524,7 +535,7 @@ export default {
             text: [
               {
                 title: '投诉',
-                value: '4501',
+                value: '1743',
                 unit: '万次'
               },
               {
@@ -538,46 +549,37 @@ export default {
             ],
             chart1: {
               title: '投诉举报热点分析',
+              color: ['#3651AF', '#4A90E2', '#94CCFF', '#67ADFF', '#4A90E2'],
               data: [[{
-                name: '烟、酒和饮料',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'up'
+                name: '家居用品',
+                value: 221
               }, {
-                name: '食品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'down'
+                name: '一般食品',
+                value: 199
               }, {
-                name: '日用商品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: '-'
+                name: '交通工具',
+                value: 126
               }, {
-                name: '医疗及医疗用品',
-                value: Mock.Random.natural(60, 100),
-                trend: Mock.Random.float(0.1, 0.5, 2, 2),
-                status: 'up'
+                name: '服装鞋帽',
+                value: 92
+              }, {
+                name: '装修建材',
+                value: 69
               }], [{
-                name: '质量',
-                value: 33,
-                trend: 0.4,
-                status: 'up'
+                name: '餐饮和住宿服务',
+                value: 137
               }, {
-                name: '合同',
-                value: 13.70,
-                trend: 0.1,
-                status: 'down'
+                name: '教育培训服务（',
+                value: 77
               }, {
-                name: '虚假宣传',
-                value: 7.50,
-                trend: 0.2,
-                status: 'down'
+                name: '制作保养和修理服务',
+                value: 64
               }, {
-                name: '计量',
-                value: 5,
-                trend: 0.1,
-                status: 'down'
+                name: '文化娱乐体育服务',
+                value: 35
+              }, {
+                name: '销售服务',
+                value: 34
               }]]
             }
           },
@@ -662,7 +664,7 @@ export default {
               value: 98
             },
             chart1: {
-              title: '抽检合格率',
+              title: '社会热点',
               data: [{
                 name: '婴幼儿配方乳粉',
                 value: '100'
@@ -879,6 +881,7 @@ export default {
             }],
             chart2: {
               title: '事故行业环节分析',
+              color: ['#3651AF', '#4A90E2', '#94CCFF', '#67ADFF', '#4A90E2'],
               data: [{
                 name: '制造业',
                 value: Mock.Random.natural(10, 100)
@@ -1557,11 +1560,20 @@ export default {
     // this.getConfig()
   },
   methods: {
+    zhiLiangClick (index) {
+      this.zhiLiangIndex = index
+      this.zhiLiangShow = true
+    },
+    zhiLiangClose () {
+      this.zhiLiangShow = false
+    },
     TabChange (i) {
       this.tabSelect3 = i
     },
+    itemClick () {
+      this.xiaoFeiSelected = !this.xiaoFeiSelected
+    },
     MapChange (i) { // 这个会立刻执行
-      console.log(i)
       if (i === 0) {
         this.map1Show = true
         this.map2Show = false
@@ -1599,6 +1611,26 @@ export default {
     openDia () {
       console.log(1)
       this.dia3 = true
+    },
+    sankShowClick () {
+      this.sankShow = !this.sankShow
+      if (this.sankShow) {
+        this.hotMapShow = false
+      }
+    },
+    barClick ([item]) {
+      this.hotMapShow = true
+      this.sankShow = false
+      let name = ''
+      if (item.componentType === 'xAxis') {
+        name = item.value
+      } else if (item.componentType === 'series') {
+        name = item.name
+      }
+      this.selectedMonth = name
+    },
+    closeHotMap () {
+      this.hotMapShow = false
     }
   }
 }
@@ -1614,9 +1646,12 @@ export default {
     }
 
     .center {
+        > div {
+            position: absolute;
+        }
+
         .map-tab {
             height: 28px;
-            margin-top: 40px;
         }
 
         .main-title {
@@ -1712,6 +1747,12 @@ export default {
             /*transform: scale(1);*/
             transform: rotateY(90deg) rotateZ(-5deg) rotateX(-5deg);
         }
+    }
+
+    .foodCharts {
+        top: 0;
+        left: 0;
+        position: absolute;
     }
 }
 </style>

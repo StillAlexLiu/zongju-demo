@@ -1,7 +1,12 @@
 <template>
     <div class='ZhiLiangTiSheng full'>
         <div class="full-height w-1-3">
-            <GroupZhongDianNew :data="data.text"/>
+            <div style="height: 20px">
+                信用监管
+            </div>
+            <div style="height: calc(100% - 20px)">
+                <GroupZhongDianNew :data="data.text"/>
+            </div>
         </div>
         <div class="full-height w-1-3">
             <div style="height: 20px">

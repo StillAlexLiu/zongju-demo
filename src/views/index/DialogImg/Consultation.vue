@@ -243,22 +243,23 @@ export default {
       ],
       videos: [
         {
-          img: require('./../BlockImg/VideoGroup/mhzhjg_items_jgquanjing_jiankong_video@2x.png')
-        },
-        {
-          img: require('./../BlockImg/VideoGroup/mhzhjg_items_jgquanjing_jiankong_video@2x.png')
-        },
-        {
-          img: require('./../BlockImg/VideoGroup/mhzhjg_items_jgquanjing_jiankong_video@2x.png')
-        },
-        {
-          img: require('./../BlockImg/VideoGroup/mhzhjg_items_jgquanjing_jiankong_video@2x.png')
-        },
-        {
-          img: require('./../BlockImg/VideoGroup/mhzhjg_items_jgquanjing_jiankong_video@2x.png')
-        },
-        {
-          img: require('./../BlockImg/VideoGroup/mhzhjg_items_jgquanjing_jiankong_video@2x.png')
+          name: '湖北局',
+          img: require('./../BlockImg/VideoGroup/timg-1.jpeg')
+        }, {
+          name: '河北局',
+          img: require('./../BlockImg/VideoGroup/timg-7.jpeg')
+        }, {
+          name: '江西局',
+          img: require('./../BlockImg/VideoGroup/timg-3.jpeg')
+        }, {
+          name: '广东局',
+          img: require('./../BlockImg/VideoGroup/timg-4.jpeg')
+        }, {
+          name: '云南局',
+          img: require('./../BlockImg/VideoGroup/timg-5.jpeg')
+        }, {
+          name: '海南局',
+          img: require('./../BlockImg/VideoGroup/timg-8.jpg')
         }
       ],
       tree: [{
@@ -701,7 +702,6 @@ export default {
     position: relative;
 
     .full {
-        /*background-image: url("./dia1.png");*/
         background-size: 100% 100%;
     }
 

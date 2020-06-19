@@ -50,8 +50,7 @@ export default {
                 formatter: (params) => {
                   const data = params.data
                   const percent = params.percent
-                  const trend = data.trend ? +data.trend + '%' : ''
-                  return data.name + '\n' + percent + ' ' + trend
+                  return data.name + ' ' + percent + '% '
                 }
               },
               emphasis: {

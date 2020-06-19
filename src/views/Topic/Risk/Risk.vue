@@ -4,10 +4,7 @@
             <container class="" title="风险指数" style="height: 30%">
                 <img-block class="full-height" :data="img.block1"/>
             </container>
-            <container class="" title="基础风险源" style="height: 27%">
-                <img-block class="full-height" :data="img.block2"/>
-            </container>
-            <container class="" title="风险评级" style="height: 43%">
+            <container class="" title="风险来源标签体系" style="height: 70%">
                 <img-block class="full-height" :data="img.block3"/>
             </container>
         </div>
@@ -65,9 +62,9 @@ export default {
           height: 456 / 2
         },
         block3: {
-          img: require('./BlockImg/风险评级@2x.png'),
-          width: 946 / 2,
-          height: 678 / 2
+          img: require('./BlockImg/风险来源标签体系@2x.png'),
+          width: 1014 / 2,
+          height: 1254 / 2
         },
         center: [{
           img: require('./BlockImg/中间地图-预警事件@2x.png'),

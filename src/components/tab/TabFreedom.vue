@@ -1,7 +1,7 @@
 <template>
     <div class="TabFreedom">
         <div v-for="(item,index) in data" :key="index" @click="click(index)" :class="active===index?'active':''">
-            <slot v-bind:item="item" v-bind:index="index">
+            <slot v-bind:item="item" v-bind:index="index" v-bind:active="active">
                 {{ item }}
             </slot>
         </div>

@@ -56,7 +56,7 @@ export default {
         },
         leftBottom: {
           active: false,
-          img: require('./../BlockImg/BattleGroup/国局-挂图作战-十大创新@2x.png')
+          img: require('./../BlockImg/BattleGroup/国局-挂图作战-十大创新.png')
         },
         leftBottom2: {
           active: false,
@@ -72,7 +72,7 @@ export default {
         },
         rightBottom: {
           active: false,
-          img: require('./../BlockImg/BattleGroup/国局-挂图作战-创新争优指数图@2x.png')
+          img: require('./../BlockImg/BattleGroup/国局-挂图作战-创新争优指数图.png')
         }
       }
     }

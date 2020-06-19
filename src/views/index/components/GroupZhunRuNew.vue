@@ -1,7 +1,7 @@
 <template>
     <div class="GroupZhunRu" v-if="data.length>0">
         <container-with-left-border :border="index===1" v-for="(item,index) in data[0].value" :key="index">
-            <div class="flex full">
+            <div class="flex full" @click="$emit('click')">
                 <div class="name text-right">{{item.name}}</div>
                 <div class="text-center number-font">{{item.value}}</div>
                 <div class="unit text-center unit-font">{{item.unit}}</div>
@@ -59,6 +59,7 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
+        cursor: pointer;
     }
 }
 </style>

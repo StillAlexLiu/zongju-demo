@@ -1,7 +1,7 @@
 <template>
     <div class="BlockTeZhongSheBei full">
         <container-with-left-border v-for="(item,index) in data" :key="index" :border="index!==0" class="">
-            <div class="full can" @click.stop="change(index)">
+            <div class="full can" @click="change(index)">
                 <span class="name text-center">{{item.name}}</span>
                 <span class="number-font">{{item.value}}</span>
                 <span class="value text-unit">{{item.unit}}</span>
@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     change (index) {
-      console.log(index)
       this.dataIndex = index
     },
     change2 (isAdd) {

@@ -1,8 +1,8 @@
 <template>
     <div class='boxChart'>
-        <div style="height: 30px;text-align: left;font-size: 14px;line-height: 30px">舆情分析
+        <div style="height: 20px;text-align: left;font-size: 14px;line-height: 20px">舆情分析
         </div>
-        <div class='wordCloub' style="height: calc(100% - 30px)"></div>
+        <div class='wordCloub' style="height: calc(100% - 20px)"></div>
     </div>
 </template>
 <script>
@@ -114,7 +114,7 @@ export default {
         width: 100%;
         background-image: url("./img/bg-cloud.png");
         background-position: center;
-        background-size: 100% auto;
+        background-size: auto 100%;
         background-repeat: no-repeat;
     }
 

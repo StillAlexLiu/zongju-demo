@@ -1,13 +1,17 @@
 <template>
     <div class="GroupChanQuan full">
         <div v-for="(item,index) in data" :key="index" class="item ">
-            <div>{{item.name}}<span class="number-font">{{item.value}}</span><span class="unit">{{item.unit}}</span>
+            <div class="name">{{item.name}}
             </div>
-            <div>
-                <span class="number">{{item.percent}}</span>
-                <Arrow :dir="item.status"/>
+            <div class="block">
+                <div class="number-font">{{item.value}}</div>
+                <div class="unit">{{item.unit}}</div>
+                <div class="number">{{item.percent}}
+                    <Arrow :dir="item.status"/>
+                </div>
             </div>
-            <div><span class="text">{{item.text}}</span><span class="unit">{{item.subText}}</span><span class="number">{{item.change}}</span><span
+            <div class="bottom"><span class="text">{{item.text}}</span><span class="unit">{{item.subText}}</span><span
+                class="number2 number-font">{{item.change}}</span><span
                 class="unit">{{item.changeUnit}}</span>
             </div>
         </div>
@@ -46,34 +50,31 @@ export default {
 .GroupChanQuan {
     padding: 3px 1px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: stretch;
     font-size: 16px;
+    text-align: center;
 
     .item {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        flex: 1;
+
+    }
+
+    .block {
+        height: 88px;
+        background-image: url("./img/圆-背景@2x.png");
+        background-size: 88px 88px;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
         align-items: center;
-
-        span {
-            padding: 0 2px;
-        }
-
-        > div {
-            &:nth-child(1) {
-                flex: 4;
-            }
-
-            &:nth-child(2) {
-                flex: 2;
-            }
-
-            &:nth-child(3) {
-                flex: 3;
-            }
-        }
     }
 
     .unit {
@@ -81,7 +82,11 @@ export default {
     }
 
     .number {
-        font-size: 20px;
+        font-size: 14px;
+    }
+
+    .number2 {
+        font-size: 16px;
     }
 
     .text {

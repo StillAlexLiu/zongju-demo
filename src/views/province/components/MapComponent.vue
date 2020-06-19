@@ -165,7 +165,6 @@ export default {
         width: 203px;
         height: 203px;
         position: absolute;
-        border: 1px solid #000;
         right: 45px;
         bottom: 51px;
         padding: 10px 20px;

@@ -1,7 +1,7 @@
 <template>
-    <div class="GroupXiaoFei">
+    <div class="GroupXiaoFei full">
         <container-with-left-border v-for="(item,index) in data" :key="index" :border="index!==0">
-            <div class="can full">
+            <div class="can full" @click="$emit('itemClick')" :class="index===0?'mouse-pointer':''">
                 <div class=" title">{{item.title}}</div>
                 <div class="" v-if="item.name">{{item.name}}</div>
                 <div class=" number-font" v-if="item.value">{{item.value}}</div>
@@ -32,6 +32,7 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     text-align: center;
+    align-items: stretch;
 
     .can {
         display: flex;

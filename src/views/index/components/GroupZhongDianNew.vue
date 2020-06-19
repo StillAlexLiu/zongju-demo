@@ -38,7 +38,7 @@ export default {
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-        flex-basis: 45px;
+        flex-basis: 42px;
         background-image: linear-gradient(270deg, rgba(51, 75, 115, 0.00) 3%, rgba(51, 75, 115, 0.35) 51%, rgba(51, 75, 115, 0.00) 100%);
 
         .right {

@@ -4,7 +4,8 @@
         <div class="info">
             <div v-for="(item,index) in data" :key="index">
                 <div class="img text-center">
-                    <span class="number-font">{{item.value}}</span>%
+                    <span class="number-font">{{item.value}}</span>
+                    <template v-if="showPercent">%</template>
                 </div>
                 <div class="name text-center">
                     {{item.name}}
@@ -27,6 +28,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    showPercent: {
+      type: Boolean,
+      default: true
     }
   }
 }

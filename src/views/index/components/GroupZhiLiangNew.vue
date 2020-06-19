@@ -1,7 +1,7 @@
 <template>
     <div class="GroupZhiLiang full">
         <div v-for="(item,index) in data" :key="index" class="">
-            <div class="title text-center ">
+            <div class="title text-center mouse-pointer" @click="$emit('itemClick',index)">
                 {{item.title}}
             </div>
             <div class="right-value">

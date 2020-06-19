@@ -33,6 +33,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: stretch;
+    cursor: pointer;
 
     .name {
     }

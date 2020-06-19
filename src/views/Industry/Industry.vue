@@ -1,10 +1,10 @@
 <template>
     <div class='Industry full'>
         <div class="h-6-11 full-width">
-            <container title="事前监管" class="full-height w-3-10">
+            <container title="准入与认证" class="full-height w-2-7">
                 <LeftBlock/>
             </container>
-            <div class="full-height w-4-10" style="padding-top: 60px">
+            <div class="full-height w-3-7" style="padding-top: 60px">
                 <container class="full">
                     <div class="h-7-9">
                         <div class="w-2-3 full-height">
@@ -14,8 +14,8 @@
                             <div class="h-1-3">
                                 <info-block3 :data="tabList[tabListIndex]"/>
                             </div>
-                            <div class="h-2-3">
-                                <img-block class="full" :data="img.center2"/>
+                            <div class="h-2-3" style="position: relative">
+                                <top2 :img="img.center2" :data="tabList[tabListIndex]"/>
                             </div>
                         </div>
                     </div>
@@ -28,30 +28,38 @@
                     </div>
                 </container>
             </div>
-            <container title="事后监管" class="full-height w-3-10">
+            <container title="事后监管" class="full-height w-2-7">
                 <img-block class="full" :data="img.right"/>
             </container>
         </div>
-        <container class="h-5-11" title="事中监管" style="position: relative">
-            <img-block class="full" :data="img.bottom"/>
-            <div class="in">
-                <div class="sub-title" style="height: 22px">
-                    <TabBottomLine :data="tab" v-model="selectedIndex"/>
+        <div class="h-5-11">
+            <container title="生产经营" class="full-height w-2-7">
+                <img-block class="full" :data="img.left"/>
+            </container>
+            <container title="抽样检测" class="full-height w-3-7" style="position: relative">
+                <img-block class="full" :data="img.bottom"/>
+                <div class="in">
+                    <div class="sub-title" style="height: 22px">
+                        <TabBottomLine :data="tab" v-model="selectedIndex"/>
+                    </div>
+                    <div class="chart-sub" style="height: calc(100% - 22px)">
+                        <ChartBarLine
+                            :data="chart[selectedIndex].data"
+                            :title="chart[selectedIndex].title"
+                            :dimensions="chart[selectedIndex].dimensions"
+                            :colors="chart[selectedIndex].color"
+                            :type="chart[selectedIndex].type"
+                            :legend="chart[selectedIndex].legend"
+                            :units="chart[selectedIndex].units"
+                            :two-axis="false"
+                        />
+                    </div>
                 </div>
-                <div class="chart-sub" style="height: calc(100% - 22px)">
-                    <ChartBarLine
-                        :data="chart[selectedIndex].data"
-                        :title="chart[selectedIndex].title"
-                        :dimensions="chart[selectedIndex].dimensions"
-                        :colors="chart[selectedIndex].color"
-                        :type="chart[selectedIndex].type"
-                        :legend="chart[selectedIndex].legend"
-                        :units="chart[selectedIndex].units"
-                        :two-axis="false"
-                    />
-                </div>
-            </div>
-        </container>
+            </container>
+            <container title="标准" class="full-height w-2-7">
+                <img-block class="full" :data="img.right2"/>
+            </container>
+        </div>
     </div>
 </template>
 
@@ -62,10 +70,12 @@ import ChartBarLine from '../index/components/ChartBarLine'
 import Mock from 'mockjs'
 import TabItem from './components/TabItem'
 import InfoBlock3 from './components/InfoBlock3'
+import Top2 from './components/Top2'
 
 export default {
   name: 'Industry',
   components: {
+    Top2,
     InfoBlock3,
     TabItem,
     ChartBarLine,
@@ -84,29 +94,76 @@ export default {
       tabListIndex: 0,
       tabList: [{
         name: '电动自行车',
-        value: '95%'
+        value: '95%',
+        values: [{
+          name: '云南',
+          value: '95%'
+        }, {
+          name: '贵州',
+          value: '95%'
+        }]
       }, {
         name: '电冰箱',
-        value: '90%'
+        value: '90%',
+        values: [{
+          name: '四川',
+          value: '87%'
+        }, {
+          name: '湖南',
+          value: '73%'
+        }]
       }, {
         name: '洗衣机',
-        value: '87%'
+        value: '87%',
+        values: [{
+          name: '北京',
+          value: '95%'
+        }, {
+          name: '上海',
+          value: '80%'
+        }]
       }, {
         name: '电视机',
-        value: '85%'
+        value: '85%',
+        values: [{
+          name: '浙江',
+          value: '76%'
+        }, {
+          name: '江西',
+          value: '44%'
+        }]
       }, {
         name: '电风扇',
-        value: '83%'
+        value: '83%',
+        values: [{
+          name: '广东',
+          value: '88%'
+        }, {
+          name: '海南',
+          value: '78%'
+        }]
       }, {
         name: '空调',
-        value: '81%'
+        value: '81%',
+        values: [{
+          name: '云南',
+          value: '96%'
+        }, {
+          name: '贵州',
+          value: '88%'
+        }]
       }],
       selectedIndex: 0,
       img: {
-        bottom: {
-          img: require('./BlockImg/事中监管.png'),
-          width: 1828,
+        left: {
+          img: require('./BlockImg/生产经营.png'),
+          width: 500,
           height: 389
+        },
+        bottom: {
+          img: require('./BlockImg/抽样检测.png'),
+          width: 748,
+          height: 376
         },
         center: {
           img: require('./BlockImg/小地图.png'),
@@ -114,7 +171,7 @@ export default {
           height: 310
         },
         center2: {
-          img: require('./BlockImg/风险top2.png'),
+          img: require('./BlockImg/中间框.png'),
           width: 210,
           height: 138
         },
@@ -122,6 +179,11 @@ export default {
           img: require('./BlockImg/事后监管.png'),
           width: 493,
           height: 522
+        },
+        right2: {
+          img: require('./BlockImg/工业品-标准.png'),
+          width: 483,
+          height: 374
         }
       },
       chart: [{
@@ -225,10 +287,10 @@ export default {
 
     .in {
         position: absolute;
-        left: 550px;
-        top: 260px;
-        width: 410px;
-        height: 200px;
+        left: 28px;
+        top: 250px;
+        width: 380px;
+        height: 190px;
     }
 
     .sub-title {

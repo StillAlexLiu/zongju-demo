@@ -50,6 +50,10 @@ export default {
         return null
       }
     },
+    xAxisTriggerEvent: {
+      type: Boolean,
+      default: false
+    },
     borderRadius: {
       type: Boolean,
       default: true
@@ -77,6 +81,10 @@ export default {
     bottom: {
       type: Number,
       default: 20
+    },
+    legendTop: {
+      type: Number,
+      default: 0
     }
   },
   computed: {
@@ -180,6 +188,7 @@ export default {
           selectedMode: false,
           itemWidth: 13,
           itemHeight: 7,
+          top: this.legendTop,
           data: this.legend
         },
         dataset: {
@@ -189,6 +198,8 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: true,
+          silent: false,
+          triggerEvent: this.xAxisTriggerEvent,
           axisLabel: {
             interval: 0,
             rotate: this.rotate
