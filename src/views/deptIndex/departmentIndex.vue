@@ -47,7 +47,7 @@
                 <transition name="bounce" mode="out-in">
                     <div class="dia" v-if="diaShow" @close="close">
                         <div>
-                            13413
+                            <img-block class="full" :data="diaImg" style="background-color: #1B1F31;"/>
                         </div>
                     </div>
                 </transition>
@@ -124,6 +124,11 @@ export default {
     return {
       dia3: false,
       diaShow: false,
+      diaImg: {
+        img: require('./BlockImg/画板@2x.png'),
+        width: 1484 / 2,
+        height: 1074 / 2
+      },
       tabSelect2: 0,
       page: {
         titles: {
@@ -842,6 +847,8 @@ export default {
         padding: 5px;
 
         > div {
+            border: 1px solid;
+            border-image: radial-gradient(circle, rgba(115, 143, 253, 0), rgba(60, 79, 155, 0.47), rgba(126, 176, 241, 0.09), rgba(135, 189, 253, 0.94)) 1 1;
             height: 100%;
             width: 100%;
         }

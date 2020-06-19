@@ -62,7 +62,6 @@ import ImgBlock from '../common/ImgBlock'
 import BusinessDia1 from './Dia/BusinessDia1'
 import BusinessDia2 from './Dia/BusinessDia2'
 import BusinessDia3 from './Dia/BusinessDia3'
-import graphic from 'echarts/lib/util/graphic'
 import Mock from 'mockjs'
 import ChartBarLine from '../index/components/ChartBarLine'
 

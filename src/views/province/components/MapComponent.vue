@@ -1,24 +1,33 @@
 <template>
     <div class='MapComponent'>
-        <ImgBlock class="full" :data="mapFlag?img1:img2"/>
         <div v-if="mapFlag" class="full">
-            <div class="point" v-for="(item,index) in points" :style="{left:item.left+'px',top:item.top+'px'}"
-                 @click="pointChange(item)"
-                 :key="index">{{item.name}}
+            <div class="full" v-if="tabs">
+                <ImgBlock class="full" :data="img1"/>
+                <div class="full">
+                    <div class="point" v-for="(item,index) in points" :style="{left:item.left+'px',top:item.top+'px'}"
+                         @click="pointChange(item)"
+                         :key="index">{{item.name}}
+                    </div>
+                    <div class="msg">
+                        <div class="title">{{msg.name}}</div>
+                        <table class="table">
+                            <tbody>
+                            <tr v-for="(item,index) in msg.text" :key="index">
+                                <td class="name">{{item.name}}</td>
+                                <td class="value">{{item.value}}</td>
+                                <td class="unit">{{item.unit}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="msg">
-                <div class="title">{{msg.name}}</div>
-                <table class="table">
-                    <tbody>
-                    <tr v-for="(item,index) in msg.text" :key="index">
-                        <td class="name">{{item.name}}</td>
-                        <td class="value">{{item.value}}</td>
-                        <td class="unit">{{item.unit}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="full" v-if="!tabs">
+                <ImgBlock class="full" :data="img3"/>
             </div>
+            <div class="btn mouse-pointer" @click="click"></div>
         </div>
+        <ImgBlock class="full" :data="img2" v-if="!mapFlag"/>
     </div>
 </template>
 
@@ -36,6 +45,7 @@ export default {
   },
   data () {
     return {
+      tabs: true,
       points: [{
         name: '张家口',
         text: [{
@@ -129,12 +139,20 @@ export default {
         img: require('./../BlockImg/地图-活力.png'),
         width: 780,
         height: 696
+      },
+      img3: {
+        img: require('./../BlockImg/编组 2.png'),
+        width: 780,
+        height: 696
       }
     }
   },
   methods: {
     pointChange (item) {
       this.msg = item
+    },
+    click () {
+      this.tabs = !this.tabs
     }
   }
 }
@@ -143,6 +161,16 @@ export default {
 <style scoped lang="less">
 .MapComponent {
     position: relative;
+
+    .btn {
+        position: absolute;
+        right: 10px;
+        top: 70px;
+        background-image: url("./../BlockImg/3d-printer备份.png");
+        width: 50px;
+        height: 24px;
+        background-size: 100% 100%;
+    }
 
     > div {
         position: absolute;

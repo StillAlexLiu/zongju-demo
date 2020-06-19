@@ -1,7 +1,7 @@
 <template>
     <div class="full ChartGauge" style="position: relative">
         <chart class="chart" :options='options' @click="click"/>
-        <div class="info" @click="click" >
+        <div class="info mouse-pointer" @click="click" >
             <span>{{data.value}}</span>%
         </div>
     </div>
