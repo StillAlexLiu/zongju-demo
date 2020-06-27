@@ -1,7 +1,9 @@
 <template>
     <div class='Hotspot full' style="padding-top: 60px">
         <container class="w-3-9 full-height" title="热点舆情">
-            <img-block class="full" :data="img.left"/>
+            <div class="full" style="padding-left: 30px">
+                <img-block class="full" :data="img.left"/>
+            </div>
         </container>
         <div class="w-4-9 full-height">
             <div class="h-2-3" style="position: relative">
@@ -12,7 +14,7 @@
                 <img-block class="full" :data="img.bottom"/>
             </container>
         </div>
-        <container class="w-2-9 full-height" title="事件精准监控">
+        <container class="w-2-9 full-height" title="事件精准监管">
             <img-block class="full" :data="img.right"/>
         </container>
     </div>
@@ -33,7 +35,7 @@ export default {
           width: 800 * 1.025,
           height: 646 * 1.025
         }, {
-          img: require('./BlockImg/new/地图2.png'),
+          img: require('./BlockImg/new/分组 22.png'),
           width: 800 * 1.025,
           height: 646 * 1.025
         }],

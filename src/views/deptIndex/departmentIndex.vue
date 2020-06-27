@@ -44,13 +44,6 @@
                     <deptEchartsMap v-if="isShowMap===2" :gongdangList="gongdangList"/>
                     <initEchartMap v-if="isShowMap===1"/>
                 </div>
-                <transition name="bounce" mode="out-in">
-                    <div class="dia" v-if="diaShow" @close="close">
-                        <div>
-                            <img-block class="full" :data="diaImg" style="background-color: #1B1F31;"/>
-                        </div>
-                    </div>
-                </transition>
             </div>
             <container class=" full-width h-4-11" :title="page.center.block.title">
                 <div class="h-2-6">
@@ -84,6 +77,14 @@
                 <img-block :data="page.right.block3.img" class="full"/>
             </container>
         </div>
+
+        <transition name="bounce" mode="out-in">
+            <div class="dia" v-if="diaShow" @click="close">
+                <div>
+                    <img-block class="full" :data="diaImg" style="background-color: #1B1F31;"/>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -125,9 +126,9 @@ export default {
       dia3: false,
       diaShow: false,
       diaImg: {
-        img: require('./BlockImg/画板@2x.png'),
-        width: 1484 / 2,
-        height: 1074 / 2
+        img: require('./BlockImg/主体市场情况.png'),
+        width: 1788,
+        height: 923
       },
       tabSelect2: 0,
       page: {
@@ -840,19 +841,14 @@ export default {
 
     .dia {
         position: absolute;
+        background: rgba(0, 0, 0, 0.85);
+        /*background: rgba(0, 0, 0, 0.5);*/
         width: 100%;
-        height: calc(100% - 50px);
-        top: 50px;
-
-        padding: 5px;
-
-        > div {
-            border: 1px solid;
-            border-image: radial-gradient(circle, rgba(115, 143, 253, 0), rgba(60, 79, 155, 0.47), rgba(126, 176, 241, 0.09), rgba(135, 189, 253, 0.94)) 1 1;
-            height: 100%;
-            width: 100%;
-        }
-
+        height: 100%;
+        padding: 60px 67px 98px 67px;
+        top: 0;
+        left: 0;
+        z-index: 199;
         /*width: 1786px;*/
         /*height: 922px;*/
         /*top: 60px;*/

@@ -8,8 +8,8 @@
                     </div>
                     <div class="w-2-3 full-height">
                         <ChartsPie :data="page.left.block1.chart1.data" :show-legend="false" :show-all="true"
-                                   :radius-circle="['60%','65%']"
-                                   :radius-pie-center="[0,'50%']"
+                                   :radius-circle="page.left.block1.chart1.r1"
+                                   :radius-pie-center="page.left.block1.chart1.r2"
                                    :unit="'件'"
                                    :unit-center="'万件'"
                                    :title="'线索来源'"
@@ -313,6 +313,8 @@ export default {
               height: 362 / 2
             },
             chart1: {
+              r1: ['60%', '65%'],
+              r2: [0, '50%'],
               data: [{
                 name: '投诉举报',
                 value: 232

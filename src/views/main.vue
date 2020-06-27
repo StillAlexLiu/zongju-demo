@@ -55,7 +55,7 @@ export default {
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background-image: url("./common/img/背景_整体背景.png");
+    /*background-image: url("./common/img/背景_整体背景.png");*/
     background-size: 100% 100%;
 
     .selector {

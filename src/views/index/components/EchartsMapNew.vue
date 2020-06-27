@@ -221,10 +221,10 @@ export default {
                 y2: 1,
                 colorStops: [{
                   offset: 0,
-                  color: 'rgba(128 ,195, 243,.6)' // 0% 处的颜色
+                  color: 'rgba(128 ,195, 243,.8)' // 0% 处的颜色
                 }, {
                   offset: 1,
-                  color: 'rgba(74 ,144, 226,.6)' // 100% 处的颜色
+                  color: 'rgba(74 ,144, 226,.8)' // 100% 处的颜色
                 }],
                 global: false // 缺省为 false
               } : '#2B5185',

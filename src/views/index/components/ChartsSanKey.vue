@@ -5,7 +5,7 @@
         </div>
         <div class="h-1-3 w-4-9" style="position: absolute;right: 0;bottom: 20px">
             <ChartBarLine :type="['bar']" :dimensions="['name','value']" :legend="['']" :data="barData" v-if="barShow"
-                          :colors="['#4A90E2']"
+                          :colors="['#3B77BE']"
                           :title="barTitle"/>
         </div>
     </div>
@@ -47,7 +47,7 @@ export default {
               {
                 name: '北京',
                 itemStyle: {
-                  color: '#50E3C2'
+                  color: '#1D6366'
                 },
                 depth: 0,
                 label: {
@@ -57,7 +57,7 @@ export default {
               {
                 name: '河北',
                 itemStyle: {
-                  color: '#50E3C2'
+                  color: '#1D6366'
                 },
                 depth: 0,
                 label: {
@@ -67,7 +67,7 @@ export default {
               {
                 name: '江苏',
                 itemStyle: {
-                  color: '#50E3C2'
+                  color: '#1D6366'
                 },
                 depth: 0,
                 label: {
@@ -78,7 +78,7 @@ export default {
               {
                 name: '四川',
                 itemStyle: {
-                  color: '#50E3C2'
+                  color: '#1D6366'
                 },
                 depth: 0,
                 label: {
@@ -89,7 +89,7 @@ export default {
               {
                 name: '云南',
                 itemStyle: {
-                  color: '#50E3C2'
+                  color: '#1D6366'
                 },
                 depth: 0,
                 label: {
@@ -100,7 +100,7 @@ export default {
               {
                 name: '浙江',
                 itemStyle: {
-                  color: '#50E3C2'
+                  color: '#1D6366'
                 },
                 depth: 0,
                 label: {
@@ -111,7 +111,7 @@ export default {
               {
                 name: '生产',
                 itemStyle: {
-                  color: '#FE5C70'
+                  color: '#D24E5F'
                 },
                 depth: 1,
                 label: {
@@ -121,7 +121,7 @@ export default {
               {
                 name: '流通',
                 itemStyle: {
-                  color: '#FE5C70'
+                  color: '#D24E5F'
                 },
                 depth: 1,
                 label: {
@@ -132,7 +132,7 @@ export default {
               {
                 name: '餐饮',
                 itemStyle: {
-                  color: '#FE5C70'
+                  color: '#D24E5F'
                 },
                 depth: 1,
                 label: {
@@ -143,7 +143,7 @@ export default {
               {
                 name: '水产品',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -152,9 +152,9 @@ export default {
                 }
               },
               {
-                name: '食用农产品',
+                name: '农产品',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -165,7 +165,7 @@ export default {
               {
                 name: '饮料',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -175,7 +175,7 @@ export default {
               {
                 name: '糕点',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -186,7 +186,7 @@ export default {
               {
                 name: '其他种类',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -197,7 +197,7 @@ export default {
               {
                 name: '乳制品',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -208,7 +208,7 @@ export default {
               {
                 name: '水果',
                 itemStyle: {
-                  color: '#4A90E2'
+                  color: '#3B77BE'
                 },
                 depth: 2,
                 label: {
@@ -217,9 +217,9 @@ export default {
                 }
               },
               {
-                name: '微生物污染',
+                name: '微生物',
                 itemStyle: {
-                  color: '#7AFAFF'
+                  color: '#0B86B6'
                 },
                 depth: 3,
                 label: {
@@ -230,7 +230,7 @@ export default {
               {
                 name: '残留物',
                 itemStyle: {
-                  color: '#7AFAFF'
+                  color: '#0B86B6'
                 },
                 depth: 3,
                 label: {
@@ -240,7 +240,7 @@ export default {
               {
                 name: '质量指标',
                 itemStyle: {
-                  color: '#7AFAFF'
+                  color: '#0B86B6'
                 },
                 depth: 3,
                 label: {
@@ -249,9 +249,9 @@ export default {
                 }
               },
               {
-                name: '食品添加剂',
+                name: '添加剂',
                 itemStyle: {
-                  color: '#7AFAFF'
+                  color: '#0B86B6'
                 },
                 depth: 3,
                 label: {
@@ -260,9 +260,9 @@ export default {
                 }
               },
               {
-                name: '其他不合格',
+                name: '其他',
                 itemStyle: {
-                  color: '#7AFAFF'
+                  color: '#0B86B6'
                 },
                 depth: 3,
                 label: {
@@ -379,17 +379,17 @@ export default {
               },
               {
                 source: '生产',
-                target: '食用农产品',
+                target: '农产品',
                 value: 250
               },
               {
                 source: '流通',
-                target: '食用农产品',
+                target: '农产品',
                 value: 250
               },
               {
                 source: '餐饮',
-                target: '食用农产品',
+                target: '农产品',
                 value: 1
               },
               {
@@ -469,38 +469,38 @@ export default {
               },
               {
                 source: '水产品',
-                target: '微生物污染',
-                value: 100
+                target: '微生物',
+                value: 120
               },
               {
-                source: '食用农产品',
-                target: '微生物污染',
-                value: 100
+                source: '农产品',
+                target: '微生物',
+                value: 120
               },
               {
                 source: '饮料',
-                target: '微生物污染',
-                value: 100
+                target: '微生物',
+                value: 120
               },
               {
                 source: '糕点',
-                target: '微生物污染',
-                value: 100
+                target: '微生物',
+                value: 120
               },
               {
                 source: '其他种类',
-                target: '微生物污染',
-                value: 100
+                target: '微生物',
+                value: 120
               },
               {
                 source: '乳制品',
-                target: '微生物污染',
-                value: 100
+                target: '微生物',
+                value: 120
               },
               {
                 source: '水果',
-                target: '微生物污染',
-                value: 100
+                target: '微生物',
+                value: 120
               },
               {
                 source: '水产品',
@@ -508,7 +508,7 @@ export default {
                 value: 150
               },
               {
-                source: '食用农产品',
+                source: '农产品',
                 target: '残留物',
                 value: 150
               },
@@ -541,119 +541,121 @@ export default {
               {
                 source: '水产品',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
               {
-                source: '食用农产品',
+                source: '农产品',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
               {
                 source: '饮料',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
               {
                 source: '糕点',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
               {
                 source: '其他种类',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
               {
                 source: '乳制品',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
               {
                 source: '水果',
                 target: '质量指标',
-                value: 100
+                value: 120
               },
 
               // 2222
               {
                 source: '水产品',
-                target: '食品添加剂',
-                value: 100
+                target: '添加剂',
+                value: 120
               },
               {
-                source: '食用农产品',
-                target: '食品添加剂',
-                value: 100
+                source: '农产品',
+                target: '添加剂',
+                value: 120
               },
               {
                 source: '饮料',
-                target: '食品添加剂',
-                value: 100
+                target: '添加剂',
+                value: 120
               },
               {
                 source: '糕点',
-                target: '食品添加剂',
-                value: 100
+                target: '添加剂',
+                value: 120
               },
               {
                 source: '其他种类',
-                target: '食品添加剂',
-                value: 100
+                target: '添加剂',
+                value: 120
               },
               {
                 source: '乳制品',
-                target: '食品添加剂',
-                value: 100
+                target: '添加剂',
+                value: 120
               },
               {
                 source: '水果',
-                target: '食品添加剂',
-                value: 100
+                target: '添加剂',
+                value: 120
               },
               // 123
               {
                 source: '水产品',
-                target: '其他不合格',
+                target: '其他',
                 value: 150
               },
               {
-                source: '食用农产品',
-                target: '其他不合格',
+                source: '农产品',
+                target: '其他',
                 value: 150
               },
               {
                 source: '饮料',
-                target: '其他不合格',
+                target: '其他',
                 value: 150
               },
               {
                 source: '糕点',
-                target: '其他不合格',
+                target: '其他',
                 value: 150
               },
               {
                 source: '其他种类',
-                target: '其他不合格',
+                target: '其他',
                 value: 150
               },
               {
                 source: '乳制品',
-                target: '其他不合格',
+                target: '其他',
                 value: 150
               },
               {
                 source: '水果',
-                target: '其他不合格',
+                target: '其他',
                 value: 150
               }
             ],
             orient: 'vertical',
             draggable: false,
             label: {
-              color: 'white'
+              color: '#FFF',
+              fontSize: 14
             },
             nodeAlign: 'left',
             nodeGap: 20,
+            // nodeWidth
             layoutIterations: 0,
             lineStyle: {
               normal: {

@@ -6,7 +6,7 @@
             </container>
             <div class="full-height w-3-7" style="padding-top: 60px">
                 <container class="full">
-                    <div class="h-7-9">
+                    <div class="h-7-9" style="position: relative">
                         <div class="w-2-3 full-height">
                             <img-block class="full" :data="img.center"/>
                         </div>
@@ -18,6 +18,7 @@
                                 <top2 :img="img.center2" :data="tabList[tabListIndex]"/>
                             </div>
                         </div>
+                        <div style="position: absolute;top:10px;left:0;font-size: 16px;">全国舆情热点分布情况</div>
                     </div>
                     <div class="h-2-9">
                         <TabFreedom :data="tabList" class="full" v-model="tabListIndex">
@@ -28,9 +29,14 @@
                     </div>
                 </container>
             </div>
-            <container title="事后监管" class="full-height w-2-7">
-                <img-block class="full" :data="img.right"/>
-            </container>
+            <div class="full-height w-2-7">
+                <container title="投诉举报" class="h-2-5">
+                    <img-block class="full" :data="img.rightt1"/>
+                </container>
+                <container title="综合监管" class="h-3-5">
+                    <img-block class="full" :data="img.rightt2"/>
+                </container>
+            </div>
         </div>
         <div class="h-5-11">
             <container title="生产经营" class="full-height w-2-7">
@@ -175,10 +181,15 @@ export default {
           width: 210,
           height: 138
         },
-        right: {
-          img: require('./BlockImg/事后监管.png'),
-          width: 493,
-          height: 522
+        rightt1: {
+          img: require('./BlockImg/投诉举报.png'),
+          width: 964 / 2,
+          height: 294 / 2
+        },
+        rightt2: {
+          img: require('./BlockImg/综合执法.png'),
+          width: 984 / 2,
+          height: 498 / 2
         },
         right2: {
           img: require('./BlockImg/工业品-标准.png'),

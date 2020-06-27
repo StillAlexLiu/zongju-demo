@@ -1,7 +1,8 @@
 <template>
     <div class='TabItem full'>
-        <div class="order" :style="{backgroundColor:index>1?colors[2]:colors[index]}">{{index}}</div>
-        <div class="value">{{data.value}}<arrow dir="up"/></div>
+        <div class="order" :style="{backgroundColor:index>1?colors[2]:colors[index]}">{{index+1}}</div>
+        <div class="value">{{data.value}}<arrow dir="up"/>
+        </div>
         <div class="name">{{data.name}}</div>
     </div>
 </template>

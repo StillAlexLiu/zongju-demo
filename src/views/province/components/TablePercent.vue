@@ -43,7 +43,8 @@ export default {
         const arr = item.split('/')
         const str = arr[0] / arr[1] * 100 + '%'
         return {
-          background: 'linear-gradient(90deg,rgba(52,144,251,0.1) 0%,rgba(74,144,226,0.31) 100%)',
+          background: 'linear-gradient(90deg,rgba(52,144,251,0.1) 0%,#3584C4 100%)',
+          // background: 'linear-gradient(90deg,rgba(52,144,251,0.1) 0%,rgba(74,144,226,0.31) 100%)',
           'background-size': str + ' 100%',
           'background-repeat': 'no-repeat'
         }
